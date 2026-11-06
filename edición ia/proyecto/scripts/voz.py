@@ -2,7 +2,8 @@
 
 Uso: python3 scripts/voz.py <guion.txt> <carpeta-salida> [--motor kokoro|piper] [--voz em_alex] [--velocidad 1.05]
 
-Motores: kokoro (por defecto, más natural; voces em_alex, em_santa, ef_dora) o piper (es_MX-claude-high).
+Motores: chatterbox (por defecto, la más humana; --perfil natural|locutor|cercana), kokoro (voces em_alex,
+em_santa, ef_dora) o piper (es_MX-claude-high).
 Después de generar, la voz pasa por una cadena de "locutor": filtro de graves, calidez, presencia,
 control de sibilantes, compresión, un toque de sala y limitador.
 
@@ -18,7 +19,8 @@ VOZ = os.path.join(PROYECTO, "voces", "es_MX-claude-high.onnx")
 args = sys.argv[1:]
 guion_path, salida = os.path.abspath(args[0]), os.path.abspath(args[1])
 op = lambda n, d: args[args.index(n) + 1] if n in args else d
-motor = op("--motor", "kokoro")
+motor = op("--motor", "chatterbox")
+perfil = op("--perfil", "locutor")  # natural y cercana inventan palabras: no usar
 velocidad = op("--velocidad", "1.05" if motor == "kokoro" else "0.9")
 voz_kokoro = op("--voz", "em_alex")
 os.makedirs(salida, exist_ok=True)
@@ -38,7 +40,15 @@ texto_dicho = re.sub(r"\{([^|}]+)\|[^}]+\}", r"\1", guion)
 
 wav = os.path.join(salida, "voz.wav")
 crudo = os.path.join(tempfile.gettempdir(), "voz-cruda.wav")
-if motor == "piper":
+if motor == "chatterbox":
+    # Chatterbox corre en su propio entorno (voces/venv-chatterbox) por sus dependencias pesadas
+    oraciones = [o for o in re.split(r"(?<=[.?!:])\s+", texto_dicho.replace("\n", " ")) if o.strip()]
+    lista = os.path.join(tempfile.gettempdir(), "oraciones.json")
+    json.dump(oraciones, open(lista, "w"), ensure_ascii=False)
+    subprocess.run([os.path.join(PROYECTO, "voces", "venv-chatterbox", "bin", "python"), os.path.join(PROYECTO, "scripts", "chatterbox_gen.py"),
+                    lista, crudo, "--perfil", perfil], check=True, stderr=subprocess.DEVNULL,
+                   env={**os.environ, "HF_HUB_OFFLINE": os.environ.get("HF_HUB_OFFLINE", "1"), "HF_HUB_DISABLE_XET": "1"})
+elif motor == "piper":
     subprocess.run([sys.executable, "-m", "piper", "-m", VOZ, "--length-scale", velocidad,
                     "--sentence-silence", "0.25", "-f", crudo], input=texto_dicho.encode(), check=True,
                    stderr=subprocess.DEVNULL)
