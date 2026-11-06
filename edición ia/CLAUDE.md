@@ -62,8 +62,14 @@ npm run lint         # chequeo de tipos y estilo
 | `componentes/CierreLogo.tsx` | Cierre de 2 s con el logo X y la llamada a la acción |
 | `VideoVertical.tsx` | Composición para videos reales (la usa `renderizar`) |
 | `MuestraEstilo.tsx` | Muestra de 10 s del estilo, con planos de ejemplo |
+| `componentes/Plano.tsx` | Un tramo de una grabación (recorte, sin audio, zoom lento) |
+| `ediciones/` | Una composición por video editado (lista de planos, textos y sonido) |
 | `public/marca/` | Logo (original, blanco, negro y las dos mitades) |
 | `public/sfx/` | Efectos propios: `whoosh.wav` (látigo) e `impacto.wav` (gancho y logo) |
+
+Los videos de iPhone (.MOV en HEVC) se pasan primero a H.264 en `public/entrada/` (ver el encabezado de `ediciones/Elegido.tsx`).
+Para renderizar una edición: `npx remotion render src/index.ts <Composicion> <tmp>.mp4`, y después normalizar a -14 LUFS con
+`ffmpeg -i <tmp>.mp4 -c:v copy -af loudnorm=I=-14:TP=-1:LRA=11 -ar 48000 -c:a aac -b:a 192k -movflags +faststart ../exportados/<nombre>-editado.mp4`.
 
 Para videos con varios planos, transiciones látigo, zócalos o gancho, armá una composición nueva en `src/` a partir de `MuestraEstilo.tsx` (reemplazando `FondoDemo` por `<OffthreadVideo>`) y registrala en `Root.tsx`.
 

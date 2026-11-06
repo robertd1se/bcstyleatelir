@@ -35,11 +35,13 @@ const paginar = (palabras: Palabra[]) => {
 
 /**
  * Subtítulos palabra por palabra: blanco, la palabra clave en rojo y más grande.
+ * centroY: altura del centro (0–1); usar SUBTITULOS.centroYAlternativo si taparían algo importante.
  * palabrasClave: palabras a destacar (sin importar mayúsculas ni tildes). Máximo una por página.
  */
-export const Subtitulos: React.FC<{ captions: Caption[]; palabrasClave?: string[] }> = ({
+export const Subtitulos: React.FC<{ captions: Caption[]; palabrasClave?: string[]; centroY?: number }> = ({
   captions,
   palabrasClave = [],
+  centroY = SUBTITULOS.centroY,
 }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
@@ -67,7 +69,7 @@ export const Subtitulos: React.FC<{ captions: Caption[]; palabrasClave?: string[
           position: "absolute",
           left: SUBTITULOS.margenLateral,
           right: SUBTITULOS.margenLateral,
-          top: ALTO * SUBTITULOS.centroY,
+          top: ALTO * centroY,
           transform: "translateY(-50%)",
           textAlign: "center",
           fontFamily: FUENTES.subtitulos,

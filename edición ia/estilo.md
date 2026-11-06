@@ -30,6 +30,7 @@ Las referencias inspiran; **no se copian** (ni planos, ni textos, ni música).
 ## Primeros 3 segundos (gancho)
 - **Cuadro 0 con título gancho**, sin fundido desde negro: 2 líneas, la 1.ª blanca a **120 px** y la 2.ª roja a **150 px**, centradas al **47 %** de la altura. La 2.ª línea entra **4 cuadros** después con un golpe de escala de 130 % a 100 % en 6 cuadros (refs. 2 y 3).
 - **2 o 3 cortes** dentro de los primeros 3 s (refs. 1 y 3: 3 cortes antes de 2,4 s).
+- Cada línea deja **al menos 80 px de margen a cada lado**: si no entra, se achica sola (los 120/150 px son el máximo).
 - El gancho es una pregunta o una afirmación con humor que nombra el problema ("¿Entrenás sin plan?").
 - Golpe de sonido (`sfx/impacto.wav`) en el cuadro 0.
 
@@ -38,7 +39,14 @@ Las referencias inspiran; **no se copian** (ni planos, ni textos, ni música).
 - Hasta **3 palabras** en pantalla. Se cambia de grupo al final de cada frase o tras una pausa de más de 350 ms.
 - **58 px**, Montserrat 700, blanco, centrados al **55 % de la altura** (a la altura del pecho, como la ref. 2), con márgenes de 90 px. Sin borde: sombra suave `0 4px 14px rgba(0,0,0,.65)`.
 - **Una palabra clave por grupo como máximo**, en rojo `#CC1310`, Montserrat 900 y **15 % más grande**. Se destaca la palabra que lleva el sentido (problema, número, resultado, beneficio), no conectores.
+- Si al 55 % taparían algo importante (un cartel, un texto, una cara o un producto), se suben al **30 % de la altura**.
 - Sin subtítulos mientras se ve un zócalo o el cierre.
+
+## Videos sin voz (recorridos, b-roll)
+- No hay silencios ni muletillas para cortar: se cortan los **tramos de paso** (giros desenfocados, cruces de puertas, paredes vacías) para dejar planos de 1,5–2,5 s.
+- La música original del video se mantiene **continua** debajo de los cortes (solo se corta la imagen) y sale en 1,5 s al final.
+- Los textos en pantalla se escriben con el mismo estilo que los subtítulos (palabra por palabra, clave en rojo), sacados del tema del video. Se muestran al usuario antes de aplicarlos.
+- Si la grabación ya trae un cierre de logo, se reemplaza por el cierre de 2 s de este archivo.
 
 ## Transiciones (de la ref. 1)
 - Base: **corte seco**. Cada 3 o 4 cortes, uno es **paneo látigo**: **6 cuadros (0,2 s)**, desenfoque horizontal de hasta 60 px en el medio, alternando izquierda y derecha. Es lo que hace la ref. 1 entre escenas: 4–6 cuadros de barrido desenfocado.

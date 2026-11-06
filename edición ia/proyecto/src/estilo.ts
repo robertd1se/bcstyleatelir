@@ -25,10 +25,17 @@ export const SUBTITULOS = {
   tamaño: 58, // px
   maxPalabras: 3,
   centroY: 0.55, // centro del bloque al 55 % de la altura
+  centroYAlternativo: 0.3, // si al 55 % taparía algo importante (texto, cara, producto)
   margenLateral: 90, // px
   escalaClave: 1.15, // la palabra clave es 15 % más grande
   entradaFrames: 4, // cada palabra entra con un "pop" de 4 cuadros
   sombra: "0 4px 14px rgba(0,0,0,0.65)",
+};
+
+export const GANCHO = {
+  tamaño1: 120, // px, línea blanca (máximo)
+  tamaño2: 150, // px, línea roja (máximo)
+  margenLateral: 80, // px mínimos a cada lado; si no entra, la línea se achica
 };
 
 export const TRANSICION_LATIGO = {
