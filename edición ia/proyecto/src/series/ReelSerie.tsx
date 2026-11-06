@@ -10,6 +10,7 @@ import { Acabado } from "./ui/Acabado";
 import { CierreSerie } from "./ui/CierreSerie";
 import { Destello, FRAMES_DESTELLO } from "./ui/Destello";
 import { Encabezado } from "./ui/Encabezado";
+import { LogoRxt } from "./ui/LogoRxt";
 import { TextoCaja } from "./ui/TextoCaja";
 
 export type Estado3D = { activas?: Record<string, number>; marcadores?: Marcador[]; coachResaltado?: number };
@@ -32,8 +33,9 @@ export const ReelSerie: React.FC<{
   cajasAzules?: string[];
   secciones: number[]; // cuadros donde empieza cada sección (destello + whoosh)
   inicioCierre: number;
+  logo?: { desde: number; hasta: number }; // logo RXT grande que se arma (ej. cuando la voz dice "En RXT")
   children?: React.ReactNode; // tarjetas y gráficos propios del reel
-}> = ({ parte, total = 9, palabras, carpeta, camara, estado3D, cajasRojas, cajasAzules, secciones, inicioCierre, children }) => {
+}> = ({ parte, total = 9, palabras, carpeta, camara, estado3D, cajasRojas, cajasAzules, secciones, inicioCierre, logo, children }) => {
   const frame = useCurrentFrame();
   const { fps, durationInFrames } = useVideoConfig();
   const base = interpolarClaves(frame, camara, ["x", "z", "zoom", "giro"], 22);
@@ -61,6 +63,11 @@ export const ReelSerie: React.FC<{
         <TextoCaja palabras={palabras} cajasRojas={cajasRojas} cajasAzules={cajasAzules} />
       </Sequence>
       {children}
+      {logo ? (
+        <Sequence from={logo.desde} durationInFrames={logo.hasta - logo.desde}>
+          <LogoRxt />
+        </Sequence>
+      ) : null}
       <Sequence from={inicioCierre}>
         <CierreSerie parte={parte} total={total} />
       </Sequence>
@@ -80,6 +87,16 @@ export const ReelSerie: React.FC<{
           <Audio src={staticFile("sfx/whoosh.wav")} volume={0.35} />
         </Sequence>
       ))}
+      {logo ? (
+        <>
+          <Sequence from={Math.max(0, logo.desde - 4)} durationInFrames={20}>
+            <Audio src={staticFile("sfx/whoosh.wav")} volume={0.5} />
+          </Sequence>
+          <Sequence from={logo.desde + 12}>
+            <Audio src={staticFile("sfx/impacto.wav")} volume={0.7} />
+          </Sequence>
+        </>
+      ) : null}
       <Sequence from={inicioCierre + 16}>
         <Audio src={staticFile("sfx/impacto.wav")} volume={0.6} />
       </Sequence>

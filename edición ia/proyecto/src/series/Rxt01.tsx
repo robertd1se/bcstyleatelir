@@ -98,6 +98,7 @@ export const Rxt01: React.FC = () => {
       cajasAzules={["coaches.", "dentro", "fuera"]}
       secciones={[T.asi, T.sesiones, T.objetivo]}
       inicioCierre={T.serie}
+      logo={{ desde: dice("en", 1) - 3, hasta: dice("desarrollo") + 12 }}
     >
       <FrameProgreso />
       <Sequence from={T.asi} durationInFrames={T.sesiones - T.asi}>

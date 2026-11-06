@@ -127,15 +127,16 @@ export const Rxt02: React.FC = () => {
       cajasAzules={["técnica,", "progresiva", "profesional."]}
       secciones={[T.no, T.setrata, T.aqui, T.cada]}
       inicioCierre={T.serie}
+      logo={{ desde: dice("en") - 3, hasta: dice("cada") + 6 }}
     >
-      <Sequence from={T.porque} durationInFrames={T.no - T.porque}>
+      <Sequence from={T.objetivos - 8} durationInFrames={T.no - T.objetivos + 8}>
         <ListaTarjetas
           etiqueta="Cada persona es distinta"
-          durationInFrames={T.no - T.porque}
+          durationInFrames={T.no - T.objetivos + 8}
           items={[
-            { icono: "◎", titulo: "Objetivos", detalle: "Lo que quieres lograr", desdeFrame: T.objetivos - T.porque },
-            { icono: "▲", titulo: "Capacidades", detalle: "Desde dónde empiezas", desdeFrame: T.capacidades - T.porque, color: COLORES.azul },
-            { icono: "+", titulo: "Necesidades", detalle: "Lo que tu cuerpo pide", desdeFrame: T.necesidades - T.porque },
+            { icono: "◎", titulo: "Objetivos", detalle: "Lo que quieres lograr", desdeFrame: 8 },
+            { icono: "▲", titulo: "Capacidades", detalle: "Desde dónde empiezas", desdeFrame: T.capacidades - T.objetivos + 8, color: COLORES.azul },
+            { icono: "+", titulo: "Necesidades", detalle: "Lo que tu cuerpo pide", desdeFrame: T.necesidades - T.objetivos + 8 },
           ]}
         />
       </Sequence>
