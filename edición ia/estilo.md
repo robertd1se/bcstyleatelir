@@ -26,7 +26,7 @@ El usuario quiere todo con terminación prolija. Antes de exportar, cada video t
 | Negro | `#0A0A0A`: fondos de gráficos y cierre |
 | Rojo | `#CC1310`: palabra clave, nombres, segunda línea del título (mismo rojo que mide la ref. 2) |
 | Azul | `#1F4FFF`: líneas, barras y subrayado de la llamada a la acción. Nunca en texto largo |
-| Títulos | Montserrat 900, MAYÚSCULAS, interletrado -2 % |
+| Títulos | Montserrat 900, MAYÚSCULAS, interletrado -2 % (videos cortos); en la serie RXT, Bodoni Moda + Allura (ver abajo) |
 | Subtítulos | Montserrat 700 (palabra clave en 900) |
 | Texto chico / CTA | Inter 500/700, MAYÚSCULAS, interletrado 40 % en la CTA |
 | Logo | X en dos mitades: `proyecto/public/marca/` (blanco, negro, mitades y original) |
@@ -94,7 +94,12 @@ Mediciones: cortes detectados con FFmpeg (`select=gt(scene,0.25)`), colores y ta
 Para videos que explican algo con voz en off (pedido para la serie RXT; inspirado en la ref. 5, sin copiarla).
 - **Voz en off:** la elegida es ElevenLabs (pendiente de que funcione la clave). Mientras tanto, Kokoro `em_alex` a velocidad 1,05, oración por oración (pausa de 0,32 s después de "." y "?"), con cadena de locutor: pasa-altos a 85 Hz, +2,5 dB de calidez a 180 Hz, −2 dB a 350 Hz, +3 dB de presencia a 3,2 kHz, −3,5 dB en las "s" a 7 kHz, compresión 3:1 y un toque de sala. **Piper no se usa:** al usuario le sonó cruda. La marca se pronuncia "Roxet" y en pantalla dice "RXT".
 - **Imagen:** gimnasio RXT en 3D isométrico, de noche, con una zona por servicio. La cámara se mueve sin cortes de una zona a otra justo cuando la voz la nombra (18 cuadros de movimiento suave) y vuelve al encuadre inicial al final, para que el reel quede en loop.
-- **Texto arriba**, centrado al **14 % de la altura**: Montserrat 800 a **66 px**, blanco, palabra por palabra, en trozos de hasta 6 palabras (se corta en comas y en el final de cada oración). Las **palabras clave van sobre un recuadro rojo** y lo secundario sobre recuadro azul (radio de 10 px). La primera oración (gancho) se ve entera desde el cuadro 0.
+- **Texto arriba**, centrado al **14,5 % de la altura**, palabra por palabra, en trozos de hasta 6 palabras (se corta en comas y al final de cada oración). **Dos tipografías combinadas en la misma frase** (pedido del usuario):
+  - **Serif editorial Bodoni Moda 500**, blanca, a **70 px**, interletrado −1 %, para el texto.
+  - **Manuscrita Allura**, **1,55× más grande (≈108 px)**, en **dorado `#E2B65A`** o **rojo `#E0352B`**, para 1 o 2 palabras clave por frase (y los números de lista). Se "escribe" de izquierda a derecha en 9 cuadros.
+  - Sombra sutil `0 4px 18px rgba(0,0,0,.55), 0 1px 2px rgba(0,0,0,.6)`. Sin recuadros ni contornos. Nada de tipografías genéricas ni efectos exagerados.
+  - El gancho siempre lleva una palabra en manuscrita (ej. "¿Qué *hacemos* en RXT?"). El rojo se reserva para la palabra más fuerte del video.
+  - Los títulos de las tarjetas también van en Bodoni Moda 600 (sin mayúsculas forzadas); las etiquetas chicas siguen en Inter en mayúsculas espaciadas.
 - **Barra de progreso** debajo del texto (23 % de la altura): actual en rojo, terminados en azul con ✓. En el 3D, la zona activa se pone roja y tiene un marcador numerado.
 - **Tarjetas tipo app** abajo (fondo oscuro translúcido, radio de 34 px) para listas: chips que se encienden en azul cuando se dicen y filas con ícono.
 - **Logo RXT armándose** cuando la voz dice "En RXT…" al principio: el fondo se oscurece al 70 %, la R entra por la izquierda, la T por la derecha y las mitades de la X se juntan (12 cuadros), con brillo rojo al encajar, línea roja y "TRAINING CLUB" debajo; sale con un golpe de escala. Whoosh al entrar e impacto al encajar. (`series/ui/LogoRxt.tsx`, logo en `public/marca/logo-rxt-*.png`). Pedido y aprobado por el usuario: "me encanta así".

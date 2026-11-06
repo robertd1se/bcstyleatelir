@@ -53,9 +53,9 @@ export const Chips: React.FC<{ items: { texto: string; desdeFrame: number }[]; t
             style={{
               padding: "14px 26px",
               borderRadius: 40,
-              fontFamily: FUENTES.titulos,
-              fontWeight: 800,
-              fontSize: 34,
+              fontFamily: FUENTES.editorial,
+              fontWeight: 600,
+              fontSize: 36,
               color: COLORES.blanco,
               background: activo ? COLORES.azul : "#ffffff12",
               opacity: activo ? 1 : 0.35,

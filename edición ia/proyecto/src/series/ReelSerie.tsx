@@ -29,13 +29,13 @@ export const ReelSerie: React.FC<{
   carpeta: string; // public/series/<carpeta>/voz.wav y musica-generada/<carpeta>.wav
   camara: ClaveCamara[];
   estado3D: (frame: number) => Estado3D;
-  cajasRojas?: string[];
-  cajasAzules?: string[];
+  doradas?: string[]; // palabras clave en manuscrita dorada
+  rojas?: string[]; // palabras clave en manuscrita roja
   secciones: number[]; // cuadros donde empieza cada sección (destello + whoosh)
   inicioCierre: number;
   logo?: { desde: number; hasta: number }; // logo RXT grande que se arma (ej. cuando la voz dice "En RXT")
   children?: React.ReactNode; // tarjetas y gráficos propios del reel
-}> = ({ parte, total = 9, palabras, carpeta, camara, estado3D, cajasRojas, cajasAzules, secciones, inicioCierre, logo, children }) => {
+}> = ({ parte, total = 9, palabras, carpeta, camara, estado3D, doradas, rojas, secciones, inicioCierre, logo, children }) => {
   const frame = useCurrentFrame();
   const { fps, durationInFrames } = useVideoConfig();
   const base = interpolarClaves(frame, camara, ["x", "z", "zoom", "giro"], 22);
@@ -60,7 +60,7 @@ export const ReelSerie: React.FC<{
 
       <Encabezado parte={parte} total={total} />
       <Sequence durationInFrames={inicioCierre}>
-        <TextoCaja palabras={palabras} cajasRojas={cajasRojas} cajasAzules={cajasAzules} />
+        <TextoCaja palabras={palabras} doradas={doradas} rojas={rojas} />
       </Sequence>
       {children}
       {logo ? (

@@ -3,6 +3,9 @@ import "@fontsource/montserrat/700.css";
 import "@fontsource/montserrat/900.css";
 import "@fontsource/inter/500.css";
 import "@fontsource/inter/700.css";
+import "@fontsource/bodoni-moda/500.css";
+import "@fontsource/bodoni-moda/600.css";
+import "@fontsource/allura/400.css";
 
 export const FPS = 30;
 export const ANCHO = 1080;
@@ -13,12 +16,17 @@ export const COLORES = {
   negro: "#0A0A0A",
   rojo: "#CC1310", // acento principal: palabra clave, nombres, títulos
   azul: "#1F4FFF", // acento secundario: líneas, barras, llamada a la acción
+  dorado: "#E2B65A", // palabras clave en manuscrita (serie RXT)
+  rojoTexto: "#E0352B", // rojo de marca un poco más claro para texto manuscrito sobre fondo oscuro
 };
 
 export const FUENTES = {
   titulos: "Montserrat, sans-serif", // 900
   subtitulos: "Montserrat, sans-serif", // 700 normal, 900 palabra clave
   textoChico: "Inter, sans-serif", // 500/700, etiquetas y CTA
+  // Serie RXT: combinación editorial
+  editorial: "'Bodoni Moda', serif", // 500 texto, 600 títulos de tarjetas · blanco
+  manuscrita: "Allura, cursive", // palabras clave · dorado o rojo, ~1,55× más grande
 };
 
 export const SUBTITULOS = {

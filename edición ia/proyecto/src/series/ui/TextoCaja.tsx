@@ -1,17 +1,23 @@
 import { Caption } from "@remotion/captions";
 import { useMemo } from "react";
-import { AbsoluteFill, Easing, interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
+import { AbsoluteFill, Easing, interpolate, useCurrentFrame, useVideoConfig } from "remotion";
 import { ALTO, COLORES, FUENTES } from "../../estilo";
 
-// Formato explicativo: texto arriba, palabra por palabra, con las palabras clave sobre un recuadro de color.
+// Texto de la serie: combinación editorial dentro de la misma frase.
+// · Serif editorial (Bodoni Moda) en blanco para el texto.
+// · Manuscrita (Allura) dorada o roja, 1,55× más grande, para las palabras clave.
+// Palabra por palabra; las manuscritas se "escriben" de izquierda a derecha.
 export const TEXTO_CAJA = {
-  tamaño: 66,
+  tamaño: 70,
+  escalaManuscrita: 1.55,
   maxPalabras: 6,
-  centroY: 0.14,
+  centroY: 0.145,
   margenLateral: 80,
+  sombra: "0 4px 18px rgba(0,0,0,0.55), 0 1px 2px rgba(0,0,0,0.6)",
 };
 
-type Palabra = Caption & { caja: string | null };
+type Tipo = "normal" | "oro" | "rojo";
+type Palabra = Caption & { tipo: Tipo };
 
 const norm = (t: string) =>
   t
@@ -32,7 +38,6 @@ const paginar = (ps: Palabra[]) => {
     }
   }
   if (actual.length) oraciones.push(actual);
-
   const paginas: Palabra[][] = [];
   for (const o of oraciones) {
     const trozos = Math.ceil(o.length / TEXTO_CAJA.maxPalabras);
@@ -53,27 +58,23 @@ const paginar = (ps: Palabra[]) => {
 };
 
 /**
- * cajasRojas / cajasAzules: palabras que van sobre recuadro (sin importar tildes ni mayúsculas).
- * Las palabras seguidas con caja del mismo color se unen en un solo recuadro.
+ * doradas / rojas: palabras clave en manuscrita (sin importar tildes ni mayúsculas).
+ * Los números de lista ("1.", "2.") van en manuscrita dorada.
  */
-export const TextoCaja: React.FC<{ palabras: Caption[]; cajasRojas?: string[]; cajasAzules?: string[] }> = ({
-  palabras,
-  cajasRojas = [],
-  cajasAzules = [],
-}) => {
+export const TextoCaja: React.FC<{ palabras: Caption[]; doradas?: string[]; rojas?: string[] }> = ({ palabras, doradas = [], rojas = [] }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const ms = (frame / fps) * 1000;
   const paginas = useMemo(() => {
-    const r = new Set(cajasRojas.map(norm));
-    const a = new Set(cajasAzules.map(norm));
+    const d = new Set(doradas.map(norm));
+    const r = new Set(rojas.map(norm));
     return paginar(
       palabras.map((p) => ({
         ...p,
-        caja: r.has(norm(p.text)) || /^\d+\.$/.test(p.text) ? COLORES.rojo : a.has(norm(p.text)) ? COLORES.azul : null,
+        tipo: (r.has(norm(p.text)) ? "rojo" : d.has(norm(p.text)) || /^\d+\.$/.test(p.text) ? "oro" : "normal") as Tipo,
       })),
     );
-  }, [palabras, cajasRojas, cajasAzules]);
+  }, [palabras, doradas, rojas]);
 
   const pagina = paginas.find((p, i) => {
     const fin = Math.min(p[p.length - 1].endMs + 500, paginas[i + 1]?.[0].startMs ?? Infinity);
@@ -81,17 +82,12 @@ export const TextoCaja: React.FC<{ palabras: Caption[]; cajasRojas?: string[]; c
   });
   if (!pagina) return null;
 
-  // agrupar palabras seguidas con la misma caja
-  const grupos: { caja: string | null; ps: Palabra[] }[] = [];
-  for (const p of pagina) {
-    const g = grupos[grupos.length - 1];
-    if (g && g.caja && g.caja === p.caja) g.ps.push(p);
-    else grupos.push({ caja: p.caja, ps: [p] });
-  }
-
-  // cada página entra subiendo 24 px en 6 cuadros
   const inicioPagina = Math.round((pagina[0].startMs / 1000) * fps);
-  const sube = pagina[0].startMs === 0 ? 0 : interpolate(frame - inicioPagina, [0, 6], [24, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) });
+  const sube =
+    pagina[0].startMs === 0
+      ? 0
+      : interpolate(frame - inicioPagina, [0, 8], [18, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) });
+
   return (
     <AbsoluteFill>
       <div
@@ -102,46 +98,47 @@ export const TextoCaja: React.FC<{ palabras: Caption[]; cajasRojas?: string[]; c
           top: ALTO * TEXTO_CAJA.centroY,
           transform: `translateY(calc(-50% + ${sube}px))`,
           textAlign: "center",
-          fontFamily: FUENTES.titulos,
-          fontWeight: 800,
+          fontFamily: FUENTES.editorial,
+          fontWeight: 500,
           fontSize: TEXTO_CAJA.tamaño,
-          lineHeight: 1.25,
+          lineHeight: 1.18,
+          letterSpacing: "-0.01em",
           color: COLORES.blanco,
-          textShadow: "0 4px 18px rgba(0,0,0,0.8)",
+          textShadow: TEXTO_CAJA.sombra,
         }}
       >
-        {grupos.map((g, gi) => {
-          const visibles = g.ps.filter((p) => ms >= p.startMs - 30);
-          if (!visibles.length) return null;
-          const f0 = Math.round(((ms - g.ps[0].startMs) / 1000) * fps);
-          const pop = spring({ frame: f0, fps, durationInFrames: 5, config: { damping: 14 } });
-          const contenido = visibles.map((p) => p.text).join(" ");
-          if (!g.caja) {
-            return visibles.map((p) => {
-              const fp = Math.round(((ms - p.startMs) / 1000) * fps);
-              // las palabras del gancho (startMs 0) se ven completas desde el cuadro 0
-              const o = p.startMs === 0 ? 1 : interpolate(fp, [0, 3], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
-              return (
-                <span key={`${gi}-${p.startMs}`} style={{ opacity: o, margin: "0 0.12em", display: "inline-block" }}>
-                  {p.text}
-                </span>
-              );
-            });
+        {pagina.map((p) => {
+          if (ms < p.startMs - 30) return null;
+          const desde = p.startMs === 0 ? -100 : Math.round((p.startMs / 1000) * fps);
+          const f = frame - desde;
+          if (p.tipo === "normal") {
+            const o = interpolate(f, [0, 5], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+            return (
+              <span key={p.startMs + p.text} style={{ display: "inline-block", margin: "0 0.13em", opacity: o, transform: `translateY(${(1 - o) * 10}px)` }}>
+                {p.text}
+              </span>
+            );
           }
+          // manuscrita: se escribe de izquierda a derecha en 9 cuadros
+          const escrito = interpolate(f, [0, 9], [0, 100], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.quad) });
           return (
             <span
-              key={gi}
+              key={p.startMs + p.text}
               style={{
                 display: "inline-block",
-                margin: "0.08em 0.12em",
-                padding: "0.02em 0.28em 0.08em",
-                background: g.caja,
-                borderRadius: 10,
-                textShadow: "none",
-                transform: `scale(${g.ps[0].startMs === 0 ? 1 : interpolate(pop, [0, 1], [0.7, 1])})`,
+                margin: "0 0.1em 0 0.12em",
+                padding: "0 0.12em",
+                fontFamily: FUENTES.manuscrita,
+                fontWeight: 400,
+                fontSize: TEXTO_CAJA.tamaño * TEXTO_CAJA.escalaManuscrita,
+                lineHeight: 0.8,
+                letterSpacing: 0,
+                verticalAlign: "-0.06em",
+                color: p.tipo === "oro" ? COLORES.dorado : COLORES.rojoTexto,
+                clipPath: `inset(-30% ${100 - escrito}% -30% -10%)`,
               }}
             >
-              {contenido}
+              {p.text}
             </span>
           );
         })}

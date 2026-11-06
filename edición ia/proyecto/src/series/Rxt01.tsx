@@ -94,8 +94,8 @@ export const Rxt01: React.FC = () => {
       carpeta="rxt-01"
       camara={CAMARA}
       estado3D={estado3D}
-      cajasRojas={["RXT?", "integral", "objetivo", "rendimiento"]}
-      cajasAzules={["coaches.", "dentro", "fuera"]}
+      doradas={["hacemos", "integral,", "pilares.", "coaches.", "objetivo", "fuera"]}
+      rojas={["rendimiento", "híbrido."]}
       secciones={[T.asi, T.sesiones, T.objetivo]}
       inicioCierre={T.serie}
       logo={{ desde: dice("en", 1) - 3, hasta: dice("desarrollo") + 12 }}

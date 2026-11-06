@@ -43,8 +43,8 @@ export const CierreSerie: React.FC<{ parte: number; total: number }> = ({ parte,
             <div key={i} style={{ flex: 1, height: 8, borderRadius: 4, background: i < parte ? COLORES.rojo : "#ffffff26" }} />
           ))}
         </div>
-        <div style={{ marginTop: 18, fontFamily: FUENTES.titulos, fontWeight: 800, fontSize: 34, color: COLORES.blanco, opacity: resto }}>
-          Parte {parte} de {total}
+        <div style={{ marginTop: 18, fontFamily: FUENTES.editorial, fontWeight: 500, fontSize: 40, color: COLORES.blanco, opacity: resto, textShadow: "0 4px 18px rgba(0,0,0,0.55)" }}>
+          Parte {parte} de <span style={{ fontFamily: FUENTES.manuscrita, fontSize: 64, color: COLORES.dorado, marginLeft: 6 }}>{total}</span>
         </div>
       </div>
     </AbsoluteFill>

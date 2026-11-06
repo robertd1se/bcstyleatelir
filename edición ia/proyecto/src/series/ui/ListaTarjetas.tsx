@@ -60,7 +60,7 @@ export const ListaTarjetas: React.FC<{ etiqueta: string; items: Item[]; duration
               {it.icono}
             </div>
             <div>
-              <div style={{ position: "relative", fontFamily: FUENTES.titulos, fontWeight: 900, fontSize: 40, color: it.tachado ? "#ffffff80" : COLORES.blanco, textTransform: "uppercase", lineHeight: 1.05 }}>
+              <div style={{ position: "relative", fontFamily: FUENTES.editorial, fontWeight: 600, fontSize: 44, color: it.tachado ? "#ffffff80" : COLORES.blanco, lineHeight: 1.05 }}>
                 {it.titulo}
                 {it.tachado ? (
                   // línea roja que tacha el texto, de izquierda a derecha
