@@ -1,5 +1,5 @@
 import { Img, interpolate, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
-import { COLORES, FUENTES } from "../../estilo";
+import { COLORES, FUENTES, ZONA_SEGURA } from "../../estilo";
 
 // Barra superior: logo + "RXT" a la izquierda, "PARTE n/9" a la derecha y una línea fina
 // que se llena en rojo a medida que avanza el video.
@@ -8,7 +8,7 @@ export const Encabezado: React.FC<{ parte: number; total: number }> = ({ parte, 
   const { durationInFrames } = useVideoConfig();
   const avance = interpolate(frame, [0, durationInFrames - 1], [0, 100]);
   return (
-    <div style={{ position: "absolute", top: 64, left: 70, right: 70 }}>
+    <div style={{ position: "absolute", top: ZONA_SEGURA.arriba + 6, left: 110, right: 110 }}>
       <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
           <Img src={staticFile("marca/logo-x-blanco.png")} style={{ width: 36, height: 38 }} />

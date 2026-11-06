@@ -48,7 +48,8 @@ export const ReelSerie: React.FC<{
   return (
     <AbsoluteFill style={{ backgroundColor: "#07080d" }}>
       {/* 3D con corrección de color */}
-      <AbsoluteFill style={{ filter: "contrast(1.08) saturate(1.15) brightness(1.04)" }}>
+      {/* bajado 110 px para que los marcadores no choquen con el texto (zona segura de Instagram) */}
+      <AbsoluteFill style={{ filter: "contrast(1.08) saturate(1.15) brightness(1.04)", transform: "translateY(110px)" }}>
         <Gimnasio3D ancho={ANCHO} alto={ALTO} t={frame / fps} cam={cam} activas={est.activas} marcadores={est.marcadores} coachResaltado={est.coachResaltado} />
       </AbsoluteFill>
       {/* desenfoque "miniatura" arriba y abajo */}

@@ -19,6 +19,14 @@ El usuario quiere todo con terminación prolija. Antes de exportar, cada video t
 - Audio final normalizado a **-14 LUFS**, pico máximo -1 dBTP (las 3 referencias miden -14 LUFS).
 - Siempre en vertical real. No usar videos horizontales girados dentro del cuadro (la ref. 1 lo hace; no lo adoptamos).
 
+## Zona segura de Instagram Reels (obligatoria)
+Instagram tapa partes del video con su interfaz y en el feed lo recorta a 4:5. Ningún texto, gráfico, logo o elemento clave va fuera de esta zona (en 1080x1920):
+- **Arriba: 290 px libres** (título "Reels" + recorte del feed). El encabezado empieza en y=296.
+- **Abajo: 440 px libres** (usuario, descripción, audio): nada importante por debajo de y=1480.
+- **Derecha: 140 px libres entre y=1000 y y=1480** (botones de me gusta, comentar, compartir). Márgenes laterales del texto: 120 px.
+- Valores en `proyecto/src/estilo.ts` → `ZONA_SEGURA`. Antes de exportar, revisar cuadros con el esquema de la interfaz encima (zonas rojas = tapado).
+- Ubicación actual: texto de la serie 3D centrado al 24,5 %; barra de progreso al 32,5 %; tarjetas entre y≈1090 y y≈1450; subtítulos del formato 2D al 70,5 %.
+
 ## Marca (manda sobre las referencias)
 | Elemento | Valor |
 |---|---|
@@ -95,13 +103,13 @@ Mediciones: cortes detectados con FFmpeg (`select=gt(scene,0.25)`), colores y ta
 Para videos que explican algo con voz en off (pedido para la serie RXT; inspirado en la ref. 5, sin copiarla).
 - **Voz en off:** la elegida es ElevenLabs (pendiente de que funcione la clave). Mientras tanto, Kokoro `em_alex` a velocidad 1,05, oración por oración (pausa de 0,32 s después de "." y "?"), con cadena de locutor: pasa-altos a 85 Hz, +2,5 dB de calidez a 180 Hz, −2 dB a 350 Hz, +3 dB de presencia a 3,2 kHz, −3,5 dB en las "s" a 7 kHz, compresión 3:1 y un toque de sala. **Piper no se usa:** al usuario le sonó cruda. La marca se pronuncia "Roxet" y en pantalla dice "RXT".
 - **Imagen:** gimnasio RXT en 3D isométrico, de noche, con una zona por servicio. La cámara se mueve sin cortes de una zona a otra justo cuando la voz la nombra (18 cuadros de movimiento suave) y vuelve al encuadre inicial al final, para que el reel quede en loop.
-- **Texto arriba**, centrado al **14,5 % de la altura**, palabra por palabra, en trozos de hasta 6 palabras (se corta en comas y al final de cada oración). **Dos tipografías combinadas en la misma frase** (pedido del usuario):
+- **Texto arriba**, centrado al **24,5 % de la altura** (zona segura), palabra por palabra, en trozos de hasta 6 palabras (se corta en comas y al final de cada oración). **Dos tipografías combinadas en la misma frase** (pedido del usuario):
   - **Serif editorial Bodoni Moda 500**, blanca, a **70 px**, interletrado −1 %, para el texto.
   - **Manuscrita Allura**, **1,55× más grande (≈108 px)**, en **dorado `#E2B65A`** o **rojo `#E0352B`**, para 1 o 2 palabras clave por frase (y los números de lista). Se "escribe" de izquierda a derecha en 9 cuadros.
   - Sombra sutil `0 4px 18px rgba(0,0,0,.55), 0 1px 2px rgba(0,0,0,.6)`. Sin recuadros ni contornos. Nada de tipografías genéricas ni efectos exagerados.
   - El gancho siempre lleva una palabra en manuscrita (ej. "¿Qué *hacemos* en RXT?"). El rojo se reserva para la palabra más fuerte del video.
   - Los títulos de las tarjetas también van en Bodoni Moda 600 (sin mayúsculas forzadas); las etiquetas chicas siguen en Inter en mayúsculas espaciadas.
-- **Barra de progreso** debajo del texto (23 % de la altura): actual en rojo, terminados en azul con ✓. En el 3D, la zona activa se pone roja y tiene un marcador numerado.
+- **Barra de progreso** debajo del texto (32,5 % de la altura): actual en rojo, terminados en azul con ✓. En el 3D, la zona activa se pone roja y tiene un marcador numerado.
 - **Tarjetas tipo app** abajo (fondo oscuro translúcido, radio de 34 px) para listas: chips que se encienden en azul cuando se dicen y filas con ícono.
 - **Logo RXT armándose** cuando la voz dice "En RXT…" al principio: el fondo se oscurece al 70 %, la R entra por la izquierda, la T por la derecha y las mitades de la X se juntan (12 cuadros), con brillo rojo al encajar, línea roja y "TRAINING CLUB" debajo; sale con un golpe de escala. Whoosh al entrar e impacto al encajar. (`series/ui/LogoRxt.tsx`, logo en `public/marca/logo-rxt-*.png`). Pedido y aprobado por el usuario: "me encanta así".
 - **Encabezado** (de la ref. 6): logo X y "RXT" a la izquierda, "PARTE n/9" a la derecha y debajo una **línea de 4 px que se llena en rojo** a medida que avanza el video.
@@ -118,5 +126,5 @@ Alternativa al gimnasio 3D, elegida por el usuario para el reel 2 ("hazlo difere
 - **Ritmo:** una mini-escena por idea, cada **1,5–3 s**, sincronizada con la palabra que la nombra. Cada escena entra subiendo 40 px con resorte y sale con un fundido de 5 cuadros.
 - **Transición:** raya de luz azul-blanca en diagonal (10 cuadros) + whoosh suave en cada cambio.
 - **Escenario** entre el 20 % y el 65 % de la altura; personajes con los pies al 61 %.
-- **Subtítulos abajo**, centrados al **80 % de la altura**, a 64 px, con la misma combinación Bodoni Moda + Allura.
+- **Subtítulos abajo**, centrados al **70,5 % de la altura** (zona segura), a 60 px, con la misma combinación Bodoni Moda + Allura.
 - Logo RXT armándose cuando la voz dice "en RXT"; cierre de serie igual que en el formato 3D.

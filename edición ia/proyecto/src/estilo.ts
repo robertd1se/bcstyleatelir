@@ -11,6 +11,10 @@ export const FPS = 30;
 export const ANCHO = 1080;
 export const ALTO = 1920;
 
+// Zona segura de Instagram Reels (px sobre 1080x1920): lo que queda fuera lo tapa la interfaz
+// (arriba: título "Reels"; abajo: usuario, descripción y audio; derecha: botones) o lo recorta el feed (4:5).
+export const ZONA_SEGURA = { arriba: 290, abajo: 440, derecha: 140, izquierda: 70 };
+
 export const COLORES = {
   blanco: "#FFFFFF",
   negro: "#0A0A0A",

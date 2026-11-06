@@ -8,14 +8,14 @@ export const ListaTarjetas: React.FC<{ etiqueta: string; items: Item[]; duration
   etiqueta,
   items,
   durationInFrames,
-  top = 1180,
+  top = 1090,
 }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const sale = interpolate(frame, [durationInFrames - 6, durationInFrames], [1, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
   const etiquetaEntra = spring({ frame, fps, durationInFrames: 10, config: { damping: 16 } });
   return (
-    <div style={{ position: "absolute", top, left: 90, right: 90, display: "flex", flexDirection: "column", alignItems: "center", gap: 16, opacity: sale }}>
+    <div style={{ position: "absolute", top, left: 110, right: 150, display: "flex", flexDirection: "column", alignItems: "center", gap: 16, opacity: sale }}>
       <div
         style={{
           padding: "8px 22px",
@@ -46,7 +46,7 @@ export const ListaTarjetas: React.FC<{ etiqueta: string; items: Item[]; duration
               display: "flex",
               alignItems: "center",
               gap: 24,
-              padding: "20px 26px",
+              padding: "16px 24px",
               borderRadius: 24,
               background: "linear-gradient(135deg, rgba(30,32,44,0.78), rgba(12,13,19,0.86))",
               backdropFilter: "blur(14px)",

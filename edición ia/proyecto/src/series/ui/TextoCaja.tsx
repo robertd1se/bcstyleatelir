@@ -11,8 +11,8 @@ export const TEXTO_CAJA = {
   tamaño: 70,
   escalaManuscrita: 1.55,
   maxPalabras: 6,
-  centroY: 0.145,
-  margenLateral: 80,
+  centroY: 0.245, // debajo del encabezado, dentro de la zona segura
+  margenLateral: 120,
   sombra: "0 4px 18px rgba(0,0,0,0.55), 0 1px 2px rgba(0,0,0,0.6)",
 };
 

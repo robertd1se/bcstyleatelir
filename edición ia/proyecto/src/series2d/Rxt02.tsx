@@ -75,7 +75,7 @@ const Gancho: React.FC = () => {
   const t = useT();
   return (
     <>
-      <div style={{ position: "absolute", top: 380, width: "100%", display: "flex", justifyContent: "center" }}>
+      <div style={{ position: "absolute", top: 410, width: "100%", display: "flex", justifyContent: "center" }}>
         <Pastilla texto="¿Por qué RXT?" color={COLORES.rojo} grande />
       </div>
       <Persona2D x={540} y={PIE + 40} alto={560} pose="pensando" t={t} remera={COLORES.azul} />
@@ -98,7 +98,7 @@ const Personas: React.FC = () => {
   const d0 = ESCENAS[1][0];
   return (
     <>
-      <div style={{ position: "absolute", top: 380, width: "100%", display: "flex", justifyContent: "center" }}>
+      <div style={{ position: "absolute", top: 410, width: "100%", display: "flex", justifyContent: "center" }}>
         <Pastilla texto="Cada persona es distinta" color={COLORES.azul} />
       </div>
       {[
@@ -123,16 +123,16 @@ const NoSoloEso: React.FC = () => {
   const d0 = ESCENAS[2][0];
   return (
     <>
-      <div style={{ position: "absolute", top: 380, width: "100%", display: "flex", justifyContent: "center" }}>
+      <div style={{ position: "absolute", top: 410, width: "100%", display: "flex", justifyContent: "center" }}>
         <Pastilla texto="No se trata solo de…" color="#3a3f55" />
       </div>
-      <Panel x={70} y={470} w={450} h={620} titulo="Levantar peso">
-        <Persona2D x={225} y={600} alto={430} pose="levantar" t={t} remera="#e05a2b" />
+      <Panel x={80} y={470} w={430} h={600} titulo="Levantar peso">
+        <Persona2D x={215} y={585} alto={420} pose="levantar" t={t} remera="#e05a2b" />
       </Panel>
       {useCurrentFrame() >= T.terminar - d0 - 4 ? (
-        <Panel x={560} y={470} w={450} h={620} titulo="Terminar la rutina">
+        <Panel x={540} y={470} w={420} h={600} titulo="Terminar la rutina">
           <div style={{ position: "absolute", top: 80, left: 24 }}>
-            <Lista items={["Sentadilla", "Press banca", "Remo", "Burpees", "Plancha"]} desde={T.terminar - d0} paso={3} w={400} />
+            <Lista items={["Sentadilla", "Press banca", "Remo", "Burpees", "Plancha"]} desde={T.terminar - d0} paso={3} w={372} />
           </div>
         </Panel>
       ) : null}
@@ -146,7 +146,7 @@ const Intencion: React.FC = () => {
   const d0 = ESCENAS[3][0];
   return (
     <>
-      <div style={{ position: "absolute", top: 380, width: "100%", display: "flex", justifyContent: "center" }}>
+      <div style={{ position: "absolute", top: 410, width: "100%", display: "flex", justifyContent: "center" }}>
         <Pastilla texto="Se trata de" color={COLORES.rojo} />
       </div>
       <div style={{ position: "absolute", left: 540 - 200, top: 520 }}>
@@ -166,7 +166,7 @@ const Tecnica: React.FC = () => {
   const f = useCurrentFrame();
   return (
     <>
-      <Panel x={190} y={430} w={700} h={720} titulo="Técnica">
+      <Panel x={170} y={470} w={700} h={680} titulo="Técnica">
         <Persona2D x={350} y={640} alto={480} pose="sentadilla" t={t} remera={COLORES.azul} />
         {/* guías */}
         <svg width={700} height={720} style={{ position: "absolute", left: 0, top: 0 }}>
@@ -186,9 +186,9 @@ const Progresiva: React.FC = () => {
   const d0 = ESCENAS[5][0];
   return (
     <>
-      <Panel x={80} y={430} w={920} h={680} titulo="Tu progreso">
+      <Panel x={80} y={470} w={880} h={640} titulo="Tu progreso">
         <div style={{ position: "absolute", left: 60, top: 110 }}>
-          <GraficoLinea w={800} h={460} desde={4} duracion={T.progresiva - d0} puntos={[0.05, 0.14, 0.22, 0.33, 0.42, 0.55, 0.66, 0.8, 0.92]} zigzag={[0.1, 0.32, 0.12, 0.38, 0.16, 0.3, 0.1, 0.34, 0.2]} />
+          <GraficoLinea w={760} h={420} desde={4} duracion={T.progresiva - d0} puntos={[0.05, 0.14, 0.22, 0.33, 0.42, 0.55, 0.66, 0.8, 0.92]} zigzag={[0.1, 0.32, 0.12, 0.38, 0.16, 0.3, 0.1, 0.34, 0.2]} />
         </div>
         <div style={{ position: "absolute", right: 30, top: 70 }}>
           <Pastilla texto="Progresivo" color="#2bb673" desde={T.progresiva - d0} />
@@ -212,7 +212,7 @@ const Acompanamiento: React.FC = () => {
       <div style={{ position: "absolute", left: 730, top: PIE - 520 - 80, transform: "translateX(-50%)" }}>
         <Pastilla texto="Coach RXT" color={COLORES.rojo} desde={4} />
       </div>
-      <div style={{ position: "absolute", top: 400, width: "100%", display: "flex", justifyContent: "center" }}>
+      <div style={{ position: "absolute", top: 410, width: "100%", display: "flex", justifyContent: "center" }}>
         <Pastilla texto="Acompañamiento profesional" color={COLORES.azul} desde={T.profesional - d0 - 6} grande />
       </div>
     </>
@@ -227,9 +227,9 @@ const Comunidad: React.FC = () => {
   return (
     <>
       {remeras.map((r, i) => (
-        <Persona2D key={i} x={140 + i * 200} y={PIE - (i % 2) * 30} alto={400 + (i % 3) * 30} pose="festejo" t={t} fase={i * 0.27} remera={r} gorra={i === 2} pelo={["#2a1a12", "#111", "#6b3f1d", "#111", "#3b2414"][i]} />
+        <Persona2D key={i} x={170 + i * 180} y={PIE - (i % 2) * 30} alto={380 + (i % 3) * 30} pose="festejo" t={t} fase={i * 0.27} remera={r} gorra={i === 2} pelo={["#2a1a12", "#111", "#6b3f1d", "#111", "#3b2414"][i]} />
       ))}
-      <div style={{ position: "absolute", top: 440, width: "100%", display: "flex", justifyContent: "center", gap: 18 }}>
+      <div style={{ position: "absolute", top: 410, width: "100%", display: "flex", justifyContent: "center", gap: 18 }}>
         <Pastilla texto="Comunidad" color={COLORES.azul} desde={T.comunidad - d0} grande />
         <Pastilla texto="Disciplina" color={COLORES.rojo} desde={T.disciplina - d0} grande />
         <Pastilla texto="Motivación" color="#2bb673" desde={T.motivacion - d0} grande />
@@ -245,7 +245,7 @@ const Limites: React.FC = () => {
   const f = useCurrentFrame();
   return (
     <>
-      <Panel x={70} y={430} w={600} h={680} titulo="Cada entrenamiento">
+      <Panel x={80} y={470} w={580} h={640} titulo="Cada entrenamiento">
         <div style={{ position: "absolute", left: 40, top: 120 }}>
           <Barras w={520} h={440} valores={[0.25, 0.36, 0.45, 0.58, 0.7, 0.95]} desde={6} etiquetas={["S1", "S2", "S3", "S4", "S5", "HOY"]} />
         </div>
@@ -253,7 +253,7 @@ const Limites: React.FC = () => {
           <div style={{ position: "absolute", right: 0, top: -40, fontFamily: FUENTES.textoChico, fontWeight: 700, fontSize: 22, letterSpacing: "0.12em", color: COLORES.dorado }}>TU LÍMITE</div>
         </div>
       </Panel>
-      <Persona2D x={850} y={PIE - 40} alto={440} pose="salto" t={t} remera={COLORES.rojo} />
+      <Persona2D x={810} y={PIE - 60} alto={420} pose="salto" t={t} remera={COLORES.rojo} />
       <Sello texto="Superado" desde={T.limites - d0} x={370} y={560} giro={-8} tamaño={70} />
     </>
   );
@@ -282,7 +282,7 @@ export const Rxt02: React.FC = () => {
 
       <Encabezado parte={2} total={9} />
       <Sequence durationInFrames={T.serie}>
-        <TextoCaja palabras={PALABRAS} centroY={0.8} tamaño={64} doradas={["elegir", "diferentes.", "intención,", "técnica,", "progresiva", "comunidad,"]} rojas={["límites."]} />
+        <TextoCaja palabras={PALABRAS} centroY={0.705} tamaño={60} doradas={["elegir", "diferentes.", "intención,", "técnica,", "progresiva", "comunidad,"]} rojas={["límites."]} />
       </Sequence>
       <Sequence from={T.serie}>
         <CierreSerie parte={2} total={9} />

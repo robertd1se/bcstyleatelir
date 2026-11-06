@@ -6,7 +6,7 @@ export const Tarjeta: React.FC<{ titulo: string; children: React.ReactNode; dura
   titulo,
   children,
   durationInFrames,
-  bottom = 170,
+  bottom = 470,
 }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
@@ -16,8 +16,8 @@ export const Tarjeta: React.FC<{ titulo: string; children: React.ReactNode; dura
     <div
       style={{
         position: "absolute",
-        left: 70,
-        right: 70,
+        left: 110,
+        right: 150,
         bottom,
         padding: "34px 38px",
         borderRadius: 34,
@@ -43,7 +43,7 @@ export const Chips: React.FC<{ items: { texto: string; desdeFrame: number }[]; t
   const frame = useCurrentFrame() + tarjetaDesde;
   const { fps } = useVideoConfig();
   return (
-    <div style={{ display: "flex", flexWrap: "wrap", gap: 16 }}>
+    <div style={{ display: "flex", flexWrap: "wrap", gap: 12 }}>
       {items.map((it) => {
         const s = spring({ frame: frame - it.desdeFrame, fps, durationInFrames: 8, config: { damping: 12 } });
         const activo = frame >= it.desdeFrame;
@@ -51,11 +51,11 @@ export const Chips: React.FC<{ items: { texto: string; desdeFrame: number }[]; t
           <div
             key={it.texto}
             style={{
-              padding: "14px 26px",
+              padding: "10px 20px",
               borderRadius: 40,
               fontFamily: FUENTES.editorial,
               fontWeight: 600,
-              fontSize: 36,
+              fontSize: 31,
               color: COLORES.blanco,
               background: activo ? COLORES.azul : "#ffffff12",
               opacity: activo ? 1 : 0.35,

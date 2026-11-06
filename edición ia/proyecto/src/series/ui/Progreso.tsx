@@ -13,7 +13,7 @@ export const Progreso: React.FC<{ titulo: string; total: number; actual: number;
   const { fps } = useVideoConfig();
   const pop = spring({ frame: frame - inicioActualFrame, fps, durationInFrames: 8, config: { damping: 10 } });
   return (
-    <div style={{ position: "absolute", top: ALTO * 0.235, left: 0, right: 0, display: "flex", flexDirection: "column", alignItems: "center", gap: 18 }}>
+    <div style={{ position: "absolute", top: ALTO * 0.325, left: 0, right: 0, display: "flex", flexDirection: "column", alignItems: "center", gap: 18 }}>
       <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
         <span style={{ fontFamily: FUENTES.textoChico, fontWeight: 700, fontSize: 24, letterSpacing: "0.3em", color: "#ffffffaa", marginRight: 10 }}>
           {titulo}
