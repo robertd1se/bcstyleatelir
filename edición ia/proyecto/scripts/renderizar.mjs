@@ -1,5 +1,5 @@
 // Arma el video final con Remotion: vertical 1080x1920, 30 fps, subtítulos animados y música opcional.
-// Uso: node scripts/renderizar.mjs <video> [--musica <archivo>] [--volumen 0.12] [--salida <archivo.mp4>]
+// Uso: node scripts/renderizar.mjs <video> --cliente <roxet|personal|...> [--musica <archivo>] [--volumen 0.12] [--salida <archivo.mp4>]
 //        [--claves "palabra1,palabra2"] [--llamada "Registrate"] [--sin-cierre]
 // Si existe <video>.captions.json lo usa; si no, edita sin subtítulos.
 // Al final normaliza el audio a -14 LUFS (estándar de Instagram/TikTok).
@@ -23,7 +23,12 @@ const volumen = Number(opcion("volumen", "0.12"));
 const claves = (opcion("claves", "") ?? "").split(",").map((c) => c.trim()).filter(Boolean);
 const llamada = opcion("llamada", "Registrate");
 const conCierre = !args.includes("--sin-cierre");
-const salida = path.resolve(opcion("salida", path.join(RAIZ, "exportados", `${sinExtension(video)}.mp4`)));
+const cliente = opcion("cliente", null);
+if (!cliente && !args.includes("--salida")) {
+  console.error("Falta --cliente <nombre> (carpeta en clientes/) o --salida <archivo.mp4>");
+  process.exit(1);
+}
+const salida = path.resolve(opcion("salida", path.join(RAIZ, "clientes", cliente ?? "", "exportados", `${sinExtension(video)}.mp4`)));
 
 // Remotion lee los archivos desde public/: copiamos ahí lo que necesita.
 const carpeta = path.join(PROYECTO, "public", "entrada");

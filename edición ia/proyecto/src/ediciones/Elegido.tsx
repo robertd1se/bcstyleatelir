@@ -1,7 +1,7 @@
-// Edición de grabaciones/copy_BE5F3685-CE9E-4E08-B460-9E7C10DBFD39.MOV
+// Edición de clientes/roxet/grabaciones/copy_BE5F3685-CE9E-4E08-B460-9E7C10DBFD39.MOV
 // Recorrido por el gym sin voz; textos tomados del cartel "RXT te ha ELEGIDO".
 // Antes de renderizar hace falta la copia en H.264 (public/entrada no se sube a Git):
-//   ffmpeg -i ../grabaciones/copy_BE5F3685-CE9E-4E08-B460-9E7C10DBFD39.MOV -c:v libx264 -crf 16 \
+//   ffmpeg -i ../clientes/roxet/grabaciones/copy_BE5F3685-CE9E-4E08-B460-9E7C10DBFD39.MOV -c:v libx264 -crf 16 \
 //     -pix_fmt yuv420p -r 30 -c:a aac public/entrada/elegido.mp4
 import { Caption } from "@remotion/captions";
 import { TransitionSeries } from "@remotion/transitions";

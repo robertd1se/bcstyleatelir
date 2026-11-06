@@ -5,18 +5,28 @@ Esta carpeta es un editor de video. Trabajá **solo dentro de `edición ia/`**.
 ## Regla principal
 
 **Antes de borrar, sobrescribir o mover cualquier archivo del usuario, pedí confirmación y esperá un "ok".**
-Eso incluye todo lo que esté en `grabaciones/`, `referencias/`, `musica/` y `exportados/`, y también `estilo.md`.
+Eso incluye todo lo que esté en `clientes/` (grabaciones, referencias, música, exportados y `marca.md`), y también `estilo.md`.
 Nunca edites los videos originales: trabajá siempre sobre copias o archivos nuevos.
+
+## Varios clientes
+
+El usuario es editor: hace videos para **Roxet (RXT)**, videos **personales** y para **otros negocios**.
+- **Antes de cada video, confirmá para qué cliente es** (si no lo dice y no es obvio, preguntá) y trabajá en su carpeta `clientes/<cliente>/`.
+- Aplicá **`estilo.md` (estilo general del usuario) + `clientes/<cliente>/marca.md` (marca del cliente)**. Si chocan, manda la marca del cliente.
+- **Cliente nuevo:** copiá `clientes/_plantilla/` a `clientes/<nombre>/`, creá sus carpetas y completá `marca.md` con lo que te pase el usuario (logo, colores, tipografías, tono, referencias). Sus logos van en `proyecto/public/clientes/<nombre>/`.
+- Lo que el usuario pida "para siempre" va a `estilo.md` si vale para todos, o al `marca.md` del cliente si es de esa marca. Ante la duda, preguntá.
 
 ## Carpetas
 
 | Carpeta / archivo | Para qué sirve |
 |---|---|
-| `grabaciones/` | El usuario deja acá los videos crudos. Solo lectura. |
-| `referencias/` | Videos que le gustan al usuario (bajados con yt-dlp). Solo para analizar: no se reutilizan ni se suben a Git. |
-| `exportados/` | Los videos terminados. |
-| `musica/` | Música que agrega el usuario. **Si está vacía, se edita sin música.** |
-| `estilo.md` | El estilo de edición del usuario. Se aplica en cada video. |
+| `clientes/<cliente>/grabaciones/` | Videos crudos de ese cliente. Solo lectura. |
+| `clientes/<cliente>/referencias/` | Videos que le gustan (bajados con yt-dlp). Solo para analizar: no se reutilizan ni se suben a Git. |
+| `clientes/<cliente>/exportados/` | Videos terminados de ese cliente. |
+| `clientes/<cliente>/musica/` | Música de ese cliente. **Si está vacía, se usa la base generada con `scripts/musica.py`** (o sin música en ediciones de grabaciones). |
+| `clientes/<cliente>/marca.md` | Marca del cliente: colores, tipografías, logo, tono, referencias, formatos y videos hechos. |
+| `clientes/_plantilla/` | Plantilla para un cliente nuevo. |
+| `estilo.md` | El estilo de edición general del usuario. Se aplica en todos los videos. |
 | `ideas-pendientes.md` | Ideas que el usuario quiere recordar pero todavía no aprobó. No aplicarlas sin su ok; proponerlas cuando vengan al caso. |
 | `proyecto/` | Proyecto de Remotion: arma el video final, subtítulos animados y gráficos. |
 | `instalar.sh` | Reinstala dependencias, whisper.cpp y el modelo (`bash instalar.sh`). |
@@ -27,7 +37,7 @@ Nunca edites los videos originales: trabajá siempre sobre copias o archivos nue
 |---|---|
 | **Node.js** (20+) | Corre Remotion y los scripts de `proyecto/scripts/`. |
 | **FFmpeg / ffprobe** | Cortar, unir, comprimir, extraer audio, detectar silencios y medir duraciones. |
-| **yt-dlp** | Bajar videos de referencia a `referencias/`: `yt-dlp -o "referencias/%(title)s.%(ext)s" <url>` |
+| **yt-dlp** | Bajar videos de referencia: `yt-dlp -o "clientes/<cliente>/referencias/%(title)s.%(ext)s" <url>` |
 | **whisper.cpp** (modelo `base`) | Transcribir con tiempos por palabra para cortar errores y hacer subtítulos. Está en `proyecto/whisper.cpp/` (no se sube a Git). |
 | **Kokoro** (voz `em_alex`) y **Piper** | Voz en off sintética en español para la serie explicativa (Kokoro es la principal; Piper sonaba "cruda" para el usuario). Modelos en `proyecto/voces/` (no se suben a Git). |
 | **ElevenLabs** | Voz IA premium elegida por el usuario. Pendiente: la clave guardada no funciona. |
@@ -42,13 +52,13 @@ npm run transcribir -- <video> [idioma=es] [modelo=base]
 
 npm run cortar-silencios -- <entrada> <salida> [umbralDb=-35] [minSilencioSeg=0.5] [margenSeg=0.1]
 
-npm run renderizar -- <video> [--musica <archivo>] [--volumen 0.12] [--salida <archivo.mp4>] \
+npm run renderizar -- <video> --cliente <nombre> [--musica <archivo>] [--volumen 0.12] [--salida <archivo.mp4>] \
                        [--claves "problema,8"] [--llamada "Registrate"] [--sin-cierre]
 #   → vertical 1080x1920, 30 fps; usa <video>.captions.json si existe
 #   → --claves: palabras a resaltar en rojo; agrega el cierre con logo (2 s) salvo --sin-cierre
-#   → normaliza el audio a -14 LUFS; por defecto guarda en ../exportados/<nombre>.mp4
+#   → normaliza el audio a -14 LUFS; guarda en ../clientes/<cliente>/exportados/ (con --cliente) o en --salida
 
-npm run muestra      # vuelve a generar ../exportados/muestra-estilo.mp4
+npm run muestra      # vuelve a generar ../clientes/roxet/exportados/muestra-estilo.mp4
 
 python3 scripts/voz.py guiones/<nombre>.txt public/series/<nombre> [--motor kokoro|piper] [--voz em_alex]
 #   → voz en off (Kokoro em_alex por defecto) con cadena de locutor + palabras.json con tiempos por palabra
@@ -87,13 +97,13 @@ npm run lint         # chequeo de tipos y estilo
 
 Los videos de iPhone (.MOV en HEVC) se pasan primero a H.264 en `public/entrada/` (ver el encabezado de `ediciones/Elegido.tsx`).
 Para renderizar una edición: `npx remotion render src/index.ts <Composicion> <tmp>.mp4`, y después normalizar a -14 LUFS con
-`ffmpeg -i <tmp>.mp4 -c:v copy -af loudnorm=I=-14:TP=-1:LRA=11 -ar 48000 -c:a aac -b:a 192k -movflags +faststart ../exportados/<nombre>-editado.mp4`.
+`ffmpeg -i <tmp>.mp4 -c:v copy -af loudnorm=I=-14:TP=-1:LRA=11 -ar 48000 -c:a aac -b:a 192k -movflags +faststart ../clientes/<cliente>/exportados/<nombre>-editado.mp4`.
 
 Para videos con varios planos, transiciones látigo, zócalos o gancho, armá una composición nueva en `src/` a partir de `MuestraEstilo.tsx` (reemplazando `FondoDemo` por `<OffthreadVideo>`) y registrala en `Root.tsx`.
 
 ## Flujo de edición
 
-Para cada video de `grabaciones/`, trabajando sobre archivos intermedios en una carpeta temporal (no en `grabaciones/`):
+Para cada video de `clientes/<cliente>/grabaciones/`, trabajando sobre archivos intermedios en una carpeta temporal (no en `grabaciones/`):
 
 1. **Transcribir:** `npm run transcribir -- <video>`.
 2. **Cortar silencios y errores:**
@@ -102,10 +112,10 @@ Para cada video de `grabaciones/`, trabajando sobre archivos intermedios en una 
    - Volver a transcribir el video cortado para que los subtítulos coincidan.
 3. **Aplicar `estilo.md`:** ritmo, gancho, transiciones, zócalos, zooms, colores y tipografía (con los componentes de `proyecto/src/`). Elegí las palabras clave para resaltar en rojo.
 4. **Subtítulos:** salen solos de `<video>.captions.json` al renderizar.
-5. **Música:** si `musica/` tiene archivos, usar el que corresponda con `--musica` (volumen bajo, unos 0.1–0.2, para que no tape la voz). Si está vacía, sin música.
-6. **Exportar:** `npm run renderizar -- <tmp>/final.mp4 --salida ../exportados/<nombre>.mp4` → **vertical 1080x1920 a 30 fps**, H.264 + AAC. Si hace falta achicarlo: `ffmpeg -i in.mp4 -c:v libx264 -crf 26 -preset slow -c:a aac -b:a 128k out.mp4`.
+5. **Música:** si `clientes/<cliente>/musica/` tiene archivos, usar el que corresponda con `--musica` (volumen bajo, unos 0.1–0.2, para que no tape la voz). Si está vacía, sin música.
+6. **Exportar:** `npm run renderizar -- <tmp>/final.mp4 --salida ../clientes/<cliente>/exportados/<nombre>.mp4` → **vertical 1080x1920 a 30 fps**, H.264 + AAC. Si hace falta achicarlo: `ffmpeg -i in.mp4 -c:v libx264 -crf 26 -preset slow -c:a aac -b:a 128k out.mp4`.
 
-Antes de exportar con un nombre que ya existe en `exportados/`, pedí confirmación.
+Antes de exportar con un nombre que ya existe en `exportados/` del cliente, pedí confirmación.
 
 ## Notas del entorno
 
