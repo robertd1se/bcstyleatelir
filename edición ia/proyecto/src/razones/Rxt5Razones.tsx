@@ -23,7 +23,7 @@ const FIN_VOZ = Math.round((PALABRAS[PALABRAS.length - 1].endMs / 1000) * FPS);
 export const DURACION_5RAZONES = FIN_VOZ + Math.round(1.0 * FPS);
 
 // "5." aparece dos veces: en el gancho ("5 razones") y en la razón 5
-const R = [dice("1."), dice("2."), dice("3."), dice("4."), dice("5.", 1)];
+const R = [dice("1."), dice("2."), dice("número"), dice("4."), dice("5.", 1)]; // la razón 3 arranca en "Número tres"
 const T = {
   funcional: dice("funcional"),
   fuerza: dice("fuerza"),
