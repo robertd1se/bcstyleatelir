@@ -15,3 +15,6 @@ voces
 
 # Música generada (se regenera con: python3 scripts/musica.py)
 public/musica-generada
+
+# Trozos de voz aprobados (caché de scripts/voz.py)
+public/series/*/trozos

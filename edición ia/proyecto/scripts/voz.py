@@ -61,7 +61,10 @@ if motor == "chatterbox":
     py_cb = os.path.join(PROYECTO, "voces", "venv-chatterbox", "bin", "python")
     entorno = {**os.environ, "HF_HUB_OFFLINE": os.environ.get("HF_HUB_OFFLINE", "1"), "HF_HUB_DISABLE_XET": "1"}
 
+    NUMEROS = {"1": "uno", "2": "dos", "3": "tres", "4": "cuatro", "5": "cinco", "6": "seis", "7": "siete", "8": "ocho", "9": "nueve", "10": "diez"}
+
     def normal(t):
+        t = re.sub(r"\d+", lambda m: f" {NUMEROS.get(m.group(), m.group())} ", t)
         t = unicodedata.normalize("NFD", t.lower())
         return " ".join("".join(c for c in t if unicodedata.category(c) != "Mn" and (c.isalnum() or c == " ")).split())
 
@@ -70,13 +73,27 @@ if motor == "chatterbox":
                        stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, cwd=tempfile.gettempdir())
         caps = json.load(open(wav_trozo + ".captions.json"))
         oido = "".join(c["text"] for c in caps)
-        parecido = difflib.SequenceMatcher(None, normal(esperado).split(), normal(oido).split()).ratio()
+        esp, oi = normal(esperado).split(), normal(oido).split()
+        parecido = difflib.SequenceMatcher(None, esp, oi).ratio()
+        if len(oi) > len(esp) + 1:  # dijo palabras de más (repitió o inventó)
+            parecido -= 0.2
         dur = sf.info(wav_trozo).duration
         maximo = 0.085 * len(esperado) + 1.2  # más largo que esto = está inventando
         return parecido, dur, maximo, oido
 
+    import hashlib, shutil
+    cache = os.path.join(salida, "trozos")
+    os.makedirs(cache, exist_ok=True)
+    clave = lambda t: hashlib.sha1(f"{perfil}|{t}".encode()).hexdigest()[:12]
     mejores = {}  # id -> (puntaje, ruta)
-    pendientes = list(range(len(trozos)))
+    pendientes = []
+    for i, t in enumerate(trozos):
+        guardado = os.path.join(cache, clave(t) + ".wav")
+        if os.path.exists(guardado):
+            mejores[i] = (1.0, guardado)
+            print(f"  trozo {i + 1}/{len(trozos)}: ya aprobado antes (se reutiliza)")
+        else:
+            pendientes.append(i)
     for ronda in range(5):
         if not pendientes:
             break
@@ -92,8 +109,10 @@ if motor == "chatterbox":
             puntaje = parecido - (0.5 if dur > maximo else 0)
             if i not in mejores or puntaje > mejores[i][0]:
                 mejores[i] = (puntaje, ruta)
-            ok = parecido >= 0.82 and dur <= maximo
-            print(f"  trozo {i + 1}/{len(trozos)} ronda {ronda + 1}: parecido {parecido:.2f}, {dur:.1f}s (máx {maximo:.1f}) {'OK' if ok else 'REHACER'}")
+            ok = parecido >= 0.86 and dur <= maximo
+            print(f"  trozo {i + 1}/{len(trozos)} ronda {ronda + 1}: parecido {parecido:.2f}, {dur:.1f}s (máx {maximo:.1f}) {'OK' if ok else 'REHACER'}  «{oido.strip()[:70]}»")
+            if ok:
+                shutil.copy(ruta, os.path.join(cache, clave(trozos[i]) + ".wav"))
             if not ok:
                 siguen.append(i)
         pendientes = siguen
