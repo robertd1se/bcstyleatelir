@@ -7,6 +7,7 @@ import { COLORES, FPS } from "../estilo";
 import palabrasJson from "../../public/series/rxt-01/palabras.json";
 import { cuandoSeDice } from "./linea";
 import { ClaveCamara, prepararPalabras, ReelSerie } from "./ReelSerie";
+import { CtaGuardar, FRAMES_CTA_GUARDAR } from "./ui/CtaGuardar";
 import { ListaTarjetas } from "./ui/ListaTarjetas";
 import { Progreso } from "./ui/Progreso";
 import { Chips, Tarjeta } from "./ui/Tarjeta";
@@ -101,6 +102,10 @@ export const Rxt01: React.FC = () => {
       logo={{ desde: dice("en", 1) - 3, hasta: dice("desarrollo") + 12 }}
     >
       <FrameProgreso />
+      {/* pedir el guardado antes del último punto (ref. 8) */}
+      <Sequence from={T.objetivo - FRAMES_CTA_GUARDAR + 4} durationInFrames={FRAMES_CTA_GUARDAR}>
+        <CtaGuardar texto="Guárdalo para tu próximo entreno" y={980} />
+      </Sequence>
       <Sequence from={T.asi} durationInFrames={T.sesiones - T.asi}>
         <Tarjeta titulo="Capacidades que desarrollamos" durationInFrames={T.sesiones - T.asi}>
           <Chips items={capacidades} tarjetaDesde={T.asi} />

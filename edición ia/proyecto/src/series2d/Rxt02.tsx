@@ -2,7 +2,7 @@
 // Voz: python3 scripts/voz.py guiones/rxt-02.txt public/series/rxt-02
 // Música: python3 scripts/musica.py public/musica-generada/rxt-02.wav --duracion <voz + 1 s> --semilla 2
 import { Caption } from "@remotion/captions";
-import { AbsoluteFill, Audio, Sequence, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
+import { AbsoluteFill, Audio, interpolate, Sequence, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
 import { COLORES, FPS, FUENTES } from "../estilo";
 import palabrasJson from "../../public/series/rxt-02/palabras.json";
 import { cuandoSeDice } from "../series/linea";
@@ -11,6 +11,7 @@ import { volumenMusica } from "../series/sonido";
 import { Acabado } from "../series/ui/Acabado";
 import { CierreSerie } from "../series/ui/CierreSerie";
 import { Encabezado } from "../series/ui/Encabezado";
+import { CtaGuardar, FRAMES_CTA_GUARDAR } from "../series/ui/CtaGuardar";
 import { LogoRxt } from "../series/ui/LogoRxt";
 import { TextoCaja } from "../series/ui/TextoCaja";
 import { Persona2D } from "./Persona2D";
@@ -62,8 +63,11 @@ const ESCENAS: [number, number][] = [
   [T.cada2, T.serie],
 ];
 
-const Escena: React.FC<{ d: number; children: React.ReactNode }> = ({ d, children }) => {
+const Escena: React.FC<{ d: number; children: React.ReactNode; primera?: boolean }> = ({ d, children, primera }) => {
   const e = useEntrada(d);
+  const frame = useCurrentFrame();
+  // la primera escena (gancho) se ve completa desde el cuadro 0: no entra, solo sale
+  if (primera) return <AbsoluteFill style={{ opacity: interpolate(frame, [d - 5, d], [1, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" }) }}>{children}</AbsoluteFill>;
   return <AbsoluteFill style={{ opacity: e.opacidad, transform: `translateY(${e.y}px) scale(${e.escala})` }}>{children}</AbsoluteFill>;
 };
 
@@ -76,7 +80,7 @@ const Gancho: React.FC = () => {
   return (
     <>
       <div style={{ position: "absolute", top: 410, width: "100%", display: "flex", justifyContent: "center" }}>
-        <Pastilla texto="¿Por qué RXT?" color={COLORES.rojo} grande />
+        <Pastilla texto="¿Por qué RXT?" color={COLORES.rojo} grande desde={-12} />
       </div>
       <Persona2D x={540} y={PIE + 40} alto={560} pose="pensando" t={t} remera={COLORES.azul} />
       {[
@@ -270,7 +274,7 @@ export const Rxt02: React.FC = () => {
         const C = COMPONENTES[i];
         return (
           <Sequence key={i} from={a} durationInFrames={b - a}>
-            <Escena d={b - a}>
+            <Escena d={b - a} primera={i === 0}>
               <C />
             </Escena>
           </Sequence>
@@ -280,6 +284,10 @@ export const Rxt02: React.FC = () => {
         <LogoRxt />
       </Sequence>
 
+      {/* pedir el guardado antes del último punto (ref. 8) */}
+      <Sequence from={T.cada2 - FRAMES_CTA_GUARDAR + 6} durationInFrames={FRAMES_CTA_GUARDAR}>
+        <CtaGuardar texto="Guárdalo para después" y={1000} />
+      </Sequence>
       <Encabezado parte={2} total={9} />
       <Sequence durationInFrames={T.serie}>
         <TextoCaja palabras={PALABRAS} centroY={0.705} tamaño={60} doradas={["elegir", "diferentes.", "intención,", "técnica,", "progresiva", "comunidad,"]} rojas={["límites."]} />

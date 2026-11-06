@@ -18,6 +18,14 @@ El usuario edita y hace publicidad, pero **no maneja las cuentas** de sus client
 - **Formatos que suelen funcionar en gyms y negocios:** listas ("3 errores…"), mitos vs. realidad, antes/después, "un día en…", detrás de escena, reacciones de clientes, series numeradas.
 - **Música:** en videos sin voz, el tema se elige pensando en que el cliente lo reemplace por un **audio en tendencia** al publicar (los cortes deben caer cada 0,5 s para que encajen con casi cualquier tema).
 
+### Técnicas virales aprendidas (ref. 8: "Mejora tus subtítulos", `clientes/roxet/referencias/ref8-DdIB23gsQPo.mp4`)
+- **Gancho con promesa contable:** decir cuántas cosas vienen ("5 pasos", "4 pilares") y mostrarlas como íconos numerados que aparecen alrededor del título en el primer segundo. Así la gente se queda hasta el último.
+- **Capítulos:** una tarjeta de pantalla completa por bloque ("Paso 1", "Paso 2"… en serif itálica grande sobre un fondo con una onda de color), cada 5–8 s. Reinicia la atención y muestra cuánto falta.
+- **CTA de guardar a mitad del video, antes del último punto:** "Antes de pasar al último paso, guárdalo" con el ícono de guardar y un dedo que lo toca (`series/ui/CtaGuardar.tsx`, 1,6 s). Se pide el guardado cuando todavía quieren ver el final.
+- **Antes / después al final:** cerrar mostrando el resultado contra el punto de partida: es el pago que hace que lo vuelvan a ver.
+- **Tarjeta de seguir:** cierre con una tarjeta tipo perfil (logo, usuario y botón "Seguir") que se toca.
+- **Estética:** fondos claros o grises con desenfoque, brillo suave alrededor del texto, dos tipografías (fina + gruesa) en la misma frase y palabra clave dentro de un recuadro con brillo.
+
 ### Paquete de publicación (se entrega con cada video)
 En `clientes/<cliente>/exportados/<video>/`:
 1. `video.mp4` — el video final.
