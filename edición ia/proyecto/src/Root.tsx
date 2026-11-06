@@ -3,7 +3,7 @@ import { FRAMES_CIERRE } from "./componentes/CierreLogo";
 import { ALTO, ANCHO, FPS } from "./estilo";
 import { MuestraEstilo } from "./MuestraEstilo";
 import { DURACION_RXT01, Rxt01 } from "./series/Rxt01";
-import { DURACION_RXT02, Rxt02 } from "./series/Rxt02";
+import { DURACION_RXT02, Rxt02 } from "./series2d/Rxt02";
 import { DURACION_ELEGIDO, Elegido } from "./ediciones/Elegido";
 import { VideoVertical, VideoVerticalProps } from "./VideoVertical";
 

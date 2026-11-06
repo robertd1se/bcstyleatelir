@@ -61,7 +61,13 @@ const paginar = (ps: Palabra[]) => {
  * doradas / rojas: palabras clave en manuscrita (sin importar tildes ni mayúsculas).
  * Los números de lista ("1.", "2.") van en manuscrita dorada.
  */
-export const TextoCaja: React.FC<{ palabras: Caption[]; doradas?: string[]; rojas?: string[] }> = ({ palabras, doradas = [], rojas = [] }) => {
+export const TextoCaja: React.FC<{ palabras: Caption[]; doradas?: string[]; rojas?: string[]; centroY?: number; tamaño?: number }> = ({
+  palabras,
+  doradas = [],
+  rojas = [],
+  centroY = TEXTO_CAJA.centroY,
+  tamaño = TEXTO_CAJA.tamaño,
+}) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const ms = (frame / fps) * 1000;
@@ -95,12 +101,12 @@ export const TextoCaja: React.FC<{ palabras: Caption[]; doradas?: string[]; roja
           position: "absolute",
           left: TEXTO_CAJA.margenLateral,
           right: TEXTO_CAJA.margenLateral,
-          top: ALTO * TEXTO_CAJA.centroY,
+          top: ALTO * centroY,
           transform: `translateY(calc(-50% + ${sube}px))`,
           textAlign: "center",
           fontFamily: FUENTES.editorial,
           fontWeight: 500,
-          fontSize: TEXTO_CAJA.tamaño,
+          fontSize: tamaño,
           lineHeight: 1.18,
           letterSpacing: "-0.01em",
           color: COLORES.blanco,
@@ -130,7 +136,7 @@ export const TextoCaja: React.FC<{ palabras: Caption[]; doradas?: string[]; roja
                 padding: "0 0.12em",
                 fontFamily: FUENTES.manuscrita,
                 fontWeight: 400,
-                fontSize: TEXTO_CAJA.tamaño * TEXTO_CAJA.escalaManuscrita,
+                fontSize: tamaño * TEXTO_CAJA.escalaManuscrita,
                 lineHeight: 0.8,
                 letterSpacing: 0,
                 verticalAlign: "-0.06em",
