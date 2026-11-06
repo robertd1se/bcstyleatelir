@@ -23,7 +23,13 @@ const FIN_VOZ = Math.round((PALABRAS[PALABRAS.length - 1].endMs / 1000) * FPS);
 export const DURACION_5RAZONES = FIN_VOZ + Math.round(1.0 * FPS);
 
 // "5." aparece dos veces: en el gancho ("5 razones") y en la razón 5
-const R = [dice("1."), dice("2."), dice("número"), dice("4."), dice("5.", 1)]; // la razón 3 arranca en "Número tres"
+// cada razón arranca en la primera palabra de su frase: "Número tres", "Y cinco"
+const inicioCinco = (() => {
+  const i = PALABRAS.findIndex((p, k) => p.text === "5." && k > 3);
+  const desde = i > 0 && /^y$/i.test(PALABRAS[i - 1].text) ? PALABRAS[i - 1] : PALABRAS[i];
+  return Math.round((desde.startMs / 1000) * FPS);
+})();
+const R = [dice("1."), dice("2."), dice("número"), dice("4."), inicioCinco];
 const T = {
   funcional: dice("funcional"),
   fuerza: dice("fuerza"),
@@ -46,7 +52,7 @@ const CAP = 20; // cuadros de la tarjeta de capítulo
 const clamp = { extrapolateLeft: "clamp", extrapolateRight: "clamp" } as const;
 const tramo = (desde: number, hasta: number) => PALABRAS.filter((p) => {
   const f = (p.startMs / 1000) * FPS;
-  return f >= desde - 2 && f < hasta - 2;
+  return f >= desde - 0.5 && f < hasta - 0.5; // margen chico: la alineación puede pegar palabras de secciones vecinas
 });
 const useT = () => useCurrentFrame() / FPS;
 
