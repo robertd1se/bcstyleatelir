@@ -17,6 +17,7 @@ Nunca edites los videos originales: trabajá siempre sobre copias o archivos nue
 | `exportados/` | Los videos terminados. |
 | `musica/` | Música que agrega el usuario. **Si está vacía, se edita sin música.** |
 | `estilo.md` | El estilo de edición del usuario. Se aplica en cada video. |
+| `ideas-pendientes.md` | Ideas que el usuario quiere recordar pero todavía no aprobó. No aplicarlas sin su ok; proponerlas cuando vengan al caso. |
 | `proyecto/` | Proyecto de Remotion: arma el video final, subtítulos animados y gráficos. |
 | `instalar.sh` | Reinstala dependencias, whisper.cpp y el modelo (`bash instalar.sh`). |
 
