@@ -41,13 +41,69 @@ texto_dicho = re.sub(r"\{([^|}]+)\|[^}]+\}", r"\1", guion)
 wav = os.path.join(salida, "voz.wav")
 crudo = os.path.join(tempfile.gettempdir(), "voz-cruda.wav")
 if motor == "chatterbox":
-    # Chatterbox corre en su propio entorno (voces/venv-chatterbox) por sus dependencias pesadas
+    import difflib
+    import numpy as np
+    import soundfile as sf
+    # 1) oraciones; las muy cortas ("Uno.") se juntan con la siguiente: ahí Chatterbox suele inventar
     oraciones = [o for o in re.split(r"(?<=[.?!:])\s+", texto_dicho.replace("\n", " ")) if o.strip()]
-    lista = os.path.join(tempfile.gettempdir(), "oraciones.json")
-    json.dump(oraciones, open(lista, "w"), ensure_ascii=False)
-    subprocess.run([os.path.join(PROYECTO, "voces", "venv-chatterbox", "bin", "python"), os.path.join(PROYECTO, "scripts", "chatterbox_gen.py"),
-                    lista, crudo, "--perfil", perfil], check=True, stderr=subprocess.DEVNULL,
-                   env={**os.environ, "HF_HUB_OFFLINE": os.environ.get("HF_HUB_OFFLINE", "1"), "HF_HUB_DISABLE_XET": "1"})
+    trozos, acum = [], ""
+    for o in oraciones:
+        acum = f"{acum} {o}".strip()
+        if len(acum.split()) >= 5:
+            trozos.append(acum)
+            acum = ""
+    if acum:
+        if trozos and len(acum.split()) < 4:
+            trozos[-1] += " " + acum
+        else:
+            trozos.append(acum)
+    tmp = tempfile.mkdtemp(prefix="cb-")
+    py_cb = os.path.join(PROYECTO, "voces", "venv-chatterbox", "bin", "python")
+    entorno = {**os.environ, "HF_HUB_OFFLINE": os.environ.get("HF_HUB_OFFLINE", "1"), "HF_HUB_DISABLE_XET": "1"}
+
+    def normal(t):
+        t = unicodedata.normalize("NFD", t.lower())
+        return " ".join("".join(c for c in t if unicodedata.category(c) != "Mn" and (c.isalnum() or c == " ")).split())
+
+    def revisar(wav_trozo, esperado):
+        subprocess.run(["node", os.path.join(PROYECTO, "scripts", "transcribir.mjs"), wav_trozo, "es"], check=True,
+                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, cwd=tempfile.gettempdir())
+        caps = json.load(open(wav_trozo + ".captions.json"))
+        oido = "".join(c["text"] for c in caps)
+        parecido = difflib.SequenceMatcher(None, normal(esperado).split(), normal(oido).split()).ratio()
+        dur = sf.info(wav_trozo).duration
+        maximo = 0.085 * len(esperado) + 1.2  # más largo que esto = está inventando
+        return parecido, dur, maximo, oido
+
+    mejores = {}  # id -> (puntaje, ruta)
+    pendientes = list(range(len(trozos)))
+    for ronda in range(5):
+        if not pendientes:
+            break
+        pedidos = [{"id": f"t{i}-r{ronda}", "texto": trozos[i], "semilla": 7 + ronda * 101 + i} for i in pendientes]
+        lista = os.path.join(tmp, f"pedidos-{ronda}.json")
+        json.dump(pedidos, open(lista, "w"), ensure_ascii=False)
+        subprocess.run([py_cb, os.path.join(PROYECTO, "scripts", "chatterbox_gen.py"), lista, tmp, "--perfil", perfil],
+                       check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, env=entorno)
+        siguen = []
+        for i in pendientes:
+            ruta = os.path.join(tmp, f"t{i}-r{ronda}.wav")
+            parecido, dur, maximo, oido = revisar(ruta, trozos[i])
+            puntaje = parecido - (0.5 if dur > maximo else 0)
+            if i not in mejores or puntaje > mejores[i][0]:
+                mejores[i] = (puntaje, ruta)
+            ok = parecido >= 0.82 and dur <= maximo
+            print(f"  trozo {i + 1}/{len(trozos)} ronda {ronda + 1}: parecido {parecido:.2f}, {dur:.1f}s (máx {maximo:.1f}) {'OK' if ok else 'REHACER'}")
+            if not ok:
+                siguen.append(i)
+        pendientes = siguen
+    if pendientes:
+        print(f"  AVISO: {len(pendientes)} trozo(s) no quedaron perfectos; se usa la mejor toma de cada uno")
+    partes, sr = [], None
+    for i, t in enumerate(trozos):
+        a, sr = sf.read(mejores[i][1])
+        partes += [a, np.zeros(int((0.38 if t.endswith(("?", ".", "!")) else 0.22) * sr))]
+    sf.write(crudo, np.concatenate(partes), sr)
 elif motor == "piper":
     subprocess.run([sys.executable, "-m", "piper", "-m", VOZ, "--length-scale", velocidad,
                     "--sentence-silence", "0.25", "-f", crudo], input=texto_dicho.encode(), check=True,
