@@ -6,7 +6,7 @@ import { interpolate } from "remotion";
  * base: volumen en pausas · agachada: proporción mientras habla (0.35 = baja a un 35 %).
  * Entra en 1 s y sale en los últimos 1,5 s.
  */
-export const volumenMusica = (palabras: Caption[], fps: number, duracion: number, base = 0.24, agachada = 0.38) => {
+export const volumenMusica = (palabras: Caption[], fps: number, duracion: number, base = 0.32, agachada = 0.42) => {
   // tramos de voz (se unen si la pausa es menor a 450 ms)
   const tramos: [number, number][] = [];
   for (const p of palabras) {

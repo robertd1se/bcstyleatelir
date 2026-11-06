@@ -8,7 +8,9 @@ El usuario quiere todo con terminación prolija. Antes de exportar, cada video t
 - **Movimiento constante:** ningún plano ni fondo queda quieto (zoom lento, deriva de cámara o animación).
 - **Transiciones con intención:** látigo, destello o movimiento de cámara; nunca un salto sin pulir entre secciones.
 - **Acabado:** viñeta suave y grano fino (`series/ui/Acabado.tsx`) en piezas animadas y gráficas.
-- **Profundidad y luz:** en 3D, charcos de luz, neón y contexto alrededor (calle, faroles); nada de fondos planos vacíos.
+- **Profundidad y luz:** en 3D, charcos de luz, neón **con halo** y contexto alrededor (calle, faroles); nada de fondos planos vacíos.
+- **3D con detalle:** sombras reales, piso con textura, personas con brazos, zapatillas y pelo; desenfoque "miniatura" arriba y abajo (7 px) y corrección de color (contraste 1,08, saturación 1,15).
+- **Tarjetas de vidrio:** fondo degradado translúcido con desenfoque del fondo (14 px), nunca un rectángulo plano.
 - **Sonido diseñado:** whoosh en cada transición o movimiento de cámara e impacto en el gancho y en el cierre.
 - **Revisión:** mirar al menos 5 cuadros clave antes del render final y corregir lo que se vea a medio hacer.
 
@@ -100,4 +102,4 @@ Para videos que explican algo con voz en off (pedido para la serie RXT; inspirad
 - **Listas en tarjetas apiladas** (de la ref. 6): una pastilla de sección con borde rojo arriba y cada tarjeta con ícono cuadrado de color, TÍTULO en Montserrat 900 a 40 px y un detalle en Inter a 26 px. Entran de a una, subiendo 60 px, cuando la voz las nombra.
 - **Cierre de serie** (de la ref. 6): el 3D se oscurece al 78 %, pastilla "GUÁRDALO Y SÍGUENOS", logo X que se arma, "RXT / TRAINING CLUB" y barra de 9 segmentos con las partes publicadas en rojo. Sin texto de subtítulos encima.
 - **Sonido:** voz; whoosh suave (volumen 0,35) en cada movimiento de cámara; impacto en el cuadro 0.
-- **Música:** si `musica/` está vacía, se genera una base original con `scripts/musica.py` (100 BPM, electrónica oscura en La menor), del largo exacto del reel. Lleva **ducking**: volumen 0,24 en las pausas, que baja al 38 % mientras habla la voz (entra y sale en 250 ms), con entrada de 1 s y salida de 1,5 s.
+- **Música:** si `musica/` está vacía, se genera una base original con `scripts/musica.py` (100 BPM, electrónica oscura en La menor), del largo exacto del reel. Lleva **ducking**: volumen **0,32** en las pausas (el usuario la pidió un poco más fuerte), que baja al **42 %** mientras habla la voz (entra y sale en 250 ms), con entrada de 1 s y salida de 1,5 s.

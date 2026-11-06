@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+import { random } from "remotion";
 import * as THREE from "three";
 import { COLORES } from "../../estilo";
 import { Zona } from "./plano";
@@ -18,12 +19,45 @@ export const Neon: React.FC<{ desde: [number, number]; hasta: [number, number]; 
   const dz = hasta[1] - desde[1];
   const largo = Math.hypot(dx, dz);
   return (
-    <mesh position={[(desde[0] + hasta[0]) / 2, y, (desde[1] + hasta[1]) / 2]} rotation={[0, -Math.atan2(dz, dx), 0]}>
-      <boxGeometry args={[largo, grosor, grosor]} />
-      <meshBasicMaterial color={color} toneMapped={false} />
-    </mesh>
+    <group position={[(desde[0] + hasta[0]) / 2, y, (desde[1] + hasta[1]) / 2]} rotation={[0, -Math.atan2(dz, dx), 0]}>
+      <mesh userData={{ sinSombra: true }}>
+        <boxGeometry args={[largo, grosor, grosor]} />
+        <meshBasicMaterial color={color} toneMapped={false} />
+      </mesh>
+      {/* halo: brillo suave alrededor del neón */}
+      <mesh userData={{ sinSombra: true }}>
+        <boxGeometry args={[largo + grosor * 4, grosor * 5, grosor * 5]} />
+        <meshBasicMaterial color={color} transparent opacity={0.16} blending={THREE.AdditiveBlending} depthWrite={false} toneMapped={false} />
+      </mesh>
+    </group>
   );
 };
+
+const texturaBaldosas = (() => {
+  let cache: THREE.CanvasTexture | null = null;
+  return () => {
+    if (cache) return cache;
+    const c = document.createElement("canvas");
+    c.width = c.height = 256;
+    const ctx = c.getContext("2d")!;
+    ctx.fillStyle = "#ffffff";
+    ctx.fillRect(0, 0, 256, 256);
+    // grano de goma
+    for (let i = 0; i < 4000; i++) {
+      const v = 225 + Math.floor(random(`b${i}`) * 30);
+      ctx.fillStyle = `rgb(${v},${v},${v})`;
+      ctx.fillRect(random(`x${i}`) * 256, random(`y${i}`) * 256, 2, 2);
+    }
+    // juntas de baldosas
+    ctx.strokeStyle = "rgba(0,0,0,0.35)";
+    ctx.lineWidth = 3;
+    ctx.strokeRect(0, 0, 256, 256);
+    cache = new THREE.CanvasTexture(c);
+    cache.wrapS = cache.wrapT = THREE.RepeatWrapping;
+    cache.colorSpace = THREE.SRGBColorSpace;
+    return cache;
+  };
+})();
 
 /** Piso de una zona con borde de neón. `activa` (0–1) la ilumina en rojo. */
 export const PisoZona: React.FC<{ z: Zona; activa: number; pulso: number }> = ({ z, activa, pulso }) => {
@@ -31,6 +65,12 @@ export const PisoZona: React.FC<{ z: Zona; activa: number; pulso: number }> = ({
   const [w, d] = z.tamaño;
   const colorBorde = useMemo(() => new THREE.Color("#5b6cff").lerp(new THREE.Color(COLORES.rojo), activa), [activa]);
   const hex = `#${colorBorde.getHexString()}`;
+  const tex = useMemo(() => {
+    const t = texturaBaldosas().clone();
+    t.needsUpdate = true;
+    t.repeat.set(w / 1.2, d / 1.2);
+    return t;
+  }, [w, d]);
   const esquinas: [number, number][] = [
     [cx - w / 2, cz - d / 2],
     [cx + w / 2, cz - d / 2],
@@ -41,7 +81,7 @@ export const PisoZona: React.FC<{ z: Zona; activa: number; pulso: number }> = ({
     <group>
       <mesh position={[cx, 0.01, cz]} rotation={[-Math.PI / 2, 0, 0]}>
         <planeGeometry args={[w, d]} />
-        <meshStandardMaterial color={z.piso} emissive={COLORES.rojo} emissiveIntensity={activa * (0.12 + 0.08 * pulso)} />
+        <meshStandardMaterial map={tex} color={z.piso} roughness={0.85} emissive={COLORES.rojo} emissiveIntensity={activa * (0.12 + 0.08 * pulso)} />
       </mesh>
       {esquinas.map((e, i) => (
         <Neon key={i} desde={e} hasta={esquinas[(i + 1) % 4]} color={hex} grosor={0.08 + activa * 0.06} />
@@ -185,26 +225,47 @@ export const Persona: React.FC<{ x: number; z: number; t: number; anim?: Animaci
   if (anim === "salto") salto = Math.max(0, Math.sin(fase * 1.3)) * 0.45;
   if (anim === "caminar") avance = 0.08 * Math.sin(fase * 2);
   // la ropa varía según la posición para que no se vean todos iguales
+  // la ropa varía según la posición para que no se vean todos iguales
   const remera = coach ? COLORES.rojo : ROPA[Math.abs(Math.round(x * 7 + z * 13)) % ROPA.length];
+  const brazo = anim === "remo" ? 0.9 + 0.5 * Math.sin(fase) : anim === "caminar" ? 0.35 * Math.sin(fase * 2) : anim === "sentadilla" ? 1.2 : anim === "salto" ? -0.6 + salto * 3 : 0.1;
   return (
     <group position={[x, salto, z]} rotation={[0, rotY, 0]}>
       <group position={[0, 0, avance]}>
-        {/* piernas */}
+        {/* piernas y zapatillas */}
         {[-0.12, 0.12].map((dx) => (
-          <mesh key={dx} position={[dx, 0.42 - bajada / 2, 0]}>
-            <boxGeometry args={[0.14, 0.84 - bajada, 0.16]} />
-            <meshStandardMaterial color="#111216" />
-          </mesh>
+          <group key={dx}>
+            <mesh position={[dx, 0.44 - bajada / 2, 0]}>
+              <boxGeometry args={[0.14, 0.8 - bajada, 0.16]} />
+              <meshStandardMaterial color="#111216" roughness={0.8} />
+            </mesh>
+            <mesh position={[dx, 0.04, 0.04]}>
+              <boxGeometry args={[0.15, 0.08, 0.26]} />
+              <meshStandardMaterial color={coach ? "#ffffff" : "#e8e8ea"} />
+            </mesh>
+          </group>
         ))}
         {/* torso */}
         <mesh position={[0, 1.15 - bajada, 0]}>
-          <capsuleGeometry args={[0.2, 0.45, 4, 10]} />
-          <meshStandardMaterial color={remera} />
+          <capsuleGeometry args={[0.2, 0.45, 4, 12]} />
+          <meshStandardMaterial color={remera} roughness={0.7} />
         </mesh>
-        {/* cabeza */}
+        {/* brazos */}
+        {[-1, 1].map((lado) => (
+          <group key={lado} position={[lado * 0.27, 1.38 - bajada, 0]} rotation={[-brazo * (lado === 1 || anim !== "caminar" ? 1 : -1), 0, lado * 0.12]}>
+            <mesh position={[0, -0.27, 0]}>
+              <capsuleGeometry args={[0.06, 0.4, 4, 8]} />
+              <meshStandardMaterial color="#c99b77" roughness={0.6} />
+            </mesh>
+          </group>
+        ))}
+        {/* cabeza y pelo */}
         <mesh position={[0, 1.62 - bajada, 0]}>
-          <sphereGeometry args={[0.15, 14, 12]} />
-          <meshStandardMaterial color="#c99b77" />
+          <sphereGeometry args={[0.15, 16, 14]} />
+          <meshStandardMaterial color="#c99b77" roughness={0.6} />
+        </mesh>
+        <mesh position={[0, 1.69 - bajada, -0.02]}>
+          <sphereGeometry args={[0.155, 16, 10, 0, Math.PI * 2, 0, Math.PI / 2]} />
+          <meshStandardMaterial color="#1a1412" roughness={0.9} />
         </mesh>
       </group>
       {coach || resaltar > 0 ? (

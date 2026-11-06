@@ -1,0 +1,541 @@
+[
+ {
+  "text": "¿Por",
+  "startMs": 40,
+  "endMs": 350,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "qué",
+  "startMs": 350,
+  "endMs": 660,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "elegir",
+  "startMs": 660,
+  "endMs": 1070,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "RXT?",
+  "startMs": 1070,
+  "endMs": 1760,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "Porque",
+  "startMs": 1760,
+  "endMs": 2110,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "en",
+  "startMs": 2110,
+  "endMs": 2220,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "RXT",
+  "startMs": 2220,
+  "endMs": 2550,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "entendemos",
+  "startMs": 2550,
+  "endMs": 3220,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "que",
+  "startMs": 3220,
+  "endMs": 3380,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "cada",
+  "startMs": 3380,
+  "endMs": 3690,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "persona",
+  "startMs": 3690,
+  "endMs": 4080,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "tiene",
+  "startMs": 4080,
+  "endMs": 4450,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "objetivos,",
+  "startMs": 4450,
+  "endMs": 5140,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "capacidades",
+  "startMs": 5140,
+  "endMs": 6010,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "y",
+  "startMs": 6010,
+  "endMs": 6080,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "necesidades",
+  "startMs": 6080,
+  "endMs": 6940,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "diferentes.",
+  "startMs": 6940,
+  "endMs": 7780,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "No",
+  "startMs": 7780,
+  "endMs": 7930,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "se",
+  "startMs": 7930,
+  "endMs": 8110,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "trata",
+  "startMs": 8110,
+  "endMs": 8460,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "solo",
+  "startMs": 8460,
+  "endMs": 8760,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "de",
+  "startMs": 8760,
+  "endMs": 8910,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "levantar",
+  "startMs": 8910,
+  "endMs": 9510,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "peso",
+  "startMs": 9510,
+  "endMs": 9880,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "o",
+  "startMs": 9880,
+  "endMs": 9910,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "de",
+  "startMs": 9910,
+  "endMs": 10275,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "terminar",
+  "startMs": 10275,
+  "endMs": 10640,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "una",
+  "startMs": 10640,
+  "endMs": 10890,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "rutina.",
+  "startMs": 10890,
+  "endMs": 11540,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "Se",
+  "startMs": 11540,
+  "endMs": 11710,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "trata",
+  "startMs": 11710,
+  "endMs": 11960,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "de",
+  "startMs": 11960,
+  "endMs": 12080,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "entrenar",
+  "startMs": 12080,
+  "endMs": 12550,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "con",
+  "startMs": 12550,
+  "endMs": 12740,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "intención,",
+  "startMs": 12740,
+  "endMs": 13500,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "cuidar",
+  "startMs": 13500,
+  "endMs": 13920,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "la",
+  "startMs": 13920,
+  "endMs": 14070,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "técnica,",
+  "startMs": 14070,
+  "endMs": 14840,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "trabajar",
+  "startMs": 14840,
+  "endMs": 15320,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "de",
+  "startMs": 15320,
+  "endMs": 15450,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "forma",
+  "startMs": 15450,
+  "endMs": 15770,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "progresiva",
+  "startMs": 15770,
+  "endMs": 16440,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "y",
+  "startMs": 16440,
+  "endMs": 16500,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "tener",
+  "startMs": 16500,
+  "endMs": 16820,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "acompañamiento",
+  "startMs": 16820,
+  "endMs": 17770,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "profesional.",
+  "startMs": 17770,
+  "endMs": 18700,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "Aquí",
+  "startMs": 18700,
+  "endMs": 19020,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "vas",
+  "startMs": 19020,
+  "endMs": 19210,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "a",
+  "startMs": 19210,
+  "endMs": 19270,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "encontrar",
+  "startMs": 19270,
+  "endMs": 19850,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "comunidad,",
+  "startMs": 19850,
+  "endMs": 20580,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "disciplina",
+  "startMs": 20580,
+  "endMs": 21200,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "y",
+  "startMs": 21200,
+  "endMs": 21260,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "motivación.",
+  "startMs": 21260,
+  "endMs": 22240,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "Cada",
+  "startMs": 22240,
+  "endMs": 22510,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "entrenamiento",
+  "startMs": 22510,
+  "endMs": 23420,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "es",
+  "startMs": 23420,
+  "endMs": 23520,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "una",
+  "startMs": 23520,
+  "endMs": 23720,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "oportunidad",
+  "startMs": 23720,
+  "endMs": 24500,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "para",
+  "startMs": 24500,
+  "endMs": 24780,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "superar",
+  "startMs": 24780,
+  "endMs": 25310,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "tus",
+  "startMs": 25310,
+  "endMs": 25560,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "propios",
+  "startMs": 25560,
+  "endMs": 25970,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "límites.",
+  "startMs": 25970,
+  "endMs": 26780,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "Esta",
+  "startMs": 26780,
+  "endMs": 27130,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "es",
+  "startMs": 27130,
+  "endMs": 27350,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "la",
+  "startMs": 27350,
+  "endMs": 27490,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "parte",
+  "startMs": 27490,
+  "endMs": 27930,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "dos",
+  "startMs": 27930,
+  "endMs": 28200,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "de",
+  "startMs": 28200,
+  "endMs": 28380,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "nueve.",
+  "startMs": 28380,
+  "endMs": 28960,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "Síguenos",
+  "startMs": 28960,
+  "endMs": 29450,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "para",
+  "startMs": 29450,
+  "endMs": 29680,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "no",
+  "startMs": 29680,
+  "endMs": 29860,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "perderte",
+  "startMs": 29860,
+  "endMs": 30280,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "la",
+  "startMs": 30280,
+  "endMs": 30360,
+  "timestampMs": null,
+  "confidence": 1
+ },
+ {
+  "text": "siguiente.",
+  "startMs": 30360,
+  "endMs": 31080,
+  "timestampMs": null,
+  "confidence": 1
+ }
+]

@@ -26,6 +26,21 @@ const ControlCamara: React.FC<{ cam: Camara }> = ({ cam }) => {
   return null;
 };
 
+// Activa sombras en toda la escena (menos neones, halos y marcadores).
+const SombrasAuto: React.FC = () => {
+  const { scene } = useThree();
+  useLayoutEffect(() => {
+    scene.traverse((o) => {
+      const m = o as THREE.Mesh;
+      if (!m.isMesh) return;
+      const basico = (m.material as THREE.Material)?.type === "MeshBasicMaterial" || o.userData.sinSombra;
+      m.castShadow = !basico;
+      m.receiveShadow = !basico;
+    });
+  });
+  return null;
+};
+
 const texturaNumero = (texto: string, color: string) => {
   const c = document.createElement("canvas");
   c.width = c.height = 256;
@@ -75,12 +90,35 @@ export const Gimnasio3D: React.FC<{
   const ba = zona("barra").centro;
   const [W, D] = TAMAÑO_PISO;
   return (
-    <ThreeCanvas width={ancho} height={alto} orthographic camera={{ zoom: cam.zoom, near: 0.1, far: 200 }} style={{ background: "#07080d" }}>
+    <ThreeCanvas
+      width={ancho}
+      height={alto}
+      orthographic
+      shadows
+      camera={{ zoom: cam.zoom, near: 0.1, far: 200 }}
+      gl={{ antialias: true }}
+      style={{ background: "#07080d" }}
+    >
       <ControlCamara cam={cam} />
+      <SombrasAuto />
       <color attach="background" args={["#07080d"]} />
       <ambientLight intensity={0.6} />
       <hemisphereLight args={["#c9d4ff", "#120c10", 0.6]} />
-      <directionalLight position={[8, 16, 10]} intensity={1.2} />
+      <directionalLight
+        position={[10, 18, 8]}
+        intensity={1.5}
+        castShadow
+        shadow-mapSize-width={2048}
+        shadow-mapSize-height={2048}
+        shadow-camera-left={-16}
+        shadow-camera-right={16}
+        shadow-camera-top={16}
+        shadow-camera-bottom={-16}
+        shadow-camera-near={1}
+        shadow-camera-far={60}
+        shadow-bias={-0.0005}
+        shadow-radius={4}
+      />
       <pointLight position={[-6, 4, -4]} color={COLORES.rojo} intensity={25} distance={14} />
       <pointLight position={[6, 4, 5]} color={COLORES.azul} intensity={30} distance={14} />
 

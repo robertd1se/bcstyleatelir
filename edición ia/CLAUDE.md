@@ -79,7 +79,7 @@ npm run lint         # chequeo de tipos y estilo
 | `MuestraEstilo.tsx` | Muestra de 10 s del estilo, con planos de ejemplo |
 | `componentes/Plano.tsx` | Un tramo de una grabación (recorte, sin audio, zoom lento) |
 | `ediciones/` | Una composición por video editado (lista de planos, textos y sonido) |
-| `series/` | Serie explicativa RXT (9 reels): `RxtNN.tsx`, gimnasio 3D (`gym3d/`), interfaz (`ui/`) y `linea.ts` (sincroniza eventos con las palabras) |
+| `series/` | Serie explicativa RXT (9 reels). `ReelSerie.tsx` es la base común (3D, encabezado, texto, voz, música, destellos, acabado, cierre); cada `RxtNN.tsx` solo define cámara, estado del 3D y tarjetas. También `gym3d/`, `ui/`, `linea.ts` y `sonido.ts` |
 | `../guiones/` | Guiones de la voz en off de la serie (`rxt-NN.txt`) |
 | `public/marca/` | Logo (original, blanco, negro y las dos mitades) |
 | `public/sfx/` | Efectos propios: `whoosh.wav` (látigo) e `impacto.wav` (gancho y logo) |

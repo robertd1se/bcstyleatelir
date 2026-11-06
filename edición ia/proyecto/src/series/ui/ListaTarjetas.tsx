@@ -1,7 +1,7 @@
 import { interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
 import { COLORES, FUENTES } from "../../estilo";
 
-export type Item = { icono: string; titulo: string; detalle?: string; desdeFrame: number; color?: string };
+export type Item = { icono: string; titulo: string; detalle?: string; desdeFrame: number; color?: string; tachado?: boolean };
 
 // Lista de tarjetas apiladas: cada una entra desde abajo cuando se dice (frames relativos a la Sequence).
 export const ListaTarjetas: React.FC<{ etiqueta: string; items: Item[]; durationInFrames: number; top?: number }> = ({
@@ -48,7 +48,8 @@ export const ListaTarjetas: React.FC<{ etiqueta: string; items: Item[]; duration
               gap: 24,
               padding: "20px 26px",
               borderRadius: 24,
-              background: "rgba(16,17,24,0.9)",
+              background: "linear-gradient(135deg, rgba(30,32,44,0.78), rgba(12,13,19,0.86))",
+              backdropFilter: "blur(14px)",
               border: `2px solid ${color}55`,
               boxShadow: `0 18px 50px rgba(0,0,0,0.55), inset 0 0 30px ${color}14`,
               opacity: s,
@@ -59,7 +60,13 @@ export const ListaTarjetas: React.FC<{ etiqueta: string; items: Item[]; duration
               {it.icono}
             </div>
             <div>
-              <div style={{ fontFamily: FUENTES.titulos, fontWeight: 900, fontSize: 40, color: COLORES.blanco, textTransform: "uppercase", lineHeight: 1.05 }}>{it.titulo}</div>
+              <div style={{ position: "relative", fontFamily: FUENTES.titulos, fontWeight: 900, fontSize: 40, color: it.tachado ? "#ffffff80" : COLORES.blanco, textTransform: "uppercase", lineHeight: 1.05 }}>
+                {it.titulo}
+                {it.tachado ? (
+                  // línea roja que tacha el texto, de izquierda a derecha
+                  <div style={{ position: "absolute", left: -4, top: "52%", height: 6, borderRadius: 3, background: COLORES.rojo, width: `${interpolate(frame - it.desdeFrame - 6, [0, 8], [0, 104], { extrapolateLeft: "clamp", extrapolateRight: "clamp" })}%` }} />
+                ) : null}
+              </div>
               {it.detalle ? <div style={{ fontFamily: FUENTES.textoChico, fontWeight: 500, fontSize: 26, color: "#ffffffb0", marginTop: 4 }}>{it.detalle}</div> : null}
             </div>
           </div>
