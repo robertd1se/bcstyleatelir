@@ -1,0 +1,583 @@
+[
+  {
+    "text": "¿Qué",
+    "startMs": 30,
+    "endMs": 270,
+    "timestampMs": 0,
+    "confidence": 0.382737
+  },
+  {
+    "text": " hacemos",
+    "startMs": 270,
+    "endMs": 590,
+    "timestampMs": 300,
+    "confidence": 0.985534
+  },
+  {
+    "text": " en",
+    "startMs": 590,
+    "endMs": 680,
+    "timestampMs": 580,
+    "confidence": 0.976664
+  },
+  {
+    "text": " Roxette?",
+    "startMs": 680,
+    "endMs": 1160,
+    "timestampMs": 720,
+    "confidence": 0.293347
+  },
+  {
+    "text": " En",
+    "startMs": 1160,
+    "endMs": 1250,
+    "timestampMs": 1300,
+    "confidence": 0.983802
+  },
+  {
+    "text": " Roxette",
+    "startMs": 1250,
+    "endMs": 1580,
+    "timestampMs": 1400,
+    "confidence": 0.987711
+  },
+  {
+    "text": " trabajamos",
+    "startMs": 1580,
+    "endMs": 2030,
+    "timestampMs": 1720,
+    "confidence": 0.941271
+  },
+  {
+    "text": " el",
+    "startMs": 2030,
+    "endMs": 2120,
+    "timestampMs": 2120,
+    "confidence": 0.983001
+  },
+  {
+    "text": " desarrollo",
+    "startMs": 2120,
+    "endMs": 2640,
+    "timestampMs": 2420,
+    "confidence": 0.972304
+  },
+  {
+    "text": " físico",
+    "startMs": 2640,
+    "endMs": 2940,
+    "timestampMs": 2760,
+    "confidence": 0.971584
+  },
+  {
+    "text": " de",
+    "startMs": 2940,
+    "endMs": 3020,
+    "timestampMs": 3020,
+    "confidence": 0.820337
+  },
+  {
+    "text": " manera",
+    "startMs": 3020,
+    "endMs": 3280,
+    "timestampMs": 3240,
+    "confidence": 0.989842
+  },
+  {
+    "text": " integral",
+    "startMs": 3280,
+    "endMs": 3840,
+    "timestampMs": 3740,
+    "confidence": 0.937702
+  },
+  {
+    "text": " con",
+    "startMs": 3840,
+    "endMs": 4210,
+    "timestampMs": 3940,
+    "confidence": 0.999093
+  },
+  {
+    "text": " cuatro",
+    "startMs": 4210,
+    "endMs": 5010,
+    "timestampMs": 4200,
+    "confidence": 0.952534
+  },
+  {
+    "text": " pilares.",
+    "startMs": 5010,
+    "endMs": 5840,
+    "timestampMs": 4400,
+    "confidence": 0.90716
+  },
+  {
+    "text": " Uno",
+    "startMs": 5840,
+    "endMs": 6150,
+    "timestampMs": 6020,
+    "confidence": 0.953845
+  },
+  {
+    "text": " en",
+    "startMs": 6150,
+    "endMs": 6350,
+    "timestampMs": 6200,
+    "confidence": 0.360805
+  },
+  {
+    "text": " entrenamiento",
+    "startMs": 6350,
+    "endMs": 7670,
+    "timestampMs": 6360,
+    "confidence": 0.430445
+  },
+  {
+    "text": " funcional,",
+    "startMs": 7670,
+    "endMs": 8810,
+    "timestampMs": 6960,
+    "confidence": 0.747148
+  },
+  {
+    "text": " dos",
+    "startMs": 8810,
+    "endMs": 9120,
+    "timestampMs": 7600,
+    "confidence": 0.948283
+  },
+  {
+    "text": " fuerza.",
+    "startMs": 9120,
+    "endMs": 10080,
+    "timestampMs": 8000,
+    "confidence": 0.643841
+  },
+  {
+    "text": " Tres",
+    "startMs": 10080,
+    "endMs": 10290,
+    "timestampMs": 10200,
+    "confidence": 0.664076
+  },
+  {
+    "text": " a",
+    "startMs": 10290,
+    "endMs": 10340,
+    "timestampMs": 10340,
+    "confidence": 0.42103
+  },
+  {
+    "text": " condicionamiento",
+    "startMs": 10340,
+    "endMs": 11210,
+    "timestampMs": 10520,
+    "confidence": 0.865826
+  },
+  {
+    "text": " físico",
+    "startMs": 11210,
+    "endMs": 11640,
+    "timestampMs": 11200,
+    "confidence": 0.995319
+  },
+  {
+    "text": " y",
+    "startMs": 11640,
+    "endMs": 11690,
+    "timestampMs": 11700,
+    "confidence": 0.73571
+  },
+  {
+    "text": " cuatro",
+    "startMs": 11690,
+    "endMs": 12000,
+    "timestampMs": 11920,
+    "confidence": 0.966024
+  },
+  {
+    "text": " en",
+    "startMs": 12000,
+    "endMs": 12080,
+    "timestampMs": 12100,
+    "confidence": 0.321918
+  },
+  {
+    "text": " entrenamiento",
+    "startMs": 12080,
+    "endMs": 12620,
+    "timestampMs": 12220,
+    "confidence": 0.90353
+  },
+  {
+    "text": " híbrido.",
+    "startMs": 12620,
+    "endMs": 13440,
+    "timestampMs": 12700,
+    "confidence": 0.315683
+  },
+  {
+    "text": " Híbrido,",
+    "startMs": 13440,
+    "endMs": 14080,
+    "timestampMs": 13520,
+    "confidence": 0.77616
+  },
+  {
+    "text": " así",
+    "startMs": 14080,
+    "endMs": 14480,
+    "timestampMs": 14640,
+    "confidence": 0.987764
+  },
+  {
+    "text": " desarrollamos",
+    "startMs": 14480,
+    "endMs": 15180,
+    "timestampMs": 14940,
+    "confidence": 0.950861
+  },
+  {
+    "text": " fuerza,",
+    "startMs": 15180,
+    "endMs": 15720,
+    "timestampMs": 15640,
+    "confidence": 0.976151
+  },
+  {
+    "text": " resistencia,",
+    "startMs": 15720,
+    "endMs": 16400,
+    "timestampMs": 15900,
+    "confidence": 0.885799
+  },
+  {
+    "text": " velocidad,",
+    "startMs": 16400,
+    "endMs": 16960,
+    "timestampMs": 16620,
+    "confidence": 0.797619
+  },
+  {
+    "text": " coordinación,",
+    "startMs": 16960,
+    "endMs": 17740,
+    "timestampMs": 17160,
+    "confidence": 0.943631
+  },
+  {
+    "text": " movilidad",
+    "startMs": 17740,
+    "endMs": 18220,
+    "timestampMs": 17760,
+    "confidence": 0.877902
+  },
+  {
+    "text": " y",
+    "startMs": 18220,
+    "endMs": 18260,
+    "timestampMs": 18120,
+    "confidence": 0.831133
+  },
+  {
+    "text": " estabilidad.",
+    "startMs": 18260,
+    "endMs": 18880,
+    "timestampMs": 18260,
+    "confidence": 0.89407
+  },
+  {
+    "text": " En",
+    "startMs": 18880,
+    "endMs": 18980,
+    "timestampMs": 18980,
+    "confidence": 0.712635
+  },
+  {
+    "text": " sesiones",
+    "startMs": 18980,
+    "endMs": 19400,
+    "timestampMs": 19080,
+    "confidence": 0.399332
+  },
+  {
+    "text": " estructuradas",
+    "startMs": 19400,
+    "endMs": 20120,
+    "timestampMs": 19640,
+    "confidence": 0.985675
+  },
+  {
+    "text": " y",
+    "startMs": 20120,
+    "endMs": 20160,
+    "timestampMs": 20160,
+    "confidence": 0.861728
+  },
+  {
+    "text": " dirigidas",
+    "startMs": 20160,
+    "endMs": 20600,
+    "timestampMs": 20320,
+    "confidence": 0.620726
+  },
+  {
+    "text": " por",
+    "startMs": 20600,
+    "endMs": 20760,
+    "timestampMs": 20660,
+    "confidence": 0.969365
+  },
+  {
+    "text": " Coach",
+    "startMs": 20760,
+    "endMs": 21040,
+    "timestampMs": 20960,
+    "confidence": 0.030802
+  },
+  {
+    "text": " nuestro",
+    "startMs": 21040,
+    "endMs": 21550,
+    "timestampMs": 21220,
+    "confidence": 0.421815
+  },
+  {
+    "text": " objetivo",
+    "startMs": 21550,
+    "endMs": 22140,
+    "timestampMs": 21620,
+    "confidence": 0.991098
+  },
+  {
+    "text": " no",
+    "startMs": 22140,
+    "endMs": 22280,
+    "timestampMs": 21920,
+    "confidence": 0.768116
+  },
+  {
+    "text": " es",
+    "startMs": 22280,
+    "endMs": 22420,
+    "timestampMs": 22100,
+    "confidence": 0.996225
+  },
+  {
+    "text": " solamente",
+    "startMs": 22420,
+    "endMs": 23300,
+    "timestampMs": 22360,
+    "confidence": 0.975267
+  },
+  {
+    "text": " que",
+    "startMs": 23300,
+    "endMs": 23300,
+    "timestampMs": 22580,
+    "confidence": 0.963293
+  },
+  {
+    "text": " entrenes.",
+    "startMs": 23300,
+    "endMs": 24160,
+    "timestampMs": 22820,
+    "confidence": 0.873299
+  },
+  {
+    "text": " Es",
+    "startMs": 24160,
+    "endMs": 24300,
+    "timestampMs": 24240,
+    "confidence": 0.973301
+  },
+  {
+    "text": " que",
+    "startMs": 24300,
+    "endMs": 24430,
+    "timestampMs": 24340,
+    "confidence": 0.991393
+  },
+  {
+    "text": " mejor",
+    "startMs": 24430,
+    "endMs": 24700,
+    "timestampMs": 24600,
+    "confidence": 0.966938
+  },
+  {
+    "text": " es",
+    "startMs": 24700,
+    "endMs": 24850,
+    "timestampMs": 24840,
+    "confidence": 0.803529
+  },
+  {
+    "text": " tu",
+    "startMs": 24850,
+    "endMs": 24920,
+    "timestampMs": 24900,
+    "confidence": 0.953694
+  },
+  {
+    "text": " rendimiento",
+    "startMs": 24920,
+    "endMs": 25530,
+    "timestampMs": 25080,
+    "confidence": 0.993498
+  },
+  {
+    "text": " y",
+    "startMs": 25530,
+    "endMs": 25600,
+    "timestampMs": 25660,
+    "confidence": 0.94894
+  },
+  {
+    "text": " te",
+    "startMs": 25600,
+    "endMs": 25690,
+    "timestampMs": 25780,
+    "confidence": 0.839157
+  },
+  {
+    "text": " sientas",
+    "startMs": 25690,
+    "endMs": 26120,
+    "timestampMs": 25880,
+    "confidence": 0.751911
+  },
+  {
+    "text": " mejor",
+    "startMs": 26120,
+    "endMs": 26740,
+    "timestampMs": 26380,
+    "confidence": 0.961135
+  },
+  {
+    "text": " dentro",
+    "startMs": 26740,
+    "endMs": 27210,
+    "timestampMs": 27060,
+    "confidence": 0.499742
+  },
+  {
+    "text": " y",
+    "startMs": 27210,
+    "endMs": 27360,
+    "timestampMs": 27280,
+    "confidence": 0.645326
+  },
+  {
+    "text": " fuera",
+    "startMs": 27360,
+    "endMs": 27560,
+    "timestampMs": 27480,
+    "confidence": 0.94597
+  },
+  {
+    "text": " del",
+    "startMs": 27560,
+    "endMs": 28140,
+    "timestampMs": 27660,
+    "confidence": 0.84074
+  },
+  {
+    "text": " gimnasio.",
+    "startMs": 28140,
+    "endMs": 30280,
+    "timestampMs": 27820,
+    "confidence": 0.976498
+  },
+  {
+    "text": " Esta",
+    "startMs": 30280,
+    "endMs": 30860,
+    "timestampMs": 30460,
+    "confidence": 0.908751
+  },
+  {
+    "text": " es",
+    "startMs": 30860,
+    "endMs": 31100,
+    "timestampMs": 30560,
+    "confidence": 0.993275
+  },
+  {
+    "text": " la",
+    "startMs": 31100,
+    "endMs": 31390,
+    "timestampMs": 30660,
+    "confidence": 0.995175
+  },
+  {
+    "text": " parte",
+    "startMs": 31390,
+    "endMs": 32020,
+    "timestampMs": 30900,
+    "confidence": 0.992699
+  },
+  {
+    "text": " 1",
+    "startMs": 32020,
+    "endMs": 32490,
+    "timestampMs": 31000,
+    "confidence": 0.656301
+  },
+  {
+    "text": " de",
+    "startMs": 32490,
+    "endMs": 32780,
+    "timestampMs": 31360,
+    "confidence": 0.621375
+  },
+  {
+    "text": " 9.",
+    "startMs": 32780,
+    "endMs": 33640,
+    "timestampMs": 31360,
+    "confidence": 0.947391
+  },
+  {
+    "text": " Síguenos",
+    "startMs": 33640,
+    "endMs": 34310,
+    "timestampMs": 33760,
+    "confidence": 0.591872
+  },
+  {
+    "text": " para",
+    "startMs": 34310,
+    "endMs": 34610,
+    "timestampMs": 34260,
+    "confidence": 0.961511
+  },
+  {
+    "text": " no",
+    "startMs": 34610,
+    "endMs": 34790,
+    "timestampMs": 34420,
+    "confidence": 0.9939
+  },
+  {
+    "text": " perderte",
+    "startMs": 34790,
+    "endMs": 35350,
+    "timestampMs": 34660,
+    "confidence": 0.952615
+  },
+  {
+    "text": " la",
+    "startMs": 35350,
+    "endMs": 35950,
+    "timestampMs": 34900,
+    "confidence": 0.988559
+  },
+  {
+    "text": " siguiente.",
+    "startMs": 35950,
+    "endMs": 36480,
+    "timestampMs": 35240,
+    "confidence": 0.99639
+  }
+]

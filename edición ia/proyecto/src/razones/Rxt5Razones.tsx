@@ -22,7 +22,8 @@ const dice = (p: string, n = 0) => cuandoSeDice(PALABRAS, p, n);
 const FIN_VOZ = Math.round((PALABRAS[PALABRAS.length - 1].endMs / 1000) * FPS);
 export const DURACION_5RAZONES = FIN_VOZ + Math.round(1.0 * FPS);
 
-const R = [dice("1."), dice("2."), dice("3."), dice("4."), dice("5.")];
+// "5." aparece dos veces: en el gancho ("5 razones") y en la razón 5
+const R = [dice("1."), dice("2."), dice("3."), dice("4."), dice("5.", 1)];
 const T = {
   funcional: dice("funcional"),
   fuerza: dice("fuerza"),
@@ -51,12 +52,20 @@ const useT = () => useCurrentFrame() / FPS;
 
 // ---------- escenas ----------
 const Gancho: React.FC = () => {
-  const pos: [number, number][] = [[190, 560], [360, 450], [720, 450], [890, 560], [540, 1060]];
+  const pos: [number, number][] = [[180, 560], [370, 470], [710, 470], [900, 560], [540, 1250]];
+  const sombra = "0 6px 24px rgba(0,0,0,0.6)";
   return (
     <>
       {pos.map(([x, y], i) => (
         <Insignia key={i} n={i + 1} x={x} y={y} desde={i === 0 ? -20 : 2 + i * 5} />
       ))}
+      <div style={{ position: "absolute", top: 640, width: "100%", textAlign: "center", textShadow: sombra }}>
+        <span style={{ fontFamily: FUENTES.manuscrita, fontSize: 300, color: COLORES.dorado, lineHeight: 0.9 }}>5</span>
+        <span style={{ fontFamily: FUENTES.editorial, fontStyle: "italic", fontWeight: 500, fontSize: 132, color: COLORES.blanco, marginLeft: 18 }}>razones</span>
+        <div style={{ fontFamily: FUENTES.editorial, fontWeight: 500, fontSize: 60, color: COLORES.blanco, marginTop: 16 }}>
+          por las que la gente elige <span style={{ fontFamily: FUENTES.manuscrita, fontSize: 96, color: COLORES.rojoTexto }}>RXT</span>
+        </div>
+      </div>
     </>
   );
 };
@@ -66,11 +75,11 @@ const Razon1: React.FC<{ d: number }> = ({ d }) => {
   const r0 = R[0];
   const enc = (w: number) => interpolate(f + r0, [w, w + 8], [0, 1], clamp);
   return (
-    <TarjetaVidrio x={70} y={600} w={940} h={860} duracion={d} etiqueta="Todo tu cuerpo">
+    <TarjetaVidrio x={70} y={640} w={940} h={820} duracion={d} etiqueta="Todo tu cuerpo">
       <div style={{ position: "absolute", inset: 0 }}>
         <Gimnasio3D
           ancho={940}
-          alto={860}
+          alto={820}
           t={f / FPS}
           cam={{ x: 0.5, z: 2.5, zoom: 38 + f * 0.04, giro: -0.15 + f * 0.003 }}
           activas={{ funcional: enc(T.funcional), fuerza: enc(T.fuerza), acondicionamiento: enc(T.acond), hibrido: enc(T.hibrido) }}
@@ -89,7 +98,7 @@ const Razon2: React.FC<{ d: number }> = ({ d }) => {
     { x: 730, alto: 360, remera: "#8b5cf6", pose: "caminar" as const, et: "Necesidades", w: T.necesidades, c: "#8b5cf6" },
   ];
   return (
-    <TarjetaVidrio x={70} y={420} w={940} h={760} duracion={d} etiqueta="Hecho para ti">
+    <TarjetaVidrio x={70} y={450} w={940} h={760} duracion={d} etiqueta="Hecho para ti">
       {personas.map((p, i) => (
         <div key={i}>
           <Persona2D x={p.x + 20} y={680} alto={p.alto} pose={p.pose} t={t} fase={i * 0.4} remera={p.remera} />
@@ -107,7 +116,7 @@ const Razon3: React.FC<{ d: number }> = ({ d }) => {
   const f = useCurrentFrame();
   const r = R[2];
   return (
-    <TarjetaVidrio x={70} y={600} w={940} h={820} duracion={d} etiqueta="Con intención">
+    <TarjetaVidrio x={70} y={640} w={940} h={800} duracion={d} etiqueta="Con intención">
       <Persona2D x={250} y={720} alto={420} pose="levantar" t={t} remera="#e05a2b" opacidad={f >= T.intencion - r ? 0.35 : 1} />
       <Sello texto="No solo peso" desde={T.levantar - r + 8} x={260} y={330} giro={-10} tamaño={50} />
       <div style={{ position: "absolute", left: 500, top: 250, display: "flex", flexDirection: "column", gap: 26 }}>
@@ -122,7 +131,7 @@ const Razon4: React.FC<{ d: number }> = ({ d }) => {
   const t = useT();
   const r = R[3];
   return (
-    <TarjetaVidrio x={70} y={420} w={940} h={760} duracion={d} etiqueta="Siempre acompañado">
+    <TarjetaVidrio x={70} y={450} w={940} h={760} duracion={d} etiqueta="Siempre acompañado">
       <Persona2D x={300} y={690} alto={400} pose="sentadilla" t={t} remera={COLORES.azul} />
       <Persona2D x={640} y={690} alto={440} pose="pulgar" t={t} remera={COLORES.rojo} gorra espejo />
       <div style={{ position: "absolute", left: 640, top: 160, transform: "translateX(-50%)" }}>
@@ -140,7 +149,7 @@ const Razon5: React.FC<{ d: number }> = ({ d }) => {
   const r = R[4];
   const remeras = ["#2bb673", COLORES.azul, COLORES.rojo, "#8b5cf6", "#e05a2b"];
   return (
-    <TarjetaVidrio x={70} y={600} w={940} h={820} duracion={d} etiqueta="Comunidad">
+    <TarjetaVidrio x={70} y={640} w={940} h={800} duracion={d} etiqueta="Comunidad">
       {remeras.map((c, i) => (
         <Persona2D key={i} x={130 + i * 170} y={700 - (i % 2) * 24} alto={330 + (i % 3) * 24} pose="festejo" t={t} fase={i * 0.27} remera={c} gorra={i === 2} />
       ))}
@@ -157,7 +166,7 @@ const Progreso5: React.FC = () => {
   return (
     <div style={{ opacity: op }}>
       {R.map((r, i) => (
-        <Insignia key={i} n={i + 1} x={300 + i * 120} y={420} desde={R[0]} tamaño={58} estado={i + 1 < actual ? "hecha" : i + 1 === actual ? "actual" : "pendiente"} />
+        <Insignia key={i} n={i + 1} x={340 + i * 100} y={392} desde={R[0]} tamaño={46} estado={i + 1 < actual ? "hecha" : i + 1 === actual ? "actual" : "pendiente"} />
       ))}
     </div>
   );
@@ -180,11 +189,11 @@ const Cierre: React.FC = () => {
 export const Rxt5Razones: React.FC = () => {
   const { fps, durationInFrames } = useVideoConfig();
   const escenas = [
-    { C: Razon1, a: R[0], b: R[1], texto: 0.245 },
-    { C: Razon2, a: R[1], b: R[2], texto: 0.705 },
-    { C: Razon3, a: R[2], b: R[3], texto: 0.245 },
-    { C: Razon4, a: R[3], b: T.antes, texto: 0.705 },
-    { C: Razon5, a: R[4], b: T.esto, texto: 0.245 },
+    { C: Razon1, a: R[0], b: R[1], texto: 0.272 },
+    { C: Razon2, a: R[1], b: R[2], texto: 0.715 },
+    { C: Razon3, a: R[2], b: R[3], texto: 0.272 },
+    { C: Razon4, a: R[3], b: T.antes, texto: 0.715 },
+    { C: Razon5, a: R[4], b: T.esto, texto: 0.272 },
   ];
   const loop = interpolate(useCurrentFrame(), [durationInFrames - 10, durationInFrames], [0, 1], clamp);
   return (
@@ -194,7 +203,6 @@ export const Rxt5Razones: React.FC = () => {
       {/* gancho: promesa contable visible desde el cuadro 0 */}
       <Sequence durationInFrames={R[0]}>
         <Gancho />
-        <TextoCaja palabras={tramo(0, R[0])} doradas={["razones", "elige"]} rojas={["RXT."]} centroY={0.43} tamaño={86} />
       </Sequence>
 
       {escenas.map(({ C, a, b, texto }, i) => (
@@ -231,7 +239,6 @@ export const Rxt5Razones: React.FC = () => {
       <AbsoluteFill style={{ opacity: loop, pointerEvents: "none" }}>
         <FondoLuces />
         <Gancho />
-        <div style={{ position: "absolute", top: 1920 * 0.43 - 60, width: "100%", textAlign: "center", fontFamily: FUENTES.editorial, fontSize: 86, color: COLORES.blanco }}>5 razones…</div>
       </AbsoluteFill>
 
       <Audio src={staticFile("series/rxt-5razones/voz.wav")} />

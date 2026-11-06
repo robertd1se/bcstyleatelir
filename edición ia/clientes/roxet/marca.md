@@ -66,3 +66,4 @@ Guion completo: preguntas 1 a 9 que mandó el usuario (qué hacemos, por qué el
 - Reel 1 ("¿Qué hacemos en RXT?"): formato 3D. `clientes/roxet/exportados/rxt-01-que-hacemos-en-rxt.mp4`
 - Reel 2 ("¿Por qué elegir RXT?"): formato 2D (el usuario pidió "hazlo diferente"). `clientes/roxet/exportados/rxt-02-por-que-elegir-rxt.mp4`
 - Reels 3 a 9: pendientes; preguntar qué formato (3D, 2D o alternar).
+- **"5 razones por las que la gente elige RXT"** (43 s): une los reels 1 y 2 con una estructura nueva por capítulos (gancho con promesa contable, "Razón *n*" con onda roja, tarjetas de vidrio con 3D y 2D, CTA de guardar antes de la última, logo RXT + tarjeta de seguir, loop). Voz Chatterbox revisada. Paquete en `clientes/roxet/exportados/rxt-5-razones/` (video, portada, publicación). Composición `Rxt5Razones` en `proyecto/src/razones/`.

@@ -1,196 +1,196 @@
 [
  {
   "text": "¿Qué",
-  "startMs": 40,
-  "endMs": 220,
+  "startMs": 30,
+  "endMs": 270,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "hacemos",
-  "startMs": 220,
-  "endMs": 750,
+  "startMs": 270,
+  "endMs": 590,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "en",
-  "startMs": 750,
-  "endMs": 900,
+  "startMs": 590,
+  "endMs": 680,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "RXT?",
-  "startMs": 900,
-  "endMs": 1680,
+  "startMs": 680,
+  "endMs": 1160,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "En",
-  "startMs": 1680,
-  "endMs": 1810,
+  "startMs": 1160,
+  "endMs": 1250,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "RXT",
-  "startMs": 1810,
-  "endMs": 2270,
+  "startMs": 1250,
+  "endMs": 1580,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "trabajamos",
-  "startMs": 2270,
-  "endMs": 2920,
+  "startMs": 1580,
+  "endMs": 2030,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "el",
-  "startMs": 2920,
-  "endMs": 3030,
+  "startMs": 2030,
+  "endMs": 2120,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "desarrollo",
-  "startMs": 3030,
-  "endMs": 3680,
+  "startMs": 2120,
+  "endMs": 2640,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "físico",
-  "startMs": 3680,
-  "endMs": 4000,
+  "startMs": 2640,
+  "endMs": 2940,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "de",
-  "startMs": 4000,
-  "endMs": 4120,
+  "startMs": 2940,
+  "endMs": 3020,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "manera",
-  "startMs": 4120,
-  "endMs": 4480,
+  "startMs": 3020,
+  "endMs": 3280,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "integral,",
-  "startMs": 4480,
-  "endMs": 5120,
+  "startMs": 3280,
+  "endMs": 3840,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "con",
-  "startMs": 5120,
-  "endMs": 5360,
+  "startMs": 3840,
+  "endMs": 4210,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "cuatro",
-  "startMs": 5360,
-  "endMs": 5840,
+  "startMs": 4210,
+  "endMs": 5010,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "pilares.",
-  "startMs": 5840,
-  "endMs": 6560,
+  "startMs": 5010,
+  "endMs": 5840,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "1.",
-  "startMs": 6560,
-  "endMs": 6770,
+  "startMs": 5840,
+  "endMs": 6150,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "Entrenamiento",
-  "startMs": 6770,
-  "endMs": 7700,
+  "startMs": 6350,
+  "endMs": 7670,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "funcional.",
-  "startMs": 7700,
-  "endMs": 8520,
+  "startMs": 7670,
+  "endMs": 8810,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "2.",
-  "startMs": 8520,
-  "endMs": 8850,
+  "startMs": 8810,
+  "endMs": 9120,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "Fuerza.",
-  "startMs": 8850,
-  "endMs": 9890,
+  "startMs": 9120,
+  "endMs": 10080,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "3.",
-  "startMs": 9890,
-  "endMs": 10060,
+  "startMs": 10080,
+  "endMs": 10290,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "Acondicionamiento",
-  "startMs": 10060,
-  "endMs": 11350,
+  "startMs": 10290,
+  "endMs": 11210,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "físico.",
-  "startMs": 11350,
-  "endMs": 11920,
+  "startMs": 11210,
+  "endMs": 11640,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "Y",
-  "startMs": 11920,
-  "endMs": 12080,
+  "startMs": 11640,
+  "endMs": 11690,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "4.",
-  "startMs": 12080,
-  "endMs": 12460,
+  "startMs": 11690,
+  "endMs": 12000,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "Entrenamiento",
-  "startMs": 12460,
-  "endMs": 13290,
+  "startMs": 12080,
+  "endMs": 12620,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "híbrido.",
-  "startMs": 13290,
+  "startMs": 13440,
   "endMs": 14080,
   "timestampMs": null,
   "confidence": 1
@@ -198,350 +198,350 @@
  {
   "text": "Así",
   "startMs": 14080,
-  "endMs": 14320,
+  "endMs": 14480,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "desarrollamos",
-  "startMs": 14320,
-  "endMs": 15120,
+  "startMs": 14480,
+  "endMs": 15180,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "fuerza,",
-  "startMs": 15120,
-  "endMs": 15750,
+  "startMs": 15180,
+  "endMs": 15720,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "resistencia,",
-  "startMs": 15750,
-  "endMs": 16520,
+  "startMs": 15720,
+  "endMs": 16400,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "velocidad,",
-  "startMs": 16520,
-  "endMs": 17340,
+  "startMs": 16400,
+  "endMs": 16960,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "coordinación,",
-  "startMs": 17340,
-  "endMs": 18120,
+  "startMs": 16960,
+  "endMs": 17740,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "movilidad",
-  "startMs": 18120,
-  "endMs": 18820,
+  "startMs": 17740,
+  "endMs": 18220,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "y",
-  "startMs": 18820,
-  "endMs": 18900,
+  "startMs": 18220,
+  "endMs": 18260,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "estabilidad,",
-  "startMs": 18900,
-  "endMs": 19800,
+  "startMs": 18260,
+  "endMs": 18880,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "en",
-  "startMs": 19800,
-  "endMs": 19940,
+  "startMs": 18880,
+  "endMs": 18980,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "sesiones",
-  "startMs": 19940,
-  "endMs": 20400,
+  "startMs": 18980,
+  "endMs": 19400,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "estructuradas",
-  "startMs": 20400,
-  "endMs": 21200,
+  "startMs": 19400,
+  "endMs": 20120,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "y",
-  "startMs": 21200,
-  "endMs": 21260,
+  "startMs": 20120,
+  "endMs": 20160,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "dirigidas",
-  "startMs": 21260,
-  "endMs": 21880,
+  "startMs": 20160,
+  "endMs": 20600,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "por",
-  "startMs": 21880,
-  "endMs": 22070,
+  "startMs": 20600,
+  "endMs": 20760,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "coaches.",
-  "startMs": 22070,
-  "endMs": 22400,
+  "startMs": 20760,
+  "endMs": 21040,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "Nuestro",
-  "startMs": 22400,
-  "endMs": 22860,
+  "startMs": 21040,
+  "endMs": 21550,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "objetivo",
-  "startMs": 22860,
-  "endMs": 23400,
+  "startMs": 21550,
+  "endMs": 22140,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "no",
-  "startMs": 23400,
-  "endMs": 23520,
+  "startMs": 22140,
+  "endMs": 22280,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "es",
-  "startMs": 23520,
-  "endMs": 23640,
+  "startMs": 22280,
+  "endMs": 22420,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "solamente",
-  "startMs": 23640,
-  "endMs": 24220,
+  "startMs": 22420,
+  "endMs": 23300,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "que",
-  "startMs": 24220,
-  "endMs": 24400,
+  "startMs": 23300,
+  "endMs": 23300,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "entrenes.",
-  "startMs": 24400,
-  "endMs": 25120,
+  "startMs": 23300,
+  "endMs": 24160,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "Es",
-  "startMs": 25120,
-  "endMs": 25310,
+  "startMs": 24160,
+  "endMs": 24300,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "que",
-  "startMs": 25310,
-  "endMs": 25440,
+  "startMs": 24300,
+  "endMs": 24430,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "mejores",
-  "startMs": 25440,
-  "endMs": 25867,
+  "startMs": 24430,
+  "endMs": 24850,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "tu",
-  "startMs": 25867,
-  "endMs": 26293,
+  "startMs": 24850,
+  "endMs": 24920,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "rendimiento",
-  "startMs": 26293,
-  "endMs": 26720,
+  "startMs": 24920,
+  "endMs": 25530,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "y",
-  "startMs": 26720,
-  "endMs": 26800,
+  "startMs": 25530,
+  "endMs": 25600,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "te",
-  "startMs": 26800,
-  "endMs": 26970,
+  "startMs": 25600,
+  "endMs": 25690,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "sientas",
-  "startMs": 26970,
-  "endMs": 27560,
+  "startMs": 25690,
+  "endMs": 26120,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "mejor,",
-  "startMs": 27560,
-  "endMs": 28000,
+  "startMs": 26120,
+  "endMs": 26740,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "dentro",
-  "startMs": 28000,
-  "endMs": 28470,
+  "startMs": 26740,
+  "endMs": 27210,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "y",
-  "startMs": 28470,
-  "endMs": 28550,
+  "startMs": 27210,
+  "endMs": 27360,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "fuera",
-  "startMs": 28550,
-  "endMs": 28940,
+  "startMs": 27360,
+  "endMs": 27560,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "del",
-  "startMs": 28940,
-  "endMs": 29180,
+  "startMs": 27560,
+  "endMs": 28140,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "gimnasio.",
-  "startMs": 29180,
-  "endMs": 29840,
+  "startMs": 28140,
+  "endMs": 30280,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "Esta",
-  "startMs": 29980,
-  "endMs": 30340,
+  "startMs": 30280,
+  "endMs": 30860,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "es",
-  "startMs": 30340,
-  "endMs": 30600,
+  "startMs": 30860,
+  "endMs": 31100,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "la",
-  "startMs": 30600,
-  "endMs": 30720,
+  "startMs": 31100,
+  "endMs": 31390,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "parte",
-  "startMs": 30720,
-  "endMs": 31190,
+  "startMs": 31390,
+  "endMs": 32020,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "uno",
-  "startMs": 31190,
-  "endMs": 31470,
+  "startMs": 32020,
+  "endMs": 32490,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "de",
-  "startMs": 31470,
-  "endMs": 31650,
+  "startMs": 32490,
+  "endMs": 32780,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "nueve.",
-  "startMs": 31650,
-  "endMs": 32120,
+  "startMs": 32780,
+  "endMs": 33640,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "Síguenos",
-  "startMs": 32120,
-  "endMs": 32590,
+  "startMs": 33640,
+  "endMs": 34310,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "para",
-  "startMs": 32590,
-  "endMs": 32790,
+  "startMs": 34310,
+  "endMs": 34610,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "no",
-  "startMs": 32790,
-  "endMs": 32900,
+  "startMs": 34610,
+  "endMs": 34790,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "perderte",
-  "startMs": 32900,
-  "endMs": 33340,
+  "startMs": 34790,
+  "endMs": 35350,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "la",
-  "startMs": 33340,
-  "endMs": 33450,
+  "startMs": 35350,
+  "endMs": 35950,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "siguiente.",
-  "startMs": 33450,
-  "endMs": 34200,
+  "startMs": 35950,
+  "endMs": 36480,
   "timestampMs": null,
   "confidence": 1
  }

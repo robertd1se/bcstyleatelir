@@ -20,7 +20,8 @@ args = sys.argv[1:]
 guion_path, salida = os.path.abspath(args[0]), os.path.abspath(args[1])
 op = lambda n, d: args[args.index(n) + 1] if n in args else d
 motor = op("--motor", "chatterbox")
-perfil = op("--perfil", "locutor")  # natural y cercana inventan palabras: no usar
+perfil = op("--perfil", "locutor")
+tempo = float(op("--tempo", "1.1" if motor == "chatterbox" else "1.0"))  # acelera sin cambiar el tono  # natural y cercana inventan palabras: no usar
 velocidad = op("--velocidad", "1.05" if motor == "kokoro" else "0.9")
 voz_kokoro = op("--voz", "em_alex")
 os.makedirs(salida, exist_ok=True)
@@ -72,8 +73,10 @@ if motor == "chatterbox":
         subprocess.run(["node", os.path.join(PROYECTO, "scripts", "transcribir.mjs"), wav_trozo, "es"], check=True,
                        stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, cwd=tempfile.gettempdir())
         caps = json.load(open(wav_trozo + ".captions.json"))
-        oido = "".join(c["text"] for c in caps)
+        oido = re.sub(r"\[[^\]]*\]", " ", "".join(c["text"] for c in caps))  # saca "[Música]" y similares
         esp, oi = normal(esperado).split(), normal(oido).split()
+        # tolera errores de escritura de Whisper (marca, plurales): una palabra oída muy parecida a una esperada cuenta como esa
+        oi = [max(esp, key=lambda e: difflib.SequenceMatcher(None, w, e).ratio()) if esp and max(difflib.SequenceMatcher(None, w, e).ratio() for e in esp) >= 0.7 else w for w in oi]
         parecido = difflib.SequenceMatcher(None, esp, oi).ratio()
         if len(oi) > len(esp) + 1:  # dijo palabras de más (repitió o inventó)
             parecido -= 0.2
@@ -140,6 +143,11 @@ else:
         pausa = 0.32 if o.endswith(("?", ".")) else 0.18
         partes += [a, np.zeros(int(pausa * sr), dtype=a.dtype)]
     sf.write(crudo, np.concatenate(partes), sr)
+
+if abs(tempo - 1.0) > 0.01:
+    acelerado = crudo.replace(".wav", "-tempo.wav")
+    subprocess.run(["ffmpeg", "-hide_banner", "-loglevel", "error", "-y", "-i", crudo, "-af", f"atempo={tempo}", acelerado], check=True)
+    os.replace(acelerado, crudo)
 
 # cadena de locutor
 from pedalboard import Pedalboard, HighpassFilter, LowShelfFilter, PeakFilter, HighShelfFilter, Compressor, Reverb, Limiter, Gain
