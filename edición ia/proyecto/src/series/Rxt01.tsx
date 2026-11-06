@@ -2,11 +2,15 @@
 // Voz: guiones/rxt-01.txt → python3 scripts/voz.py guiones/rxt-01.txt public/series/rxt-01
 import { Caption } from "@remotion/captions";
 import { AbsoluteFill, Audio, interpolate, Sequence, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
-import { ALTO, ANCHO, COLORES, FPS, FUENTES } from "../estilo";
+import { ALTO, ANCHO, COLORES, FPS } from "../estilo";
 import palabrasJson from "../../public/series/rxt-01/palabras.json";
 import { Gimnasio3D } from "./gym3d/Gimnasio3D";
 import { cuandoSeDice, interpolarClaves } from "./linea";
-import { EtiquetaSerie } from "./ui/EtiquetaSerie";
+import { Acabado } from "./ui/Acabado";
+import { CierreSerie } from "./ui/CierreSerie";
+import { Destello, FRAMES_DESTELLO } from "./ui/Destello";
+import { Encabezado } from "./ui/Encabezado";
+import { ListaTarjetas } from "./ui/ListaTarjetas";
 import { Progreso } from "./ui/Progreso";
 import { Chips, Tarjeta } from "./ui/Tarjeta";
 import { TextoCaja } from "./ui/TextoCaja";
@@ -35,7 +39,9 @@ const T = {
 
 const GENERAL = { x: 0.5, z: 2.5, zoom: 47, giro: 0 };
 const camaraClaves = [
-  { frame: 0, ...GENERAL },
+  // gancho: arranca cerca y se abre
+  { frame: 0, x: 0, z: 1, zoom: 64, giro: -0.25 },
+  { frame: 16, ...GENERAL },
   { frame: T.p1, x: -5.5, z: -3.5, zoom: 78, giro: 0 },
   { frame: T.p2, x: 5.5, z: -3.5, zoom: 78, giro: 0 },
   { frame: T.p3, x: -5.5, z: 5, zoom: 78, giro: 0 },
@@ -53,7 +59,10 @@ export const Rxt01: React.FC = () => {
   const frame = useCurrentFrame();
   const { fps, durationInFrames } = useVideoConfig();
   const t = frame / fps;
-  const cam = interpolarClaves(frame, camaraClaves, ["x", "z", "zoom", "giro"]);
+  const base = interpolarClaves(frame, camaraClaves, ["x", "z", "zoom", "giro"], 22);
+  // deriva lenta para que la cámara nunca quede quieta (vuelve a 0 al final, para el loop)
+  const deriva = Math.sin((frame / durationInFrames) * Math.PI * 2);
+  const cam = { ...base, giro: base.giro + 0.06 * deriva, zoom: base.zoom * (1 + 0.03 * Math.sin((frame / durationInFrames) * Math.PI * 4)) };
 
   // pilar actual (1..4), 5 = todos hechos, 0 = ninguno todavía
   const actual = frame >= T.asi ? 5 : INICIOS_PILARES.filter((f) => frame >= f).length;
@@ -89,7 +98,7 @@ export const Rxt01: React.FC = () => {
     texto: c[0].toUpperCase() + c.slice(1),
     desdeFrame: dice(c, c === "fuerza" ? 1 : 0),
   }));
-  const moverCamara = camaraClaves.slice(1).map((c) => c.frame - 11);
+  const moverCamara = camaraClaves.slice(2).map((c) => c.frame - 13);
 
   return (
     <AbsoluteFill style={{ backgroundColor: "#07080d" }}>
@@ -97,8 +106,10 @@ export const Rxt01: React.FC = () => {
       {/* degradado arriba para que el texto se lea */}
       <AbsoluteFill style={{ background: "linear-gradient(180deg, #07080df0 0%, #07080dcc 22%, transparent 38%)" }} />
 
-      <EtiquetaSerie parte={1} total={9} />
-      <TextoCaja palabras={PALABRAS} cajasRojas={["RXT?", "integral", "objetivo", "rendimiento"]} cajasAzules={["coaches", "dentro", "fuera"]} />
+      <Encabezado parte={1} total={9} />
+      <Sequence durationInFrames={T.serie}>
+        <TextoCaja palabras={PALABRAS} cajasRojas={["RXT?", "integral", "objetivo", "rendimiento"]} cajasAzules={["coaches", "dentro", "fuera"]} />
+      </Sequence>
       <div style={{ opacity: progresoOpacidad }}>
         <Progreso
           titulo="PILARES"
@@ -115,29 +126,37 @@ export const Rxt01: React.FC = () => {
         </Tarjeta>
       </Sequence>
       <Sequence from={T.sesiones} durationInFrames={T.objetivo - T.sesiones}>
-        <Tarjeta titulo="Cómo entrenamos" durationInFrames={T.objetivo - T.sesiones}>
-          <Linea texto="Sesiones estructuradas" icono="▦" />
-          <Linea texto="Dirigidas por coaches" icono="●" color={COLORES.azul} />
-        </Tarjeta>
+        <ListaTarjetas
+          etiqueta="Cómo entrenamos"
+          durationInFrames={T.objetivo - T.sesiones}
+          items={[
+            { icono: "▦", titulo: "Sesiones estructuradas", detalle: "Con planificación e intención", desdeFrame: 4 },
+            { icono: "●", titulo: "Dirigidas por coaches", detalle: "Supervisan tu técnica", desdeFrame: dice("dirigidas") - T.sesiones, color: COLORES.azul },
+          ]}
+        />
       </Sequence>
       <Sequence from={T.objetivo} durationInFrames={T.serie - T.objetivo}>
-        <Tarjeta titulo="Nuestro objetivo" durationInFrames={T.serie - T.objetivo}>
-          <Linea texto="Mejorar tu rendimiento" icono="↑" desde={T.rendimiento - T.objetivo} />
-          <Linea texto="Sentirte mejor, dentro y fuera" icono="✓" color={COLORES.azul} desde={T.mejor - T.objetivo} />
-        </Tarjeta>
+        <ListaTarjetas
+          etiqueta="Nuestro objetivo"
+          durationInFrames={T.serie - T.objetivo}
+          items={[
+            { icono: "↑", titulo: "Mejor rendimiento", detalle: "Desarrolla tus capacidades", desdeFrame: T.rendimiento - T.objetivo },
+            { icono: "✓", titulo: "Sentirte mejor", detalle: "Dentro y fuera del gimnasio", desdeFrame: T.mejor - T.objetivo, color: COLORES.azul },
+          ]}
+        />
       </Sequence>
-      <Sequence from={T.serie} durationInFrames={durationInFrames - T.serie}>
-        <Tarjeta titulo="Serie RXT" durationInFrames={durationInFrames - T.serie + 6}>
-          <div style={{ display: "flex", gap: 14, marginBottom: 22 }}>
-            {Array.from({ length: 9 }, (_, i) => (
-              <div key={i} style={{ flex: 1, height: 10, borderRadius: 5, background: i === 0 ? COLORES.rojo : "#ffffff26" }} />
-            ))}
-          </div>
-          <div style={{ fontFamily: FUENTES.titulos, fontWeight: 800, fontSize: 40, color: COLORES.blanco }}>
-            Parte 1 de 9 · <span style={{ color: COLORES.rojo }}>Síguenos</span>
-          </div>
-        </Tarjeta>
+      <Sequence from={T.serie}>
+        <CierreSerie parte={1} total={9} />
       </Sequence>
+
+      {/* destellos entre secciones */}
+      {[T.asi, T.sesiones, T.objetivo, T.serie].map((f) => (
+        <Sequence key={f} from={f - FRAMES_DESTELLO / 2} durationInFrames={FRAMES_DESTELLO}>
+          <Destello />
+        </Sequence>
+      ))}
+
+      <Acabado />
 
       <Audio src={staticFile("series/rxt-01/voz.wav")} />
       <Audio src={staticFile("sfx/impacto.wav")} volume={0.5} />
@@ -147,18 +166,5 @@ export const Rxt01: React.FC = () => {
         </Sequence>
       ))}
     </AbsoluteFill>
-  );
-};
-
-const Linea: React.FC<{ texto: string; icono: string; color?: string; desde?: number }> = ({ texto, icono, color = COLORES.rojo, desde = 0 }) => {
-  const frame = useCurrentFrame();
-  const o = interpolate(frame, [desde, desde + 6], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
-  return (
-    <div style={{ display: "flex", alignItems: "center", gap: 22, marginTop: 10, opacity: o, transform: `translateX(${(1 - o) * 30}px)` }}>
-      <div style={{ width: 58, height: 58, borderRadius: 16, background: color, display: "flex", alignItems: "center", justifyContent: "center", fontFamily: FUENTES.titulos, fontWeight: 900, fontSize: 32, color: COLORES.blanco }}>
-        {icono}
-      </div>
-      <div style={{ fontFamily: FUENTES.titulos, fontWeight: 800, fontSize: 42, color: COLORES.blanco }}>{texto}</div>
-    </div>
   );
 };

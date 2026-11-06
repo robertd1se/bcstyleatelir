@@ -3,6 +3,15 @@
 Reglas concretas para cada video. Los valores numéricos viven en `proyecto/src/estilo.ts`: si cambiás uno, cambiá el otro.
 Las referencias inspiran; **no se copian** (ni planos, ni textos, ni música).
 
+## Regla de oro: nada crudo
+El usuario quiere todo con terminación prolija. Antes de exportar, cada video tiene que cumplir:
+- **Movimiento constante:** ningún plano ni fondo queda quieto (zoom lento, deriva de cámara o animación).
+- **Transiciones con intención:** látigo, destello o movimiento de cámara; nunca un salto sin pulir entre secciones.
+- **Acabado:** viñeta suave y grano fino (`series/ui/Acabado.tsx`) en piezas animadas y gráficas.
+- **Profundidad y luz:** en 3D, charcos de luz, neón y contexto alrededor (calle, faroles); nada de fondos planos vacíos.
+- **Sonido diseñado:** whoosh en cada transición o movimiento de cámara e impacto en el gancho y en el cierre.
+- **Revisión:** mirar al menos 5 cuadros clave antes del render final y corregir lo que se vea a medio hacer.
+
 ## Formato
 - Vertical **1080x1920, 30 fps**, H.264 + AAC 48 kHz.
 - Audio final normalizado a **-14 LUFS**, pico máximo -1 dBTP (las 3 referencias miden -14 LUFS).
@@ -74,6 +83,8 @@ Las referencias inspiran; **no se copian** (ni planos, ni textos, ni música).
 | 1 | `referencias/ref1-DXjwsAKjFB2.mp4` | Paneos látigo de 4–6 cuadros, cortes por continuidad, música que entra en 1 s y cierre con el logo sobre negro |
 | 2 | `referencias/ref2-DZYEkfpMK_d.mp4` | Subtítulos chicos a la altura del pecho, palabra por palabra, con la palabra clave en rojo; títulos con número grande |
 | 3 | `referencias/ref3-DV90aO2DBnL.mp4` | Ritmo de un corte cada 1,5–2,5 s, gancho con 3 cortes en 2 s, zócalos nombre/rol/frase con humor |
+| 5 | `referencias/ref5-DfXdCL7sOB2.mp4` | Formato explicativo: voz en off, gimnasio 3D isométrico, texto arriba con recuadros de color, barra de progreso con ✓, tarjetas tipo app, loop |
+| 6 | `referencias/ref6-DfU22HORUf1.mp4` | Encabezado con línea de avance, destellos entre secciones, listas en tarjetas apiladas con ícono, cierre con logo y "Guárdalo y síguenos" |
 
 Mediciones: cortes detectados con FFmpeg (`select=gt(scene,0.25)`), colores y tamaños medidos sobre cuadros, sonoridad con `ebur128`, y las referencias transcritas con Whisper.
 
@@ -84,5 +95,8 @@ Para videos que explican algo con voz en off (pedido para la serie RXT; inspirad
 - **Texto arriba**, centrado al **14 % de la altura**: Montserrat 800 a **66 px**, blanco, palabra por palabra, en trozos de hasta 6 palabras (se corta en comas y en el final de cada oración). Las **palabras clave van sobre un recuadro rojo** y lo secundario sobre recuadro azul (radio de 10 px). La primera oración (gancho) se ve entera desde el cuadro 0.
 - **Barra de progreso** debajo del texto (23 % de la altura): actual en rojo, terminados en azul con ✓. En el 3D, la zona activa se pone roja y tiene un marcador numerado.
 - **Tarjetas tipo app** abajo (fondo oscuro translúcido, radio de 34 px) para listas: chips que se encienden en azul cuando se dicen y filas con ícono.
-- Arriba siempre "RXT · PARTE n/9" con el logo chico. El cierre es una tarjeta "Parte n de 9 · Síguenos" (no usa el cierre de logo de 2 s).
+- **Encabezado** (de la ref. 6): logo X y "RXT" a la izquierda, "PARTE n/9" a la derecha y debajo una **línea de 4 px que se llena en rojo** a medida que avanza el video.
+- **Secciones separadas por un destello** de luz cálida en diagonal (12 cuadros, de la ref. 6) más un whoosh.
+- **Listas en tarjetas apiladas** (de la ref. 6): una pastilla de sección con borde rojo arriba y cada tarjeta con ícono cuadrado de color, TÍTULO en Montserrat 900 a 40 px y un detalle en Inter a 26 px. Entran de a una, subiendo 60 px, cuando la voz las nombra.
+- **Cierre de serie** (de la ref. 6): el 3D se oscurece al 78 %, pastilla "GUÁRDALO Y SÍGUENOS", logo X que se arma, "RXT / TRAINING CLUB" y barra de 9 segmentos con las partes publicadas en rojo. Sin texto de subtítulos encima.
 - Sonido: voz, whoosh suave (volumen 0,35) en cada movimiento de cámara e impacto en el cuadro 0. Sin música si `musica/` está vacía.

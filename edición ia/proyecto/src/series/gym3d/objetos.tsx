@@ -164,6 +164,8 @@ export const Mostrador: React.FC<{ x: number; z: number }> = ({ x, z }) => (
 export type Animacion = "sentadilla" | "remo" | "salto" | "quieto" | "caminar";
 
 /** Persona de bloques animada. `t` en segundos. `coach` lleva remera roja y aro azul. */
+const ROPA = ["#2b2e3a", "#e9e9ee", "#3a3f52", "#111216", "#d8d8de", "#1f3a8a"];
+
 export const Persona: React.FC<{ x: number; z: number; t: number; anim?: Animacion; rotY?: number; coach?: boolean; desfase?: number; resaltar?: number }> = ({
   x,
   z,
@@ -182,7 +184,8 @@ export const Persona: React.FC<{ x: number; z: number; t: number; anim?: Animaci
   if (anim === "remo") avance = 0.35 * Math.sin(fase);
   if (anim === "salto") salto = Math.max(0, Math.sin(fase * 1.3)) * 0.45;
   if (anim === "caminar") avance = 0.08 * Math.sin(fase * 2);
-  const remera = coach ? COLORES.rojo : "#2b2e3a";
+  // la ropa varía según la posición para que no se vean todos iguales
+  const remera = coach ? COLORES.rojo : ROPA[Math.abs(Math.round(x * 7 + z * 13)) % ROPA.length];
   return (
     <group position={[x, salto, z]} rotation={[0, rotY, 0]}>
       <group position={[0, 0, avance]}>

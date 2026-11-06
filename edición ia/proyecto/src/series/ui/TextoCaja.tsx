@@ -1,6 +1,6 @@
 import { Caption } from "@remotion/captions";
 import { useMemo } from "react";
-import { AbsoluteFill, interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
+import { AbsoluteFill, Easing, interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
 import { ALTO, COLORES, FUENTES } from "../../estilo";
 
 // Formato explicativo: texto arriba, palabra por palabra, con las palabras clave sobre un recuadro de color.
@@ -89,6 +89,9 @@ export const TextoCaja: React.FC<{ palabras: Caption[]; cajasRojas?: string[]; c
     else grupos.push({ caja: p.caja, ps: [p] });
   }
 
+  // cada página entra subiendo 24 px en 6 cuadros
+  const inicioPagina = Math.round((pagina[0].startMs / 1000) * fps);
+  const sube = pagina[0].startMs === 0 ? 0 : interpolate(frame - inicioPagina, [0, 6], [24, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp", easing: Easing.out(Easing.cubic) });
   return (
     <AbsoluteFill>
       <div
@@ -97,7 +100,7 @@ export const TextoCaja: React.FC<{ palabras: Caption[]; cajasRojas?: string[]; c
           left: TEXTO_CAJA.margenLateral,
           right: TEXTO_CAJA.margenLateral,
           top: ALTO * TEXTO_CAJA.centroY,
-          transform: "translateY(-50%)",
+          transform: `translateY(calc(-50% + ${sube}px))`,
           textAlign: "center",
           fontFamily: FUENTES.titulos,
           fontWeight: 800,

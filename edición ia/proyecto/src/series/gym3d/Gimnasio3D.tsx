@@ -5,6 +5,7 @@ import * as THREE from "three";
 import { COLORES } from "../../estilo";
 import { Cajon, Maquina, Mostrador, Neon, Pared, PisoZona, Persona, Pesa, Rack, Barra } from "./objetos";
 import { TAMAÑO_PISO, ZONAS, zona } from "./plano";
+import { CharcoLuz, Colchoneta, Exterior, Mancuernero, Rig } from "./ambiente";
 
 export type Camara = { x: number; z: number; zoom: number; giro?: number };
 export type Marcador = { zona: string; numero: string; opacidad: number; escala: number; color?: string };
@@ -83,6 +84,7 @@ export const Gimnasio3D: React.FC<{
       <pointLight position={[-6, 4, -4]} color={COLORES.rojo} intensity={25} distance={14} />
       <pointLight position={[6, 4, 5]} color={COLORES.azul} intensity={30} distance={14} />
 
+      <Exterior t={t} />
       {/* piso general */}
       <mesh position={[0, -0.01, 1]} rotation={[-Math.PI / 2, 0, 0]}>
         <planeGeometry args={[W, D]} />
@@ -92,9 +94,24 @@ export const Gimnasio3D: React.FC<{
         <PisoZona key={z.id} z={z} activa={activas[z.id] ?? 0} pulso={pulso} />
       ))}
 
-      {/* paredes del fondo */}
+      {/* paredes del fondo con franjas de neón */}
       <Pared desde={[-12, -8]} hasta={[12, -8]} />
       <Pared desde={[-12, -8]} hasta={[-12, 13]} />
+      <Neon desde={[-11.8, -7.85]} hasta={[11.8, -7.85]} y={1.2} color={COLORES.rojo} grosor={0.06} />
+      <Neon desde={[-11.85, -7.8]} hasta={[-11.85, 12.8]} y={1.2} color="#7a5cff" grosor={0.06} />
+
+      {/* charcos de luz de los focos */}
+      {ZONAS.slice(0, 4).map((z, i) => (
+        <CharcoLuz key={z.id} x={z.centro[0]} z={z.centro[1]} radio={4.2} color={i % 2 ? "#9fb0ff" : "#ffffff"} intensidad={0.14 + (activas[z.id] ?? 0) * 0.18} />
+      ))}
+      <CharcoLuz x={ba[0]} z={ba[1]} radio={4} color="#ffb35c" intensidad={0.3} />
+
+      {/* más equipamiento */}
+      <Rig x={f[0]} z={-7.3} largo={7.5} />
+      {[-3, -2, -1].map((dx) => (
+        <Colchoneta key={dx} x={ac[0] + dx} z={ac[1] + 2.4} rotY={Math.PI / 2} />
+      ))}
+      <Mancuernero x={fu[0]} z={-7.3} largo={6} />
 
       {/* Funcional: cajones, pesas rusas, saltos y sentadillas */}
       {[-2.5, -1.2, 0.1].map((dx, i) => (
