@@ -70,6 +70,15 @@ Instagram tapa partes del video con su interfaz y en el feed lo recorta a 4:5. N
 - Plano de más de 1,5 s: **zoom lento de 100 % a 108 %** durante todo el plano para que nunca quede quieto.
 - Silencios de más de **0,5 s**: se cortan. Tomas repetidas, muletillas y frases cortadas: afuera.
 
+## Subtítulos fluidos (regla para todos los videos con voz)
+El usuario los quiere "mejores, fluidos, no crudos". Componente: `proyecto/src/series/ui/SubtitulosFluidos.tsx`.
+- **Frases completas**, cortadas donde se respira (coma, punto, dos puntos) o a las **5 palabras**; nunca una palabra sola ni un número solo: "*1.* entrenas todo tu cuerpo".
+- La frase **aparece entera** 90 ms antes de que se diga: fundido + subida de 18 px + desenfoque que se aclara (7 cuadros).
+- **Karaoke:** las palabras que todavía no se dijeron se ven al 50 %, la que se está diciendo al 100 % y apenas más grande (104 %); las palabras clave en manuscrita se "escriben" cuando se dicen.
+- **Sin huecos:** cada frase queda hasta que empieza la siguiente (fundido cruzado de 5 cuadros); solo se va antes si la pausa supera 1,1 s.
+- **Lo que se lee = lo que se dice:** si la voz agrega palabras ("sí", "y a"), se rehace la voz, no se tolera.
+- Espacio entre palabras de 0,34 em (Bodoni pega las palabras si se deja menos).
+
 ## Primeros 3 segundos (gancho)
 - **Cuadro 0 con título gancho**, sin fundido desde negro: 2 líneas, la 1.ª blanca a **120 px** y la 2.ª roja a **150 px**, centradas al **47 %** de la altura. La 2.ª línea entra **4 cuadros** después con un golpe de escala de 130 % a 100 % en 6 cuadros (refs. 2 y 3).
 - **2 o 3 cortes** dentro de los primeros 3 s (refs. 1 y 3: 3 cortes antes de 2,4 s).

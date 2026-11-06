@@ -78,7 +78,7 @@ if motor == "chatterbox":
         # tolera errores de escritura de Whisper (marca, plurales): una palabra oída muy parecida a una esperada cuenta como esa
         oi = [max(esp, key=lambda e: difflib.SequenceMatcher(None, w, e).ratio()) if esp and max(difflib.SequenceMatcher(None, w, e).ratio() for e in esp) >= 0.7 else w for w in oi]
         parecido = difflib.SequenceMatcher(None, esp, oi).ratio()
-        if len(oi) > len(esp) + 1:  # dijo palabras de más (repitió o inventó)
+        if len(oi) > len(esp):  # dijo palabras de más (repitió, inventó o agregó muletillas)
             parecido -= 0.2
         dur = sf.info(wav_trozo).duration
         maximo = 0.085 * len(esperado) + 1.2  # más largo que esto = está inventando

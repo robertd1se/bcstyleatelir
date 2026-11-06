@@ -12,7 +12,7 @@ import { volumenMusica } from "../series/sonido";
 import { Acabado } from "../series/ui/Acabado";
 import { CtaGuardar, FRAMES_CTA_GUARDAR } from "../series/ui/CtaGuardar";
 import { LogoRxt } from "../series/ui/LogoRxt";
-import { TextoCaja } from "../series/ui/TextoCaja";
+import { SubtitulosFluidos } from "../series/ui/SubtitulosFluidos";
 import { Persona2D } from "../series2d/Persona2D";
 import { Pastilla, Sello } from "../series2d/piezas";
 import { EncabezadoRazones, FondoLuces, Insignia, TarjetaCapitulo, TarjetaSeguir, TarjetaVidrio } from "./piezas";
@@ -210,7 +210,7 @@ export const Rxt5Razones: React.FC = () => {
           <Sequence from={CAP - 6}>
             <C d={b - a - CAP + 6} />
           </Sequence>
-          <TextoCaja palabras={tramo(a, b).map((p) => ({ ...p, startMs: p.startMs - (a / FPS) * 1000 }))} doradas={["cuerpo:", "ti:", "intención,", "coach", "comunidad"]} rojas={["técnica.", "límites."]} centroY={texto} />
+          <SubtitulosFluidos palabras={tramo(a, b).map((p) => ({ ...p, startMs: p.startMs - (a / FPS) * 1000 }))} doradas={["cuerpo:", "ti:", "intención,", "coach", "comunidad"]} rojas={["técnica.", "límites."]} centroY={texto} />
           <Sequence durationInFrames={CAP}>
             <TarjetaCapitulo n={i + 1} duracion={CAP} />
           </Sequence>
@@ -219,7 +219,7 @@ export const Rxt5Razones: React.FC = () => {
 
       {/* guardar antes de la última razón */}
       <Sequence from={T.antes} durationInFrames={R[4] - T.antes}>
-        <TextoCaja palabras={tramo(T.antes, R[4]).map((p) => ({ ...p, startMs: p.startMs - (T.antes / FPS) * 1000 }))} doradas={["guarda"]} centroY={0.36} tamaño={78} />
+        <SubtitulosFluidos palabras={tramo(T.antes, R[4]).map((p) => ({ ...p, startMs: p.startMs - (T.antes / FPS) * 1000 }))} doradas={["guarda"]} centroY={0.36} tamaño={78} />
         <Sequence durationInFrames={Math.max(FRAMES_CTA_GUARDAR, R[4] - T.antes)}>
           <CtaGuardar texto="Guárdalo" y={1000} />
         </Sequence>
@@ -227,7 +227,7 @@ export const Rxt5Razones: React.FC = () => {
 
       {/* cierre */}
       <Sequence from={T.esto}>
-        <TextoCaja palabras={tramo(T.esto, durationInFrames + 999).map((p) => ({ ...p, startMs: p.startMs - (T.esto / FPS) * 1000 }))} doradas={["síguenos"]} rojas={["RXT."]} centroY={0.245} />
+        <SubtitulosFluidos palabras={tramo(T.esto, durationInFrames + 999).map((p) => ({ ...p, startMs: p.startMs - (T.esto / FPS) * 1000 }))} doradas={["síguenos"]} rojas={["RXT."]} centroY={0.245} />
         <Cierre />
       </Sequence>
 
