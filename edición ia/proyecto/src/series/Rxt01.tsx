@@ -6,6 +6,7 @@ import { ALTO, ANCHO, COLORES, FPS } from "../estilo";
 import palabrasJson from "../../public/series/rxt-01/palabras.json";
 import { Gimnasio3D } from "./gym3d/Gimnasio3D";
 import { cuandoSeDice, interpolarClaves } from "./linea";
+import { volumenMusica } from "./sonido";
 import { Acabado } from "./ui/Acabado";
 import { CierreSerie } from "./ui/CierreSerie";
 import { Destello, FRAMES_DESTELLO } from "./ui/Destello";
@@ -159,6 +160,8 @@ export const Rxt01: React.FC = () => {
       <Acabado />
 
       <Audio src={staticFile("series/rxt-01/voz.wav")} />
+      {/* base original generada con scripts/musica.py, con ducking bajo la voz */}
+      <Audio src={staticFile("musica-generada/rxt-01.wav")} volume={volumenMusica(PALABRAS, fps, durationInFrames)} />
       <Audio src={staticFile("sfx/impacto.wav")} volume={0.5} />
       {moverCamara.map((f) => (
         <Sequence key={f} from={Math.max(0, f)} durationInFrames={20}>

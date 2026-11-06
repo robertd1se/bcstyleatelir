@@ -12,11 +12,16 @@ cd proyecto
 npm install
 NODE_USE_ENV_PROXY=1 node scripts/instalar-whisper.mjs "${1:-base}"
 
-# Voz sintética (Piper) para la serie explicativa
-python3 -c "import piper" 2>/dev/null || pip3 install --user piper-tts || pip3 install --break-system-packages piper-tts
+# Voz sintética (Kokoro, con Piper de respaldo), procesamiento de audio y música
+for paq in kokoro-onnx soundfile pedalboard piper-tts; do
+  python3 -c "import ${paq//-/_}" 2>/dev/null || pip3 install --user $paq || pip3 install --break-system-packages $paq
+done
 mkdir -p voces
 for ext in onnx onnx.json; do
   [ -s voces/es_MX-claude-high.$ext ] || curl -sSfL -o voces/es_MX-claude-high.$ext \
     "https://huggingface.co/rhasspy/piper-voices/resolve/main/es/es_MX/claude/high/es_MX-claude-high.$ext"
+done
+for f in kokoro-v1.0.onnx voices-v1.0.bin; do
+  [ -s voces/$f ] || curl -sSfL -o voces/$f "https://huggingface.co/fastrtc/kokoro-onnx/resolve/main/$f"
 done
 echo "Todo listo."

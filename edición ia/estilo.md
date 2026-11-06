@@ -90,7 +90,7 @@ Mediciones: cortes detectados con FFmpeg (`select=gt(scene,0.25)`), colores y ta
 
 ## Formato serie explicativa (serie RXT de 9 reels)
 Para videos que explican algo con voz en off (pedido para la serie RXT; inspirado en la ref. 5, sin copiarla).
-- **Voz en off** sintética (Piper `es_MX-claude-high`, velocidad 0,9). La marca se pronuncia "Roxet" y en pantalla dice "RXT".
+- **Voz en off:** la elegida es ElevenLabs (pendiente de que funcione la clave). Mientras tanto, Kokoro `em_alex` a velocidad 1,05, oración por oración (pausa de 0,32 s después de "." y "?"), con cadena de locutor: pasa-altos a 85 Hz, +2,5 dB de calidez a 180 Hz, −2 dB a 350 Hz, +3 dB de presencia a 3,2 kHz, −3,5 dB en las "s" a 7 kHz, compresión 3:1 y un toque de sala. **Piper no se usa:** al usuario le sonó cruda. La marca se pronuncia "Roxet" y en pantalla dice "RXT".
 - **Imagen:** gimnasio RXT en 3D isométrico, de noche, con una zona por servicio. La cámara se mueve sin cortes de una zona a otra justo cuando la voz la nombra (18 cuadros de movimiento suave) y vuelve al encuadre inicial al final, para que el reel quede en loop.
 - **Texto arriba**, centrado al **14 % de la altura**: Montserrat 800 a **66 px**, blanco, palabra por palabra, en trozos de hasta 6 palabras (se corta en comas y en el final de cada oración). Las **palabras clave van sobre un recuadro rojo** y lo secundario sobre recuadro azul (radio de 10 px). La primera oración (gancho) se ve entera desde el cuadro 0.
 - **Barra de progreso** debajo del texto (23 % de la altura): actual en rojo, terminados en azul con ✓. En el 3D, la zona activa se pone roja y tiene un marcador numerado.
@@ -99,4 +99,5 @@ Para videos que explican algo con voz en off (pedido para la serie RXT; inspirad
 - **Secciones separadas por un destello** de luz cálida en diagonal (12 cuadros, de la ref. 6) más un whoosh.
 - **Listas en tarjetas apiladas** (de la ref. 6): una pastilla de sección con borde rojo arriba y cada tarjeta con ícono cuadrado de color, TÍTULO en Montserrat 900 a 40 px y un detalle en Inter a 26 px. Entran de a una, subiendo 60 px, cuando la voz las nombra.
 - **Cierre de serie** (de la ref. 6): el 3D se oscurece al 78 %, pastilla "GUÁRDALO Y SÍGUENOS", logo X que se arma, "RXT / TRAINING CLUB" y barra de 9 segmentos con las partes publicadas en rojo. Sin texto de subtítulos encima.
-- Sonido: voz, whoosh suave (volumen 0,35) en cada movimiento de cámara e impacto en el cuadro 0. Sin música si `musica/` está vacía.
+- **Sonido:** voz; whoosh suave (volumen 0,35) en cada movimiento de cámara; impacto en el cuadro 0.
+- **Música:** si `musica/` está vacía, se genera una base original con `scripts/musica.py` (100 BPM, electrónica oscura en La menor), del largo exacto del reel. Lleva **ducking**: volumen 0,24 en las pausas, que baja al 38 % mientras habla la voz (entra y sale en 250 ms), con entrada de 1 s y salida de 1,5 s.

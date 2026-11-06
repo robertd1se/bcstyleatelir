@@ -29,7 +29,9 @@ Nunca edites los videos originales: trabajá siempre sobre copias o archivos nue
 | **FFmpeg / ffprobe** | Cortar, unir, comprimir, extraer audio, detectar silencios y medir duraciones. |
 | **yt-dlp** | Bajar videos de referencia a `referencias/`: `yt-dlp -o "referencias/%(title)s.%(ext)s" <url>` |
 | **whisper.cpp** (modelo `base`) | Transcribir con tiempos por palabra para cortar errores y hacer subtítulos. Está en `proyecto/whisper.cpp/` (no se sube a Git). |
-| **Piper** (voz `es_MX-claude-high`) | Voz en off sintética en español para la serie explicativa. Está en `proyecto/voces/` (no se sube a Git). |
+| **Kokoro** (voz `em_alex`) y **Piper** | Voz en off sintética en español para la serie explicativa (Kokoro es la principal; Piper sonaba "cruda" para el usuario). Modelos en `proyecto/voces/` (no se suben a Git). |
+| **ElevenLabs** | Voz IA premium elegida por el usuario. Pendiente: la clave guardada no funciona. |
+| **pedalboard** | Efectos de audio (cadena de locutor para la voz, mezcla de la música). |
 | **Remotion** | Componer el video vertical con subtítulos animados, gráficos y música. Composición `VideoVertical` en `proyecto/src/`. |
 
 ### Scripts (correr desde `proyecto/`)
@@ -48,9 +50,16 @@ npm run renderizar -- <video> [--musica <archivo>] [--volumen 0.12] [--salida <a
 
 npm run muestra      # vuelve a generar ../exportados/muestra-estilo.mp4
 
-python3 scripts/voz.py guiones/<nombre>.txt public/series/<nombre>
-#   → voz en off con Piper (voz es_MX-claude-high) + palabras.json con tiempos por palabra
+python3 scripts/voz.py guiones/<nombre>.txt public/series/<nombre> [--motor kokoro|piper] [--voz em_alex]
+#   → voz en off (Kokoro em_alex por defecto) con cadena de locutor + palabras.json con tiempos por palabra
 #   → en el guion, {lo que se dice|lo que se muestra}: {Roxet|RXT}, {uno|1.}
+
+python3 scripts/voz_elevenlabs.py guiones/<nombre>.txt public/series/<nombre> --voz <voice_id>
+#   → voz de ElevenLabs (mejor calidad). La clave la pone el proxy (secreto de red de api.elevenlabs.io).
+#   → HOY NO FUNCIONA: ElevenLabs rechaza la clave guardada ("must start with sk_"). Revisar con el usuario.
+
+python3 scripts/musica.py public/musica-generada/<nombre>.wav --duracion <seg> --bpm 100
+#   → base instrumental original (electrónica oscura de gym); hacerla del largo exacto del video
 
 npm run dev          # Remotion Studio, para ver y ajustar en vivo
 npm run lint         # chequeo de tipos y estilo
