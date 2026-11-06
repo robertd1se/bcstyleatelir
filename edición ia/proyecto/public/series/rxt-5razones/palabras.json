@@ -2,27 +2,27 @@
  {
   "text": "Estas",
   "startMs": 10,
-  "endMs": 280,
+  "endMs": 270,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "son",
-  "startMs": 280,
-  "endMs": 450,
+  "startMs": 270,
+  "endMs": 430,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "5",
-  "startMs": 450,
-  "endMs": 740,
+  "startMs": 430,
+  "endMs": 710,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "razones",
-  "startMs": 740,
+  "startMs": 710,
   "endMs": 1180,
   "timestampMs": null,
   "confidence": 1
@@ -30,55 +30,55 @@
  {
   "text": "por",
   "startMs": 1180,
-  "endMs": 1340,
+  "endMs": 1300,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "las",
-  "startMs": 1340,
-  "endMs": 1520,
+  "startMs": 1300,
+  "endMs": 1480,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "que",
-  "startMs": 1520,
-  "endMs": 1700,
+  "startMs": 1480,
+  "endMs": 1660,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "la",
-  "startMs": 1700,
-  "endMs": 1820,
+  "startMs": 1660,
+  "endMs": 1780,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "gente",
-  "startMs": 1820,
-  "endMs": 2120,
+  "startMs": 1780,
+  "endMs": 2090,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "elige",
-  "startMs": 2120,
-  "endMs": 2420,
+  "startMs": 2090,
+  "endMs": 2390,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "RXT.",
-  "startMs": 2420,
-  "endMs": 3120,
+  "startMs": 2390,
+  "endMs": 3100,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "1.",
-  "startMs": 3120,
+  "startMs": 3100,
   "endMs": 3530,
   "timestampMs": null,
   "confidence": 1
@@ -86,27 +86,27 @@
  {
   "text": "entrenas",
   "startMs": 3530,
-  "endMs": 4090,
+  "endMs": 4070,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "todo",
-  "startMs": 4090,
-  "endMs": 4390,
+  "startMs": 4070,
+  "endMs": 4370,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "tu",
-  "startMs": 4390,
-  "endMs": 4910,
+  "startMs": 4370,
+  "endMs": 4970,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "cuerpo:",
-  "startMs": 4910,
+  "startMs": 4970,
   "endMs": 5240,
   "timestampMs": null,
   "confidence": 1
@@ -219,420 +219,420 @@
  {
   "text": "a",
   "startMs": 11680,
-  "endMs": 11740,
+  "endMs": 11750,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "tus",
-  "startMs": 11740,
-  "endMs": 11960,
+  "startMs": 11750,
+  "endMs": 11980,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "capacidades",
-  "startMs": 11960,
-  "endMs": 12720,
+  "startMs": 11980,
+  "endMs": 12840,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "y",
-  "startMs": 12720,
-  "endMs": 12760,
+  "startMs": 12840,
+  "endMs": 12920,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "a",
-  "startMs": 12760,
-  "endMs": 12830,
+  "startMs": 12920,
+  "endMs": 12980,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "tus",
-  "startMs": 12830,
-  "endMs": 13060,
+  "startMs": 12980,
+  "endMs": 13210,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "necesidades.",
-  "startMs": 13060,
+  "startMs": 13210,
   "endMs": 14160,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "Número",
-  "startMs": 14650,
-  "endMs": 15140,
+  "startMs": 14320,
+  "endMs": 15080,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "3.",
-  "startMs": 15140,
-  "endMs": 15560,
+  "startMs": 15080,
+  "endMs": 15340,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "no",
-  "startMs": 15560,
-  "endMs": 15700,
+  "startMs": 15340,
+  "endMs": 15500,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "se",
-  "startMs": 15700,
-  "endMs": 15840,
+  "startMs": 15500,
+  "endMs": 15660,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "trata",
-  "startMs": 15840,
-  "endMs": 16190,
+  "startMs": 15660,
+  "endMs": 16070,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "solo",
-  "startMs": 16190,
-  "endMs": 16470,
+  "startMs": 16070,
+  "endMs": 16370,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "de",
-  "startMs": 16470,
-  "endMs": 16610,
+  "startMs": 16370,
+  "endMs": 16530,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "levantar",
-  "startMs": 16610,
-  "endMs": 17170,
+  "startMs": 16530,
+  "endMs": 17150,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "peso.",
-  "startMs": 17170,
-  "endMs": 17720,
+  "startMs": 17150,
+  "endMs": 17760,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "Aquí",
-  "startMs": 17720,
-  "endMs": 18070,
+  "startMs": 17760,
+  "endMs": 17990,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "entrenas",
-  "startMs": 18070,
-  "endMs": 18630,
+  "startMs": 17990,
+  "endMs": 18380,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "con",
-  "startMs": 18630,
-  "endMs": 18840,
+  "startMs": 18380,
+  "endMs": 18500,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "intención,",
-  "startMs": 18840,
-  "endMs": 19680,
+  "startMs": 18500,
+  "endMs": 19100,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "cuidando",
-  "startMs": 19680,
-  "endMs": 20240,
+  "startMs": 19100,
+  "endMs": 19800,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "tu",
-  "startMs": 20240,
-  "endMs": 20380,
+  "startMs": 19800,
+  "endMs": 19960,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "técnica.",
-  "startMs": 20380,
-  "endMs": 21160,
+  "startMs": 19960,
+  "endMs": 20960,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "4.",
-  "startMs": 21160,
-  "endMs": 21690,
+  "startMs": 20960,
+  "endMs": 21450,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "un",
-  "startMs": 21690,
-  "endMs": 21820,
+  "startMs": 21450,
+  "endMs": 21570,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "coach",
-  "startMs": 21820,
-  "endMs": 22157,
+  "startMs": 21570,
+  "endMs": 21785,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "te",
-  "startMs": 22157,
-  "endMs": 22493,
+  "startMs": 21785,
+  "endMs": 22000,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "acompaña",
-  "startMs": 22493,
-  "endMs": 22830,
+  "startMs": 22000,
+  "endMs": 22600,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "y",
-  "startMs": 22830,
-  "endMs": 22900,
+  "startMs": 22600,
+  "endMs": 22670,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "te",
-  "startMs": 22900,
-  "endMs": 23020,
+  "startMs": 22670,
+  "endMs": 22810,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "corrige",
-  "startMs": 23020,
-  "endMs": 23285,
+  "startMs": 22810,
+  "endMs": 23090,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "en",
-  "startMs": 23285,
-  "endMs": 23550,
+  "startMs": 23090,
+  "endMs": 23370,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "cada",
-  "startMs": 23550,
-  "endMs": 23820,
+  "startMs": 23370,
+  "endMs": 23870,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "sesión.",
-  "startMs": 23820,
-  "endMs": 24400,
+  "startMs": 23870,
+  "endMs": 24200,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "Antes",
-  "startMs": 24400,
-  "endMs": 24730,
+  "startMs": 24200,
+  "endMs": 24510,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "de",
-  "startMs": 24730,
-  "endMs": 24860,
+  "startMs": 24510,
+  "endMs": 24630,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "la",
-  "startMs": 24860,
-  "endMs": 24990,
+  "startMs": 24630,
+  "endMs": 24750,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "última,",
-  "startMs": 24990,
-  "endMs": 25580,
+  "startMs": 24750,
+  "endMs": 25310,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "guarda",
-  "startMs": 25580,
-  "endMs": 25960,
+  "startMs": 25310,
+  "endMs": 25680,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "este",
-  "startMs": 25960,
-  "endMs": 26680,
+  "startMs": 25680,
+  "endMs": 26240,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "video.",
-  "startMs": 26680,
-  "endMs": 26680,
+  "startMs": 26240,
+  "endMs": 26480,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "Y",
-  "startMs": 26690,
-  "endMs": 26740,
+  "startMs": 26480,
+  "endMs": 26630,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "5.",
-  "startMs": 26740,
-  "endMs": 27160,
+  "startMs": 26630,
+  "endMs": 27100,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "una",
-  "startMs": 27160,
-  "endMs": 27340,
+  "startMs": 27100,
+  "endMs": 27210,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "comunidad",
-  "startMs": 27340,
-  "endMs": 27940,
+  "startMs": 27210,
+  "endMs": 27770,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "que",
-  "startMs": 27940,
-  "endMs": 28060,
+  "startMs": 27770,
+  "endMs": 27950,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "te",
-  "startMs": 28060,
-  "endMs": 28220,
+  "startMs": 27950,
+  "endMs": 28070,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "empuja",
-  "startMs": 28220,
-  "endMs": 28610,
+  "startMs": 28070,
+  "endMs": 28430,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "a",
-  "startMs": 28610,
-  "endMs": 28660,
+  "startMs": 28430,
+  "endMs": 28490,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "superar",
-  "startMs": 28660,
-  "endMs": 29020,
+  "startMs": 28490,
+  "endMs": 28930,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "tus",
-  "startMs": 29020,
-  "endMs": 29200,
+  "startMs": 28930,
+  "endMs": 29100,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "propios",
-  "startMs": 29200,
-  "endMs": 29610,
+  "startMs": 29100,
+  "endMs": 29520,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "límites.",
-  "startMs": 29610,
-  "endMs": 30320,
+  "startMs": 29520,
+  "endMs": 30280,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "Esto",
-  "startMs": 30320,
-  "endMs": 30520,
+  "startMs": 30280,
+  "endMs": 30440,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "es",
-  "startMs": 30520,
-  "endMs": 30620,
+  "startMs": 30440,
+  "endMs": 30520,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "RXT.",
-  "startMs": 30620,
-  "endMs": 31070,
+  "startMs": 30520,
+  "endMs": 30880,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "Síguenos",
-  "startMs": 31070,
-  "endMs": 31520,
+  "startMs": 30880,
+  "endMs": 31300,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "para",
-  "startMs": 31520,
-  "endMs": 31720,
+  "startMs": 31300,
+  "endMs": 31400,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "ver",
-  "startMs": 31720,
-  "endMs": 31870,
+  "startMs": 31400,
+  "endMs": 31520,
   "timestampMs": null,
   "confidence": 1
  },
  {
   "text": "más.",
-  "startMs": 31870,
-  "endMs": 32280,
+  "startMs": 31520,
+  "endMs": 31880,
   "timestampMs": null,
   "confidence": 1
  }

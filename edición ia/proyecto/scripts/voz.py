@@ -69,7 +69,32 @@ if motor == "chatterbox":
         t = unicodedata.normalize("NFD", t.lower())
         return " ".join("".join(c for c in t if unicodedata.category(c) != "Mn" and (c.isalnum() or c == " ")).split())
 
+    def limpiar_cola(ruta, esperado):
+        # Chatterbox a veces sigue hablando después del punto ("...necesidades. Miato..."):
+        # se corta en el primer silencio después de que empieza la última palabra esperada.
+        subprocess.run(["node", os.path.join(PROYECTO, "scripts", "transcribir.mjs"), ruta, "es"], check=True,
+                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, cwd=tempfile.gettempdir())
+        caps = [c for c in json.load(open(ruta + ".captions.json")) if re.sub(r"\[[^\]]*\]", "", c["text"]).strip()]
+        if not caps:
+            return
+        ultima = normal(esperado).split()[-1]
+        idx = max((k for k, c in enumerate(caps) if normal(c["text"]) == ultima), default=len(caps) - 1)
+        a, sr_ = sf.read(ruta)
+        mono = a if a.ndim == 1 else a.mean(1)
+        paso = int(0.02 * sr_)
+        desde = int((caps[idx]["startMs"] + 250) / 1000 * sr_)
+        silencio = 0
+        for k in range(desde, len(mono) - paso, paso):
+            nivel = 20 * np.log10(np.sqrt(np.mean(mono[k:k + paso] ** 2)) + 1e-9)
+            silencio = silencio + 1 if nivel < -38 else 0
+            if silencio * 20 >= 140:
+                corte = k - (silencio - 1) * paso + int(0.08 * sr_)
+                if corte < len(a) - int(0.05 * sr_):
+                    sf.write(ruta, a[:corte], sr_)
+                break
+
     def revisar(wav_trozo, esperado):
+        limpiar_cola(wav_trozo, esperado)
         subprocess.run(["node", os.path.join(PROYECTO, "scripts", "transcribir.mjs"), wav_trozo, "es"], check=True,
                        stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, cwd=tempfile.gettempdir())
         caps = json.load(open(wav_trozo + ".captions.json"))
