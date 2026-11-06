@@ -12,3 +12,6 @@ whisper.cpp
 public/entrada
 # Voces de Piper (se bajan con: npm run instalar-voz)
 voces
+
+# Música generada (se regenera con: python3 scripts/musica.py)
+public/musica-generada
