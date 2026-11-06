@@ -82,6 +82,10 @@ if motor == "chatterbox":
             parecido -= 0.2
         dur = sf.info(wav_trozo).duration
         maximo = 0.085 * len(esperado) + 1.2  # más largo que esto = está inventando
+        # una palabra que "dura" demasiado esconde un ruido o una muletilla pegada (ej. "necesidades... ya")
+        reales = [c for c in caps if re.sub(r"\[[^\]]*\]", "", c["text"]).strip()]
+        if reales and max(c["endMs"] - c["startMs"] for c in reales) > 1100:
+            parecido -= 0.3
         return parecido, dur, maximo, oido
 
     import hashlib, shutil
@@ -121,9 +125,24 @@ if motor == "chatterbox":
         pendientes = siguen
     if pendientes:
         print(f"  AVISO: {len(pendientes)} trozo(s) no quedaron perfectos; se usa la mejor toma de cada uno")
+    def recortar(ruta):
+        # deja solo desde la primera palabra real hasta la última (+ un respiro): saca colas y ruidos sueltos
+        subprocess.run(["node", os.path.join(PROYECTO, "scripts", "transcribir.mjs"), ruta, "es"], check=True,
+                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, cwd=tempfile.gettempdir())
+        caps = [c for c in json.load(open(ruta + ".captions.json")) if re.sub(r"\[[^\]]*\]", "", c["text"]).strip()]
+        a, sr_ = sf.read(ruta)
+        if caps:
+            ini = max(0, int((caps[0]["startMs"] - 80) / 1000 * sr_))
+            fin = min(len(a), int((caps[-1]["endMs"] + 160) / 1000 * sr_))
+            a = a[ini:fin].copy()
+            rampa = min(len(a), int(0.02 * sr_))  # 20 ms de fundido en los bordes para que no haga clic
+            a[:rampa] *= np.linspace(0, 1, rampa)[:, None] if a.ndim > 1 else np.linspace(0, 1, rampa)
+            a[-rampa:] *= np.linspace(1, 0, rampa)[:, None] if a.ndim > 1 else np.linspace(1, 0, rampa)
+        return a, sr_
+
     partes, sr = [], None
     for i, t in enumerate(trozos):
-        a, sr = sf.read(mejores[i][1])
+        a, sr = recortar(mejores[i][1])
         partes += [a, np.zeros(int((0.38 if t.endswith(("?", ".", "!")) else 0.22) * sr))]
     sf.write(crudo, np.concatenate(partes), sr)
 elif motor == "piper":
