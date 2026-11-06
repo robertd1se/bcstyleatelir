@@ -11,4 +11,12 @@ command -v yt-dlp >/dev/null || pip3 install --user yt-dlp || pip3 install --bre
 cd proyecto
 npm install
 NODE_USE_ENV_PROXY=1 node scripts/instalar-whisper.mjs "${1:-base}"
+
+# Voz sintética (Piper) para la serie explicativa
+python3 -c "import piper" 2>/dev/null || pip3 install --user piper-tts || pip3 install --break-system-packages piper-tts
+mkdir -p voces
+for ext in onnx onnx.json; do
+  [ -s voces/es_MX-claude-high.$ext ] || curl -sSfL -o voces/es_MX-claude-high.$ext \
+    "https://huggingface.co/rhasspy/piper-voices/resolve/main/es/es_MX/claude/high/es_MX-claude-high.$ext"
+done
 echo "Todo listo."

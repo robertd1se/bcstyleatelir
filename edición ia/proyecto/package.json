@@ -11,14 +11,18 @@
   "dependencies": {
     "@fontsource/inter": "5.3.0",
     "@fontsource/montserrat": "5.3.0",
+    "@react-three/fiber": "9.8.2",
     "@remotion/captions": "4.0.541",
     "@remotion/cli": "4.0.541",
     "@remotion/install-whisper-cpp": "4.0.541",
     "@remotion/layout-utils": "4.0.541",
+    "@remotion/three": "4.0.541",
     "@remotion/transitions": "4.0.541",
+    "@types/three": "0.187.0",
     "react": "19.3.1",
     "react-dom": "19.3.1",
-    "remotion": "4.0.541"
+    "remotion": "4.0.541",
+    "three": "0.187.0"
   },
   "devDependencies": {
     "@remotion/eslint-config-flat": "4.0.541",
@@ -37,7 +41,8 @@
     "transcribir": "node scripts/transcribir.mjs",
     "cortar-silencios": "node scripts/cortar-silencios.mjs",
     "renderizar": "node scripts/renderizar.mjs",
-    "muestra": "node scripts/muestra.mjs"
+    "muestra": "node scripts/muestra.mjs",
+    "voz": "python3 scripts/voz.py"
   },
   "allowScripts": {
     "esbuild": false

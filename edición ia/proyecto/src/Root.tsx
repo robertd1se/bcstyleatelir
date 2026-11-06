@@ -2,6 +2,7 @@ import { CalculateMetadataFunction, Composition } from "remotion";
 import { FRAMES_CIERRE } from "./componentes/CierreLogo";
 import { ALTO, ANCHO, FPS } from "./estilo";
 import { MuestraEstilo } from "./MuestraEstilo";
+import { DURACION_RXT01, Rxt01 } from "./series/Rxt01";
 import { DURACION_ELEGIDO, Elegido } from "./ediciones/Elegido";
 import { VideoVertical, VideoVerticalProps } from "./VideoVertical";
 
@@ -32,6 +33,7 @@ export const RemotionRoot: React.FC = () => {
         }}
       />
       <Composition id="Elegido" component={Elegido} fps={FPS} width={ANCHO} height={ALTO} durationInFrames={DURACION_ELEGIDO} />
+      <Composition id="Rxt01" component={Rxt01} fps={FPS} width={ANCHO} height={ALTO} durationInFrames={DURACION_RXT01} />
       <Composition id="MuestraEstilo" component={MuestraEstilo} fps={FPS} width={ANCHO} height={ALTO} durationInFrames={300} />
     </>
   );

@@ -76,3 +76,13 @@ Las referencias inspiran; **no se copian** (ni planos, ni textos, ni música).
 | 3 | `referencias/ref3-DV90aO2DBnL.mp4` | Ritmo de un corte cada 1,5–2,5 s, gancho con 3 cortes en 2 s, zócalos nombre/rol/frase con humor |
 
 Mediciones: cortes detectados con FFmpeg (`select=gt(scene,0.25)`), colores y tamaños medidos sobre cuadros, sonoridad con `ebur128`, y las referencias transcritas con Whisper.
+
+## Formato serie explicativa (serie RXT de 9 reels)
+Para videos que explican algo con voz en off (pedido para la serie RXT; inspirado en la ref. 5, sin copiarla).
+- **Voz en off** sintética (Piper `es_MX-claude-high`, velocidad 0,9). La marca se pronuncia "Roxet" y en pantalla dice "RXT".
+- **Imagen:** gimnasio RXT en 3D isométrico, de noche, con una zona por servicio. La cámara se mueve sin cortes de una zona a otra justo cuando la voz la nombra (18 cuadros de movimiento suave) y vuelve al encuadre inicial al final, para que el reel quede en loop.
+- **Texto arriba**, centrado al **14 % de la altura**: Montserrat 800 a **66 px**, blanco, palabra por palabra, en trozos de hasta 6 palabras (se corta en comas y en el final de cada oración). Las **palabras clave van sobre un recuadro rojo** y lo secundario sobre recuadro azul (radio de 10 px). La primera oración (gancho) se ve entera desde el cuadro 0.
+- **Barra de progreso** debajo del texto (23 % de la altura): actual en rojo, terminados en azul con ✓. En el 3D, la zona activa se pone roja y tiene un marcador numerado.
+- **Tarjetas tipo app** abajo (fondo oscuro translúcido, radio de 34 px) para listas: chips que se encienden en azul cuando se dicen y filas con ícono.
+- Arriba siempre "RXT · PARTE n/9" con el logo chico. El cierre es una tarjeta "Parte n de 9 · Síguenos" (no usa el cierre de logo de 2 s).
+- Sonido: voz, whoosh suave (volumen 0,35) en cada movimiento de cámara e impacto en el cuadro 0. Sin música si `musica/` está vacía.

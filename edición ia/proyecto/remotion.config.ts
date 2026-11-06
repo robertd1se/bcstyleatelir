@@ -20,4 +20,6 @@ const navegadorLocal =
   "/opt/pw-browsers/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell";
 if (fs.existsSync(navegadorLocal)) {
   Config.setBrowserExecutable(navegadorLocal);
+  // Sin GPU: el 3D (series/gym3d) se dibuja por software
+  Config.setChromiumOpenGlRenderer("swangle");
 }

@@ -29,6 +29,7 @@ Nunca edites los videos originales: trabajá siempre sobre copias o archivos nue
 | **FFmpeg / ffprobe** | Cortar, unir, comprimir, extraer audio, detectar silencios y medir duraciones. |
 | **yt-dlp** | Bajar videos de referencia a `referencias/`: `yt-dlp -o "referencias/%(title)s.%(ext)s" <url>` |
 | **whisper.cpp** (modelo `base`) | Transcribir con tiempos por palabra para cortar errores y hacer subtítulos. Está en `proyecto/whisper.cpp/` (no se sube a Git). |
+| **Piper** (voz `es_MX-claude-high`) | Voz en off sintética en español para la serie explicativa. Está en `proyecto/voces/` (no se sube a Git). |
 | **Remotion** | Componer el video vertical con subtítulos animados, gráficos y música. Composición `VideoVertical` en `proyecto/src/`. |
 
 ### Scripts (correr desde `proyecto/`)
@@ -46,6 +47,10 @@ npm run renderizar -- <video> [--musica <archivo>] [--volumen 0.12] [--salida <a
 #   → normaliza el audio a -14 LUFS; por defecto guarda en ../exportados/<nombre>.mp4
 
 npm run muestra      # vuelve a generar ../exportados/muestra-estilo.mp4
+
+python3 scripts/voz.py guiones/<nombre>.txt public/series/<nombre>
+#   → voz en off con Piper (voz es_MX-claude-high) + palabras.json con tiempos por palabra
+#   → en el guion, {lo que se dice|lo que se muestra}: {Roxet|RXT}, {uno|1.}
 
 npm run dev          # Remotion Studio, para ver y ajustar en vivo
 npm run lint         # chequeo de tipos y estilo
@@ -65,6 +70,8 @@ npm run lint         # chequeo de tipos y estilo
 | `MuestraEstilo.tsx` | Muestra de 10 s del estilo, con planos de ejemplo |
 | `componentes/Plano.tsx` | Un tramo de una grabación (recorte, sin audio, zoom lento) |
 | `ediciones/` | Una composición por video editado (lista de planos, textos y sonido) |
+| `series/` | Serie explicativa RXT (9 reels): `RxtNN.tsx`, gimnasio 3D (`gym3d/`), interfaz (`ui/`) y `linea.ts` (sincroniza eventos con las palabras) |
+| `../guiones/` | Guiones de la voz en off de la serie (`rxt-NN.txt`) |
 | `public/marca/` | Logo (original, blanco, negro y las dos mitades) |
 | `public/sfx/` | Efectos propios: `whoosh.wav` (látigo) e `impacto.wav` (gancho y logo) |
 
@@ -96,3 +103,4 @@ Antes de exportar con un nombre que ya existe en `exportados/`, pedí confirmaci
 - En la sesión en la nube están permitidos Hugging Face (modelos de Whisper) e Instagram (`www.instagram.com`, `i.instagram.com` y los servidores de video `scontent-ord5-1/2.cdninstagram.com`). Si un reel viene de otro servidor `scontent-…`, hay que pedir permiso para ese host. YouTube y TikTok no están permitidos.
 - Node necesita `NODE_USE_ENV_PROXY=1` para descargar a través del proxy de la nube (ya está puesto en `instalar.sh` y en `npm run instalar-whisper`).
 - Remotion usa el Chrome que ya viene instalado en la nube (`remotion.config.ts`), porque su servidor de descarga está bloqueado.
+- El 3D se dibuja por software (`swangle`) en la nube: un reel de 36 s tarda varios minutos en renderizar. Probá con `npx remotion still ... --frame=N --scale=0.5` antes del render completo.
