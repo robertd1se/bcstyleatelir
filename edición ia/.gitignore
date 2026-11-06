@@ -1,0 +1,3 @@
+# Los videos de referencia son de terceros: solo para analizar, no se suben.
+referencias/*
+!referencias/.gitkeep

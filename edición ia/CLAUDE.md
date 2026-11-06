@@ -13,7 +13,7 @@ Nunca edites los videos originales: trabajá siempre sobre copias o archivos nue
 | Carpeta / archivo | Para qué sirve |
 |---|---|
 | `grabaciones/` | El usuario deja acá los videos crudos. Solo lectura. |
-| `referencias/` | Videos que le gustan al usuario (bajados con yt-dlp). Sirven para definir `estilo.md`. |
+| `referencias/` | Videos que le gustan al usuario (bajados con yt-dlp). Solo para analizar: no se reutilizan ni se suben a Git. |
 | `exportados/` | Los videos terminados. |
 | `musica/` | Música que agrega el usuario. **Si está vacía, se edita sin música.** |
 | `estilo.md` | El estilo de edición del usuario. Se aplica en cada video. |
@@ -38,15 +38,34 @@ npm run transcribir -- <video> [idioma=es] [modelo=base]
 
 npm run cortar-silencios -- <entrada> <salida> [umbralDb=-35] [minSilencioSeg=0.5] [margenSeg=0.1]
 
-npm run renderizar -- <video> [--musica <archivo>] [--volumen 0.15] [--salida <archivo.mp4>]
+npm run renderizar -- <video> [--musica <archivo>] [--volumen 0.12] [--salida <archivo.mp4>] \
+                       [--claves "problema,8"] [--llamada "Registrate"] [--sin-cierre]
 #   → vertical 1080x1920, 30 fps; usa <video>.captions.json si existe
-#   → por defecto guarda en ../exportados/<nombre>.mp4
+#   → --claves: palabras a resaltar en rojo; agrega el cierre con logo (2 s) salvo --sin-cierre
+#   → normaliza el audio a -14 LUFS; por defecto guarda en ../exportados/<nombre>.mp4
+
+npm run muestra      # vuelve a generar ../exportados/muestra-estilo.mp4
 
 npm run dev          # Remotion Studio, para ver y ajustar en vivo
 npm run lint         # chequeo de tipos y estilo
 ```
 
-El estilo de los subtítulos (fuente, colores, tamaño y posición) está en la constante `ESTILO` de `proyecto/src/Subtitulos.tsx`.
+### Código del estilo (`proyecto/src/`)
+
+| Archivo | Qué es |
+|---|---|
+| `estilo.ts` | Colores, fuentes, tamaños y tiempos de la marca: la versión en código de `estilo.md` |
+| `componentes/Subtitulos.tsx` | Subtítulos palabra por palabra con palabra clave en rojo |
+| `componentes/Latigo.tsx` | Transición de paneo látigo (`latigo()` + `tiempoLatigo`, para `TransitionSeries`) |
+| `componentes/Gancho.tsx` | Título de los primeros 3 s |
+| `componentes/Zocalo.tsx` | Zócalo nombre / rol / frase |
+| `componentes/CierreLogo.tsx` | Cierre de 2 s con el logo X y la llamada a la acción |
+| `VideoVertical.tsx` | Composición para videos reales (la usa `renderizar`) |
+| `MuestraEstilo.tsx` | Muestra de 10 s del estilo, con planos de ejemplo |
+| `public/marca/` | Logo (original, blanco, negro y las dos mitades) |
+| `public/sfx/` | Efectos propios: `whoosh.wav` (látigo) e `impacto.wav` (gancho y logo) |
+
+Para videos con varios planos, transiciones látigo, zócalos o gancho, armá una composición nueva en `src/` a partir de `MuestraEstilo.tsx` (reemplazando `FondoDemo` por `<OffthreadVideo>`) y registrala en `Root.tsx`.
 
 ## Flujo de edición
 
@@ -57,7 +76,7 @@ Para cada video de `grabaciones/`, trabajando sobre archivos intermedios en una 
    - Silencios: `npm run cortar-silencios -- <video> <tmp>/sin-silencios.mp4`.
    - Errores (tomas repetidas, frases cortadas, muletillas): leer la transcripción, elegir qué tramos sacar según los tiempos por palabra y cortarlos con FFmpeg (`select`/`aselect` o `trim` + `concat`). Ante dudas sobre qué cortar, preguntar.
    - Volver a transcribir el video cortado para que los subtítulos coincidan.
-3. **Aplicar `estilo.md`:** ritmo, zooms, gráficos, colores y tipografía de subtítulos (ajustando `ESTILO` y los componentes de `proyecto/src/`).
+3. **Aplicar `estilo.md`:** ritmo, gancho, transiciones, zócalos, zooms, colores y tipografía (con los componentes de `proyecto/src/`). Elegí las palabras clave para resaltar en rojo.
 4. **Subtítulos:** salen solos de `<video>.captions.json` al renderizar.
 5. **Música:** si `musica/` tiene archivos, usar el que corresponda con `--musica` (volumen bajo, unos 0.1–0.2, para que no tape la voz). Si está vacía, sin música.
 6. **Exportar:** `npm run renderizar -- <tmp>/final.mp4 --salida ../exportados/<nombre>.mp4` → **vertical 1080x1920 a 30 fps**, H.264 + AAC. Si hace falta achicarlo: `ffmpeg -i in.mp4 -c:v libx264 -crf 26 -preset slow -c:a aac -b:a 128k out.mp4`.
@@ -67,6 +86,6 @@ Antes de exportar con un nombre que ya existe en `exportados/`, pedí confirmaci
 ## Notas del entorno
 
 - Si `proyecto/node_modules` o `proyecto/whisper.cpp` no existen (por ejemplo, en una sesión nueva), correr `bash instalar.sh`.
-- En la sesión en la nube, Hugging Face está permitido (para bajar modelos de Whisper), pero **YouTube, Instagram y TikTok no**: yt-dlp no puede bajar referencias ahí. El usuario puede subir los videos a `referencias/` a mano o bajarlos en su propia computadora.
+- En la sesión en la nube están permitidos Hugging Face (modelos de Whisper) e Instagram (`www.instagram.com`, `i.instagram.com` y los servidores de video `scontent-ord5-1/2.cdninstagram.com`). Si un reel viene de otro servidor `scontent-…`, hay que pedir permiso para ese host. YouTube y TikTok no están permitidos.
 - Node necesita `NODE_USE_ENV_PROXY=1` para descargar a través del proxy de la nube (ya está puesto en `instalar.sh` y en `npm run instalar-whisper`).
 - Remotion usa el Chrome que ya viene instalado en la nube (`remotion.config.ts`), porque su servidor de descarga está bloqueado.
