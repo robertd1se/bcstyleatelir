@@ -25,6 +25,7 @@ El usuario edita y hace publicidad, pero **no maneja las cuentas** de sus client
 - **Antes / después al final:** cerrar mostrando el resultado contra el punto de partida: es el pago que hace que lo vuelvan a ver.
 - **Tarjeta de seguir:** cierre con una tarjeta tipo perfil (logo, usuario y botón "Seguir") que se toca.
 - **Estética:** fondos claros o grises con desenfoque, brillo suave alrededor del texto, dos tipografías (fina + gruesa) en la misma frase y palabra clave dentro de un recuadro con brillo.
+- **Sus 5 consejos de subtítulos** (lo que dice el video): 1) dos tipografías, una normal y otra más gruesa para destacar; 2) **agrandar la palabra resaltada y ponerla en su propia línea, debajo**; 3) **variar la posición de los subtítulos** a lo largo del video (arriba, centro, abajo, siempre dentro de la zona segura) para que no se vea monótono; 4) animar los textos al entrar; 5) **brillo suave** en el texto.
 
 ### Paquete de publicación (se entrega con cada video)
 En `clientes/<cliente>/exportados/<video>/`:
