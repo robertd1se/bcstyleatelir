@@ -6,6 +6,25 @@ Lo propio de cada cliente (colores, tipografías, logo, tono, formatos y referen
 Reglas concretas para cada video. Los valores numéricos viven en `proyecto/src/estilo.ts`: si cambiás uno, cambiá el otro.
 Las referencias inspiran; **no se copian** (ni planos, ni textos, ni música).
 
+## Viralidad (obligatorio en todos los videos)
+El usuario edita y hace publicidad, pero **no maneja las cuentas** de sus clientes: todo lo que suba las chances de que un video se viralice tiene que salir resuelto desde la edición y en el paquete de publicación. Nadie garantiza un viral; estas reglas apuntan a lo que Instagram premia: **retención (verlo entero), repeticiones, compartidos, guardados y comentarios**.
+- **Gancho en 1 segundo:** el cuadro 0 ya tiene movimiento y un texto de **máximo 7 palabras** que abre una curiosidad, promete algo o choca ("El error que te frena en el gym", "Nadie te dice esto…"). Nada de logos ni intros antes de los 2 s.
+- **Duración:** 7–15 s para alcance; 20–35 s solo si el contenido sostiene (lista, historia, antes/después). Si se puede decir en menos, se corta.
+- **Retención:** algo cambia cada 1,5–3 s (corte, texto, zoom, gráfico). Prometer el final al principio ("el 3 es el que nadie hace") y pagarlo al final.
+- **Loop:** el último cuadro empalma con el primero (misma toma o frase que se completa), así se repite solo.
+- **Subtítulos siempre:** la mayoría mira sin sonido.
+- **Llamada a la acción que mueve el algoritmo** (una por video, al final): "Comenta *PALABRA* y te mando…" (comentarios), "Mándaselo a tu amigo que…" (compartidos), "Guárdalo para tu próximo entreno" (guardados), "Parte 1 de 9: síguenos" (series).
+- **Portada:** un cuadro con el título grande, legible dentro del recorte 4:5 del perfil.
+- **Formatos que suelen funcionar en gyms y negocios:** listas ("3 errores…"), mitos vs. realidad, antes/después, "un día en…", detrás de escena, reacciones de clientes, series numeradas.
+- **Música:** en videos sin voz, el tema se elige pensando en que el cliente lo reemplace por un **audio en tendencia** al publicar (los cortes deben caer cada 0,5 s para que encajen con casi cualquier tema).
+
+### Paquete de publicación (se entrega con cada video)
+En `clientes/<cliente>/exportados/<video>/`:
+1. `video.mp4` — el video final.
+2. `portada.jpg` — portada 1080x1920 con el título dentro del área 4:5.
+3. `publicacion.txt` — **descripción** (primera línea = gancho, 2–4 líneas, CTA) + **3–6 hashtags** (nicho + ciudad) + **2 ganchos alternativos** para probar + **mejor horario sugerido** (tarde-noche, 18–21 h, entre semana).
+4. Si el cliente puede, recomendarle subirlo primero como **"reel de prueba"** (se muestra a no seguidores) y quedarse con el gancho que mejor retenga.
+
 ## Regla de oro: nada crudo
 El usuario quiere todo con terminación prolija. Antes de exportar, cada video tiene que cumplir:
 - **Movimiento constante:** ningún plano ni fondo queda quieto (zoom lento, deriva de cámara o animación).

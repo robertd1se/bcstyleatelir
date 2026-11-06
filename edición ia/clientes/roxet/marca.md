@@ -2,6 +2,7 @@
 
 Gimnasio de entrenamiento funcional, fuerza, acondicionamiento e híbrido. Tiene barra (energy bar).
 Se pronuncia "Roxet"; en pantalla se escribe "RXT".
+Instagram: **@roxet_trainingclub**. El usuario hace sus videos y publicidad pero **no tiene acceso a la cuenta**: cada video se entrega con su paquete de publicación (ver `estilo.md` → Viralidad) para que lo suba quien maneja la cuenta.
 
 ## Marca
 | Elemento | Valor |
