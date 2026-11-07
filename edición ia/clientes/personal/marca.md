@@ -36,9 +36,11 @@ Tres sabores que combina: tráiler con texto cinético (P1, P6), acción con lá
 |---|---|
 | Colores | Negro `#0A0A0A`, blanco `#FFFFFF`, acento amarillo cine `#F2C230`, luz cálida `#FFB347`; en videos de producto, el neón del producto (ej. celeste `#22D3EE` + lima `#B6F23A`) |
 | Tipografías | Archivo Expanded o Unbounded (texto cinético chico y ancho), Anton / Bebas Neue (golpes y títulos), Inter (créditos chicos) |
-| Logo | Pendiente: preguntar si usa un logo o firma personal (nombre/usuario) para el cierre |
+| Logo | Sin firma: el cierre es solo el título tipo póster (elegido por el usuario) |
 | Tono | Épico, cinematográfico, "tráiler" |
 | Redes | Pendiente: preguntar su usuario |
 
 ## Videos hechos
-(ninguno todavía)
+| Video | Archivo | Notas |
+|---|---|---|
+| Pulsar NS (producto, 18,5 s) | `exportados/pulsar/` | 6 clips DJI de la moto. Gancho en blanco y negro "NO ES SOLO / UNA MOTO." que pasa a color con el bombo; ráfagas de detalles, látigos, 3 destellos cálidos, 3 glitches, plano final en cámara lenta con título "PULSAR" amarillo y créditos "GRIS · MORADO · LIMA". Música original a 120 BPM. Composición `proyecto/src/personal/Pulsar.tsx`. |

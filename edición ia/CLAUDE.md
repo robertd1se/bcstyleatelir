@@ -89,6 +89,7 @@ npm run lint         # chequeo de tipos y estilo
 | `MuestraEstilo.tsx` | Muestra de 10 s del estilo, con planos de ejemplo |
 | `componentes/Plano.tsx` | Un tramo de una grabación (recorte, sin audio, zoom lento) |
 | `ediciones/` | Una composición por video editado (lista de planos, textos y sonido) |
+| `personal/` | Videos personales sin voz (cinematográficos, `clientes/personal/marca.md`): `Pulsar.tsx` tiene látigos, ráfagas, glitches, destellos, texto cinético y título póster reutilizables. Fuentes Anton y Unbounded en `public/fuentes/` |
 | `series/` | Serie explicativa RXT (9 reels). `ReelSerie.tsx` es la base común (3D, encabezado, texto, voz, música, destellos, acabado, cierre); cada `RxtNN.tsx` solo define cámara, estado del 3D y tarjetas. También `gym3d/`, `ui/`, `linea.ts` y `sonido.ts` |
 | `series2d/` | Formato explicativo 2D (reel 2): personaje plano animado (`Persona2D.tsx`), piezas gráficas (`piezas.tsx`) y `Rxt02.tsx` |
 | `../guiones/` | Guiones de la voz en off de la serie (`rxt-NN.txt`) |
