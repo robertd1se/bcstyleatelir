@@ -2,6 +2,7 @@ import { CalculateMetadataFunction, Composition } from "remotion";
 import { FRAMES_CIERRE } from "./componentes/CierreLogo";
 import { ALTO, ANCHO, FPS } from "./estilo";
 import { MuestraEstilo } from "./MuestraEstilo";
+import { DURACION_RXT_LESION, RxtLesion } from "./clientes/roxet/RxtLesion";
 import { DURACION_MARIN_MUSICA, MarinMusica } from "./clientes/coach-marin/MarinMusica";
 import { DURACION_MARIN_TODO, MarinTodo } from "./clientes/coach-marin/MarinTodo";
 import { DURACION_5RAZONES, Rxt5Razones } from "./razones/Rxt5Razones";
@@ -42,6 +43,7 @@ export const RemotionRoot: React.FC = () => {
       <Composition id="Rxt5Razones" component={Rxt5Razones} fps={FPS} width={ANCHO} height={ALTO} durationInFrames={DURACION_5RAZONES} />
       <Composition id="MarinTodo" component={MarinTodo} fps={FPS} width={ANCHO} height={ALTO} durationInFrames={DURACION_MARIN_TODO} />
       <Composition id="MarinMusica" component={MarinMusica} fps={FPS} width={ANCHO} height={ALTO} durationInFrames={DURACION_MARIN_MUSICA} />
+      <Composition id="RxtLesion" component={RxtLesion} fps={FPS} width={ANCHO} height={ALTO} durationInFrames={DURACION_RXT_LESION} />
       <Composition id="MuestraEstilo" component={MuestraEstilo} fps={FPS} width={ANCHO} height={ALTO} durationInFrames={300} />
     </>
   );
