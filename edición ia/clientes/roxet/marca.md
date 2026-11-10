@@ -4,6 +4,17 @@ Gimnasio de entrenamiento funcional, fuerza, acondicionamiento e híbrido. Tiene
 Se pronuncia "Roxet"; en pantalla se escribe "RXT".
 Instagram: **@roxet_trainingclub**. El usuario hace sus videos y publicidad pero **no tiene acceso a la cuenta**: cada video se entrega con su paquete de publicación (ver `estilo.md` → Viralidad) para que lo suba quien maneja la cuenta.
 
+
+## LINEAMIENTOS DE CONTENIDO (pedido de RXT, nov 2026) — MANDAN SOBRE TODO LO ANTERIOR
+Mensaje: **RXT es el gym donde te cuidan la técnica, te acompañan y recuperas tu calidad de vida.**
+- **Público:** adultos de **30 años en adelante**.
+- **No somos CrossFit ni HYROX.** Nada de contenido de "mamados" ni de presumir (sin PRs pesados, sin poses, sin cuerpos como protagonistas).
+- **Un tema por semana** (rotan): 1) **Grupales:** el coach corrigiendo técnica · 2) **Calidad de vida:** un caso real de rehabilitación (con permiso por escrito del socio) · 3) **El proceso:** cómo es la valoración · 4) **Comunidad y barra:** después de entrenar.
+- **Cada reel:** gancho en los **primeros 3 s que se entienda sin audio** (texto en pantalla + imagen clara) · **40–60 s máximo, con subtítulos** · **salen los coaches y los socios, no el dueño** · cierre: **"Escríbenos VALORACIÓN"** (en el reel de regalo: **"Escríbenos REGALO"**).
+- **Material real:** grabaciones de coaches y socios con sus voces reales. Los formatos animados (3D, 2D, voz sintética) quedan solo como apoyo gráfico, no como protagonistas.
+- **Entregas:** video editado el **viernes** anterior → RXT lo revisa el **lunes** → se publica el **martes**. Las ideas nuevas se proponen **antes de grabar**; ante dudas, preguntar.
+- Plan de los próximos 4 reels: `plan-reels-nov-dic.md`.
+
 ## Marca
 | Elemento | Valor |
 |---|---|
