@@ -11,8 +11,10 @@
   "dependencies": {
     "@fontsource/allura": "^5.3.0",
     "@fontsource/bodoni-moda": "^5.3.0",
+    "@fontsource/cormorant-garamond": "^5.3.0",
     "@fontsource/inter": "5.3.0",
     "@fontsource/montserrat": "5.3.0",
+    "@fontsource/oswald": "^5.3.0",
     "@react-three/fiber": "9.8.2",
     "@remotion/captions": "4.0.541",
     "@remotion/cli": "4.0.541",
