@@ -36,4 +36,4 @@ Pago en efectivo o tarjeta. Para empezar: elegir programa → llenar el cuestion
 - Mostrar la web app dentro de un celular animado (pantallas reales de la página).
 
 ## Videos hechos
-(ninguno todavía)
+- **Reel con música** (24,6 s): une los 3 reels animados de la app que mandó el usuario (`grabaciones/Reel_*.mp4`, mudos) cortados al ritmo de una base propia "fresca" (house/pop a 120 BPM, `scripts/musica.py --estilo fresco`), con golpe de zoom en cada corte, pulso en cada tiempo y destellos azules en el drop, el precio y el cierre. Paquete en `exportados/reel-musica/`. Composición `MarinMusica` (`proyecto/src/clientes/coach-marin/`).

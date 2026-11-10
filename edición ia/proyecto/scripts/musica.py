@@ -1,6 +1,8 @@
 """Compone una base instrumental original para videos de gym (sin derechos de terceros).
 
-Uso: python3 scripts/musica.py <salida.wav> [--duracion 40] [--bpm 100] [--semilla 1]
+Uso: python3 scripts/musica.py <salida.wav> [--duracion 40] [--bpm 100] [--semilla 1] [--estilo oscuro|fresco]
+Estilos: "oscuro" (por defecto, gym en La menor) y "fresco" (house/pop luminoso en Do mayor, bajo en contratiempo,
+hi-hat abierto en el "y", pluck brillante; usar con --bpm 120).
 Estilo: electrónica oscura en La menor (Am–F–C–G): bombo, palmas, hi-hats, bajo con
 "sidechain", pad ancho y arpegio con eco. Intro filtrada de 1 compás y final con caída.
 """
@@ -15,6 +17,8 @@ op = lambda n, d: type(d)(args[args.index(n) + 1]) if n in args else d
 DUR = op("--duracion", 40.0)
 BPM = op("--bpm", 100.0)
 rng = np.random.default_rng(op("--semilla", 1))
+ESTILO = op("--estilo", "oscuro")
+FRESCO = ESTILO == "fresco"
 SR = 44100
 N = int(DUR * SR)
 negra = 60 / BPM
@@ -70,6 +74,8 @@ def sierra(f, n, desafinado=0.0):
 
 # --- armonía: Am F C G (raíces y acordes) ---
 ACORDES = [(57, [57, 60, 64]), (53, [53, 57, 60]), (48, [48, 52, 55]), (55, [55, 59, 62])]
+if FRESCO:  # Do – Sol – Lam – Fa, voces en registro medio-alto (luminoso)
+    ACORDES = [(48, [60, 64, 67]), (55, [59, 62, 67]), (57, [60, 64, 69]), (53, [60, 65, 69])]
 compases = int(np.ceil(DUR / compas))
 
 bat = np.zeros(N); bajo = np.zeros(N); pad = np.zeros(N); arp = np.zeros(N); hats = np.zeros(N)
@@ -92,9 +98,14 @@ for c in range(compases):
         vel = 0.5 + 0.3 * (k % 2 == 0) + rng.uniform(-0.1, 0.1)
         colocar(hats, H * vel, t0 + k * paso)
     if not intro: colocar(hats, HA * 0.5, t0 + 3.5 * negra)
+    if FRESCO and not intro:  # hi-hat abierto en cada contratiempo (house)
+        for b in range(4):
+            colocar(hats, HA * 0.55, t0 + (b + 0.5) * negra)
     # bajo: corcheas en la raíz, con octava
     if not intro:
         for k in range(8):
+            if FRESCO and k % 2 == 0:  # bajo solo en el contratiempo: rebota con el bombo
+                continue
             f = nota(raiz - 24 + (12 if k in (3, 7) else 0))
             n = int(negra / 2 * SR)
             tt = np.arange(n) / SR
@@ -105,12 +116,12 @@ for c in range(compases):
     s = sum(sierra(nota(m), n, 0.006) for m in acorde) / 3
     colocar(pad, s * env(n, 0.4, 6), t0)
     # arpegio en semicorcheas (a partir del compás 3)
-    if c >= 2 and not final:
+    if (c >= 1 if FRESCO else c >= 2) and not final:
         patron = [0, 1, 2, 1, 2, 0, 1, 2] * 2
         for k, idx in enumerate(patron):
             m = acorde[idx] + 12 + (12 if k % 8 == 6 else 0)
             n = int(negra / 4 * SR * 0.9)
-            colocar(arp, sierra(nota(m), n) * env(n, 0.003, 0.08) * 0.6, t0 + k * negra / 4)
+            colocar(arp, sierra(nota(m), n) * env(n, 0.003, 0.05 if FRESCO else 0.08) * 0.6, t0 + k * negra / 4)
 
 # "sidechain": el bajo y el pad se agachan con cada negra (efecto bombeo)
 fase = (t_total % negra) / negra
@@ -119,13 +130,13 @@ bombeo[: int(compas * SR)] = 1  # sin bombeo en la intro
 bajo *= bombeo; pad *= (0.6 + 0.4 * bombeo)
 
 fx = lambda x, cadena: cadena(x.astype(np.float32), SR)
-pad = fx(pad, Pedalboard([LowpassFilter(1800), Chorus(rate_hz=0.3, depth=0.4, mix=0.5), Reverb(room_size=0.85, wet_level=0.45, dry_level=0.6, width=1.0)]))
-arp = fx(arp, Pedalboard([LowpassFilter(3200), Delay(delay_seconds=negra * 0.75, feedback=0.35, mix=0.3), Reverb(room_size=0.6, wet_level=0.25)]))
+pad = fx(pad, Pedalboard([LowpassFilter(3600 if FRESCO else 1800), Chorus(rate_hz=0.3, depth=0.4, mix=0.5), Reverb(room_size=0.6 if FRESCO else 0.85, wet_level=0.3 if FRESCO else 0.45, dry_level=0.6, width=1.0)]))
+arp = fx(arp, Pedalboard([LowpassFilter(6500 if FRESCO else 3200), Delay(delay_seconds=negra * 0.75, feedback=0.35, mix=0.3), Reverb(room_size=0.6, wet_level=0.25)]))
 bajo = fx(bajo, Pedalboard([LowpassFilter(400)]))
 bat = fx(bat, Pedalboard([Compressor(threshold_db=-14, ratio=4, attack_ms=5, release_ms=80)]))
 hats = fx(hats, Pedalboard([Reverb(room_size=0.3, wet_level=0.15)]))
 
-mezcla = 0.95 * bat + 0.75 * bajo + 0.35 * pad + 0.22 * arp + 0.3 * hats
+mezcla = 0.95 * bat + 0.75 * bajo + 0.35 * pad + (0.34 if FRESCO else 0.22) * arp + (0.36 if FRESCO else 0.3) * hats
 
 # intro filtrada (se abre en el primer compás) y caída final de 1,5 s
 i_intro = int(compas * SR)
