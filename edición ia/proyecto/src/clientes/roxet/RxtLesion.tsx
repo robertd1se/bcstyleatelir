@@ -8,12 +8,20 @@ import { Acabado } from "../../series/ui/Acabado";
 import { Monito } from "./Monito";
 
 const clamp = { extrapolateLeft: "clamp", extrapolateRight: "clamp" } as const;
-const F = { gancho: 90, lesion: 330, fin: 450, frase: 480, cta: 545 };
-export const DURACION_RXT_LESION = 640;
+// Fases: sentadilla (sem 1–4) · peso muerto (sem 5–8, lesión de arriba) · press (sem 9–10) · seguimiento (sem 11–12)
+const F = { gancho: 90, peso: 330, lesion: 540, press: 570, seguimiento: 780, fin: 960, frase: 965, cta: 1035 };
+export const DURACION_RXT_LESION = 1135;
+const EJERCICIOS: { desde: number; nombre: string; consejos: string[] }[] = [
+  { desde: F.gancho, nombre: "SENTADILLA", consejos: ["Espalda neutra", "Rodillas afuera", "Pecho arriba", "Controla la bajada"] },
+  { desde: F.peso, nombre: "PESO MUERTO", consejos: ["Cadera atrás", "Barra pegada a las piernas", "Espalda recta", "¡Eso es!"] },
+  { desde: F.press, nombre: "PRESS ARRIBA", consejos: ["Abdomen firme", "No arquees la espalda", "Codos al frente"] },
+  { desde: F.seguimiento, nombre: "SEGUIMIENTO", consejos: [] },
+];
+const SEGUIMIENTO = ["Valoración inicial", "Plan ajustado cada semana", "+20 kg en sentadilla", "Sin dolor de espalda"];
 const PISO_ARRIBA = 800;
 const PISO_ABAJO = 1360;
-const semana = (f: number) => Math.max(1, Math.min(12, 1 + Math.floor((f - F.gancho) / 30)));
-const CONSEJOS = ["Espalda neutra", "Rodillas afuera", "Pecho arriba", "Controla la bajada", "¡Eso es!"];
+const semana = (f: number) => Math.max(1, Math.min(12, 1 + Math.floor(((f - F.gancho) / (F.fin - F.gancho)) * 12)));
+const fase = (f: number) => EJERCICIOS.filter((e) => f >= e.desde).length - 1 || 0;
 
 const Carril: React.FC<{ y: number; titulo: string; rojo?: boolean; opacidad?: number }> = ({ y, titulo, rojo, opacidad = 1 }) => (
   <div style={{ position: "absolute", left: 110, top: y, opacity: opacidad, fontFamily: FUENTES.textoChico, fontWeight: 700, fontSize: 26, letterSpacing: "0.28em", color: "#ffffffcc" }}>
@@ -37,72 +45,93 @@ const Escena: React.FC = () => {
   const f = useCurrentFrame();
   const { fps } = useVideoConfig();
   const rep = 0.5 - 0.5 * Math.cos((2 * Math.PI * f) / 36);
+  const rep2 = 0.5 - 0.5 * Math.cos((2 * Math.PI * (f + 9)) / 36);
   const s = semana(f);
+  const fz = Math.max(0, fase(f));
+  const ej = EJERCICIOS[fz];
   const avance = interpolate(f, [F.gancho, F.fin], [0, 1], clamp);
+  const poseEj = (["sentadilla", "pesoMuerto", "press", "sentadilla"] as const)[fz];
 
-  // ARRIBA: solo
+  // ARRIBA: solo (la técnica se rompe; se lesiona en el peso muerto)
   const lesionado = f >= F.lesion;
-  const malaArriba = interpolate(f, [F.gancho, F.lesion], [0.05, 1], clamp);
-  const dolor = interpolate(f, [F.lesion, F.lesion + 8, F.lesion + 120], [0, 1, 0.5], clamp);
-  const poseArriba = !lesionado ? "sentadilla" : f < F.lesion + 30 ? "dolor" : "sentado";
+  const malaArriba = f < F.peso ? interpolate(f, [F.gancho, F.peso], [0.1, 0.7], clamp) : interpolate(f, [F.peso, F.lesion], [0.5, 1], clamp);
+  const dolor = interpolate(f, [F.lesion, F.lesion + 8, F.lesion + 150], [0, 1, 0.4], clamp);
+  const poseArriba = !lesionado ? (fz === 0 ? "sentadilla" : "pesoMuerto") : f < F.lesion + 30 ? "dolor" : "sentado";
   const opArriba = interpolate(f, [F.lesion + 60, F.lesion + 90], [1, 0.55], clamp);
 
   // ABAJO: con coach
   const coach = spring({ frame: f - (F.gancho + 15), fps, durationInFrames: 12, config: { damping: 14 } });
-  const consejoIdx = Math.floor((f - (F.gancho + 30)) / 60);
-  const consejo = f >= F.gancho + 30 && consejoIdx < CONSEJOS.length ? CONSEJOS[consejoIdx] : null;
-  const amigo1 = interpolate(f, [F.lesion + 50, F.lesion + 65], [0, 1], clamp);
-  const amigo2 = interpolate(f, [F.lesion + 80, F.lesion + 95], [0, 1], clamp);
-  const rep2 = 0.5 - 0.5 * Math.cos((2 * Math.PI * (f + 9)) / 36);
+  const enFase = f - ej.desde;
+  const consejoIdx = Math.floor((enFase - 20) / 55);
+  const consejo = enFase >= 20 && consejoIdx >= 0 && consejoIdx < ej.consejos.length ? ej.consejos[consejoIdx] : null;
+  const seguimiento = f >= F.seguimiento;
+  const amigo1 = interpolate(f, [F.seguimiento + 60, F.seguimiento + 75], [0, 1], clamp);
+  const amigo2 = interpolate(f, [F.seguimiento + 100, F.seguimiento + 115], [0, 1], clamp);
+  const cambio = interpolate(enFase, [0, 6], [0.4, 1], clamp); // parpadeo suave al cambiar de ejercicio
 
   return (
     <AbsoluteFill>
       <svg width={1080} height={1920} style={{ position: "absolute", inset: 0 }}>
-        {/* pisos */}
         <line x1={110} x2={930} y1={PISO_ARRIBA} y2={PISO_ARRIBA} stroke="#ffffff33" strokeWidth={3} />
         <line x1={110} x2={930} y1={PISO_ABAJO} y2={PISO_ABAJO} stroke="#ffffff33" strokeWidth={3} />
         {/* arriba */}
-        <Monito x={330} y={PISO_ARRIBA} escala={1.2} pose={poseArriba} bajada={lesionado ? 0 : rep} mala={malaArriba} kilos={lesionado ? 0 : s * 0.75} dolor={dolor} opacidad={opArriba} />
+        <Monito x={330} y={PISO_ARRIBA} escala={1.2} pose={poseArriba} bajada={lesionado ? 0 : rep} mala={malaArriba} kilos={lesionado ? 0 : s * 0.7} dolor={dolor} opacidad={opArriba} />
         {lesionado && f >= F.lesion + 30 ? <circle cx={470} cy={PISO_ARRIBA - 24} r={36} fill="#0a0a0a" stroke="#ffffff88" strokeWidth={4} opacity={opArriba} /> : null}
         {/* abajo */}
-        <Monito x={150} y={PISO_ABAJO} escala={1.05} pose="senalar" gorra opacidad={coach} />
-        <Monito x={360} y={PISO_ABAJO} escala={1.2} pose="sentadilla" bajada={rep} mala={0.04} kilos={s * 0.5} />
-        <Monito x={600} y={PISO_ABAJO} escala={0.85} pose="sentadilla" bajada={rep2} mala={0.04} kilos={2} opacidad={amigo1 * 0.8} />
-        <Monito x={760} y={PISO_ABAJO} escala={0.75} pose="sentadilla" bajada={rep} mala={0.04} kilos={1} opacidad={amigo2 * 0.7} />
-        {/* guía de postura (abajo) */}
-        <line x1={360 + 40} y1={PISO_ABAJO - 340} x2={360 + 40} y2={PISO_ABAJO} stroke="#22c55e" strokeWidth={3} strokeDasharray="10 10" opacity={0.5 * coach} />
+        <Monito x={150} y={PISO_ABAJO} escala={1.05} pose={seguimiento ? "tablet" : "senalar"} gorra opacidad={coach} />
+        <Monito x={360} y={PISO_ABAJO} escala={1.2} pose={poseEj} bajada={rep} mala={0.04} kilos={s * 0.45} opacidad={cambio} />
+        <Monito x={690} y={PISO_ABAJO} escala={0.65} pose="sentadilla" bajada={rep2} mala={0.04} kilos={2} opacidad={amigo1 * 0.8} />
+        <Monito x={830} y={PISO_ABAJO} escala={0.6} pose="pesoMuerto" bajada={rep} mala={0.04} kilos={1} opacidad={amigo2 * 0.7} />
+        {/* guía de postura (abajo, mientras corrige) */}
+        {!seguimiento ? <line x1={400} y1={PISO_ABAJO - 340} x2={400} y2={PISO_ABAJO} stroke="#22c55e" strokeWidth={3} strokeDasharray="10 10" opacity={0.5 * coach} /> : null}
       </svg>
 
       <Carril y={340} titulo="ENTRENANDO SOLO" />
       <Carril y={900} titulo="CON COACH RXT" rojo />
 
-      {/* consejo del coach */}
       {consejo ? (
-        <div key={consejo} style={{ position: "absolute", left: 100, top: PISO_ABAJO - 420, padding: "10px 20px", borderRadius: 14, background: "#ffffff", color: "#0a0a0a", fontFamily: FUENTES.textoChico, fontWeight: 700, fontSize: 30, transform: `scale(${spring({ frame: (f - (F.gancho + 30)) % 60, fps, durationInFrames: 8, config: { damping: 12 } })})`, transformOrigin: "left bottom" }}>
+        <div key={consejo} style={{ position: "absolute", left: 100, top: PISO_ABAJO - 420, padding: "10px 20px", borderRadius: 14, background: "#ffffff", color: "#0a0a0a", fontFamily: FUENTES.textoChico, fontWeight: 700, fontSize: 30, transform: `scale(${spring({ frame: (enFase - 20) % 55, fps, durationInFrames: 8, config: { damping: 12 } })})`, transformOrigin: "left bottom" }}>
           {consejo}
         </div>
       ) : null}
 
-      {/* resultados */}
+      {/* seguimiento: tarjetas que aparecen una a una */}
+      {seguimiento ? (
+        <div style={{ position: "absolute", left: 500, top: 925, display: "flex", flexDirection: "column", gap: 8 }}>
+          {SEGUIMIENTO.map((t, i) => {
+            const d = i * 30;
+            if (enFase < d) return null;
+            const e = spring({ frame: enFase - d, fps, durationInFrames: 10, config: { damping: 13 } });
+            return (
+              <div key={t} style={{ display: "flex", alignItems: "center", gap: 12, padding: "8px 14px", borderRadius: 12, background: "rgba(255,255,255,0.08)", border: "1.5px solid rgba(255,255,255,0.18)", fontFamily: FUENTES.textoChico, fontWeight: 700, fontSize: 23, color: "#ffffff", opacity: e, transform: `translateX(${(1 - e) * 40}px)` }}>
+                <span style={{ color: "#22c55e" }}>✓</span> {t}
+              </div>
+            );
+          })}
+        </div>
+      ) : null}
+
       {lesionado ? (
         <div style={{ position: "absolute", left: 560, top: PISO_ARRIBA - 230, fontFamily: FUENTES.textoChico, fontWeight: 700, fontSize: 30, color: COLORES.rojoTexto, opacity: interpolate(f, [F.lesion + 20, F.lesion + 32], [0, 1], clamp) }}>
           Lesión
-          <div style={{ fontWeight: 500, fontSize: 26, color: "#ffffffaa", marginTop: 6 }}>3 meses sin entrenar</div>
+          <div style={{ fontWeight: 500, fontSize: 26, color: "#ffffffaa", marginTop: 6 }}>{f >= F.seguimiento ? "sin plan, sin seguimiento" : "3 meses sin entrenar"}</div>
         </div>
       ) : null}
-      {f >= F.fin - 30 ? (
-        <div style={{ position: "absolute", left: 110, top: PISO_ABAJO + 22, fontFamily: FUENTES.textoChico, fontWeight: 700, fontSize: 30, color: "#22c55e", opacity: interpolate(f, [F.fin - 30, F.fin - 18], [0, 1], clamp) }}>
+      {f >= F.fin - 40 ? (
+        <div style={{ position: "absolute", left: 110, top: PISO_ABAJO + 22, fontFamily: FUENTES.textoChico, fontWeight: 700, fontSize: 30, color: "#22c55e", opacity: interpolate(f, [F.fin - 40, F.fin - 28], [0, 1], clamp) }}>
           ✓ Sigue entrenando
           <div style={{ fontWeight: 500, fontSize: 26, color: "#ffffffaa", marginTop: 6 }}>y cada vez más fuerte</div>
         </div>
       ) : null}
 
-      <Grafico x={700} y={410} puntos={[0.1, 0.3, 0.5, 0.7, 0.85, 0.05, 0.05]} color={lesionado ? COLORES.rojoTexto : "#ffffff"} avance={avance} />
-      <Grafico x={700} y={975} puntos={[0.1, 0.2, 0.32, 0.45, 0.58, 0.72, 0.86]} color="#22c55e" avance={avance} />
+      <Grafico x={700} y={410} puntos={[0.1, 0.25, 0.4, 0.55, 0.68, 0.78, 0.05, 0.05, 0.05]} color={lesionado ? COLORES.rojoTexto : "#ffffff"} avance={avance} />
+      {!seguimiento ? <Grafico x={700} y={975} puntos={[0.08, 0.18, 0.28, 0.38, 0.48, 0.58, 0.68, 0.78, 0.88]} color="#22c55e" avance={avance} /> : null}
 
-      {/* semana */}
-      <div style={{ position: "absolute", top: 846, width: "100%", textAlign: "center", fontFamily: FUENTES.textoChico, fontWeight: 700, fontSize: 24, letterSpacing: "0.3em", color: "#ffffff88" }}>
+      {/* semana + ejercicio */}
+      <div style={{ position: "absolute", top: 838, width: "100%", textAlign: "center", fontFamily: FUENTES.textoChico, fontWeight: 700, fontSize: 24, letterSpacing: "0.3em", color: "#ffffff88" }}>
         SEMANA <span style={{ fontFamily: FUENTES.editorial, fontSize: 40, letterSpacing: 0, color: "#ffffff" }}>{s}</span>
+        <span style={{ margin: "0 14px", color: "#ffffff44" }}>·</span>
+        <span key={ej.nombre} style={{ color: ej.nombre === "SEGUIMIENTO" ? "#22c55e" : "#ffffff", opacity: cambio }}>{ej.nombre}</span>
       </div>
     </AbsoluteFill>
   );

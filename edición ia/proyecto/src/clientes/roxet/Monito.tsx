@@ -3,7 +3,7 @@
 import { COLORES } from "../../estilo";
 
 const rad = (g: number) => (g * Math.PI) / 180;
-export type PoseMonito = "sentadilla" | "dolor" | "sentado" | "parado" | "senalar";
+export type PoseMonito = "sentadilla" | "pesoMuerto" | "press" | "dolor" | "sentado" | "parado" | "senalar" | "tablet";
 
 export const Monito: React.FC<{
   x: number; // tobillo
@@ -27,15 +27,23 @@ export const Monito: React.FC<{
   if (pose === "dolor") {
     tibia = 14; muslo = 20; tronco = 48; barra = false;
   }
-  if (pose === "parado" || pose === "senalar") {
+  if (pose === "parado" || pose === "senalar" || pose === "tablet") {
     tibia = 2; muslo = 2; tronco = 4; barra = false;
+  }
+  if (pose === "pesoMuerto") {
+    // bisagra de cadera: tibia casi vertical, el tronco se inclina; con mala técnica la espalda se redondea
+    tibia = 6 + 12 * bajada; muslo = 8 + 28 * bajada; tronco = 12 + 62 * bajada; barra = false;
+  }
+  if (pose === "press") {
+    // de pie; con mala técnica arquea la espalda hacia atrás
+    tibia = 2; muslo = 2 - 10 * mala; tronco = 3 - 16 * mala; barra = false;
   }
   const A = [0, 0];
   const K = [A[0] + 70 * Math.sin(rad(tibia)), A[1] - 70 * Math.cos(rad(tibia))];
   const H = [K[0] - 75 * Math.sin(rad(muslo)), K[1] - 75 * Math.cos(rad(muslo))];
   const S = [H[0] + 95 * Math.sin(rad(tronco)), H[1] - 95 * Math.cos(rad(tronco))];
   // espalda redonda: el punto medio se va hacia atrás
-  const curva = (pose === "sentadilla" ? mala : pose === "dolor" ? 0.6 : 0) * 26;
+  const curva = (pose === "sentadilla" || pose === "pesoMuerto" ? mala : pose === "dolor" ? 0.6 : pose === "press" ? -0.5 * mala : 0) * 26;
   const M = [(H[0] + S[0]) / 2 - curva * Math.cos(rad(tronco)), (H[1] + S[1]) / 2 - curva * Math.sin(rad(tronco))];
   const C = [S[0] + 24 * Math.sin(rad(tronco)), S[1] - 24 * Math.cos(rad(tronco))];
   const linea = { stroke: color, strokeWidth: 7 / Math.max(k, 0.6), strokeLinecap: "round" as const, strokeLinejoin: "round" as const, fill: "none" };
@@ -54,7 +62,16 @@ export const Monito: React.FC<{
       </g>
     );
   }
-  const mano = pose === "senalar" ? [S[0] + 70, S[1] + 10] : pose === "dolor" ? [lumbar[0] - 18, lumbar[1]] : [S[0] - 6, S[1] + 4];
+  // dónde van las manos (y la barra) según el ejercicio
+  const manoPeso = [S[0] + 6 * Math.sin(rad(tronco)), S[1] + 88]; // brazos colgando hasta las rodillas
+  const manoPress = [S[0] + 4, S[1] - 20 - 80 * (1 - bajada)]; // de los hombros a arriba de la cabeza
+  const mano =
+    pose === "senalar" ? [S[0] + 70, S[1] + 10]
+    : pose === "tablet" ? [S[0] + 40, S[1] + 30]
+    : pose === "dolor" ? [lumbar[0] - 18, lumbar[1]]
+    : pose === "pesoMuerto" ? manoPeso
+    : pose === "press" ? manoPress
+    : [S[0] - 6, S[1] + 4];
   return (
     <g opacity={opacidad}>
       {dolor > 0 ? <circle cx={P(lumbar[0], lumbar[1])[0]} cy={P(lumbar[0], lumbar[1])[1]} r={34 * k} fill={COLORES.rojoTexto} opacity={0.45 * dolor} style={{ filter: "blur(6px)" }} /> : null}
@@ -63,6 +80,13 @@ export const Monito: React.FC<{
       <path d={`M${pt(S)} L${pt([(S[0] + mano[0]) / 2 + 10, (S[1] + mano[1]) / 2 + 20])} L${pt(mano)}`} {...linea} />
       <circle cx={P(C[0], C[1])[0]} cy={P(C[0], C[1])[1]} r={16 * k} {...linea} />
       {gorra ? <path d={`M${pt([C[0] - 16, C[1] - 6])} Q${pt([C[0], C[1] - 26])} ${pt([C[0] + 16, C[1] - 6])} L${pt([C[0] + 30, C[1] - 4])}`} stroke={COLORES.rojoTexto} strokeWidth={8} strokeLinecap="round" fill="none" /> : null}
+      {pose === "tablet" ? <rect x={P(mano[0] - 4, mano[1] - 34)[0]} y={P(mano[0] - 4, mano[1] - 34)[1]} width={26 * k} height={40 * k} rx={5} fill="#0a0a0a" stroke={color} strokeWidth={4} /> : null}
+      {pose === "pesoMuerto" || pose === "press" ? (
+        <g>
+          <line x1={P(mano[0] - 60, mano[1])[0]} y1={P(mano[0] - 60, mano[1])[1]} x2={P(mano[0] + 60, mano[1])[0]} y2={P(mano[0] + 60, mano[1])[1]} stroke="#9aa0aa" strokeWidth={5} strokeLinecap="round" />
+          <circle cx={P(mano[0], mano[1])[0]} cy={P(mano[0], mano[1])[1]} r={(16 + kilos * 3) * k} fill="#0a0a0a" stroke={color} strokeWidth={4} />
+        </g>
+      ) : null}
       {barra ? (
         <g>
           <line x1={P(S[0] - 70, S[1] - 2)[0]} y1={P(S[0] - 70, S[1] - 2)[1]} x2={P(S[0] + 50, S[1] - 2)[0]} y2={P(S[0] + 50, S[1] - 2)[1]} stroke="#9aa0aa" strokeWidth={5} strokeLinecap="round" />
