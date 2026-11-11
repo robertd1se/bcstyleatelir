@@ -15,8 +15,8 @@ HASHTAGS (cambiar #TuCiudad por la ciudad real)
 NOTAS
 -----
 - El gancho se entiende sin audio (texto en pantalla desde el primer cuadro).
-- Duración 38 s, sin voz: comparación animada (estilo de la referencia que pidió el editor) con 3 ejercicios
-  (sentadilla, peso muerto, press) y el seguimiento del coach.
+- Duración 36 s, sin voz: comparación animada (estilo de la referencia que pidió el editor) con 5 ejercicios
+  (sentadilla, swing con pesa rusa, peso muerto, thruster y burpees) y el seguimiento del coach.
 - Pendiente según los lineamientos de RXT ("que salgan los coaches y los socios"): se puede sumar una toma real
   de un coach corrigiendo a un socio, pero el reel ya está en 38 s: habría que recortar una fase para no pasar de 40–60 s.
 - Quien maneje los mensajes: responder a "VALORACIÓN" con el link/WhatsApp para agendar.
