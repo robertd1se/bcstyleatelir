@@ -8,16 +8,17 @@ import { Acabado } from "../../series/ui/Acabado";
 import { Monito } from "./Monito";
 
 const clamp = { extrapolateLeft: "clamp", extrapolateRight: "clamp" } as const;
-// Fases (4,5 s cada ejercicio): sentadilla · swing · peso muerto (lesión de arriba) · thruster · burpees · seguimiento
-const F = { gancho: 90, lesion: 470, seguimiento: 765, fin: 915, frase: 920, cta: 990 };
-export const DURACION_RXT_LESION = 1090;
-type Pose = "sentadilla" | "swing" | "pesoMuerto" | "thruster" | "burpee";
+// Fases (4,5 s cada ejercicio): sentadilla · swing · peso muerto (lesión de arriba) · press · thruster · burpees · seguimiento
+const F = { gancho: 90, lesion: 470, seguimiento: 900, fin: 1050, frase: 1055, cta: 1125 };
+export const DURACION_RXT_LESION = 1225;
+type Pose = "sentadilla" | "swing" | "pesoMuerto" | "press" | "thruster" | "burpee";
 const EJERCICIOS: { desde: number; nombre: string; pose: Pose; consejos: string[] }[] = [
   { desde: 90, nombre: "SENTADILLA", pose: "sentadilla", consejos: ["Espalda neutra", "Rodillas afuera"] },
   { desde: 225, nombre: "SWING CON PESA RUSA", pose: "swing", consejos: ["Empuja con la cadera", "Brazos relajados"] },
   { desde: 360, nombre: "PESO MUERTO", pose: "pesoMuerto", consejos: ["Cadera atrás", "Barra pegada a las piernas"] },
-  { desde: 495, nombre: "THRUSTER", pose: "thruster", consejos: ["Talones apoyados", "Usa el impulso de las piernas"] },
-  { desde: 630, nombre: "BURPEES", pose: "burpee", consejos: ["Abdomen firme en la plancha", "Aterriza suave"] },
+  { desde: 495, nombre: "PRESS ARRIBA", pose: "press", consejos: ["Abdomen firme", "No arquees la espalda"] },
+  { desde: 630, nombre: "THRUSTER", pose: "thruster", consejos: ["Talones apoyados", "Usa el impulso de las piernas"] },
+  { desde: 765, nombre: "BURPEES", pose: "burpee", consejos: ["Abdomen firme en la plancha", "Aterriza suave"] },
   { desde: F.seguimiento, nombre: "SEGUIMIENTO", pose: "sentadilla", consejos: [] },
 ];
 const SEGUIMIENTO = ["Valoración inicial", "Plan ajustado cada semana", "+20 kg en sentadilla", "Sin dolor de espalda"];
