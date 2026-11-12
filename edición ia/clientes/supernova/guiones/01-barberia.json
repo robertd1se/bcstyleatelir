@@ -1,0 +1,36 @@
+{
+  "id": "01-barberia",
+  "formato": "dos-caminos",
+  "etapa": "Fascinar",
+  "giro": "barberías",
+  "gancho": ["Mismo corte.", "Dos barberías."],
+  "negocio": "Tu barbería",
+  "etiquetaSin": "sin app",
+  "etiquetaCon": "con Supernova",
+  "cliente": "Cliente nuevo",
+  "mensajes": ["Hola, ¿cuánto el corte?", "¿Tienen lugar hoy?", "¿A qué hora cierran?", "¿Siguen abiertos?"],
+  "espera": ["4 mensajes", "y sigue esperando"],
+  "perdida": "Se cortó en otra",
+  "horaInicio": "17:05",
+  "horaFinSin": "19:40",
+  "horaFinCon": "17:06",
+  "respuesta": "Aquí está todo 👇",
+  "app": {
+    "link": "tubarberia · link",
+    "nombre": "TU BARBERÍA",
+    "sub": "Cortes · Paquetes · Citas",
+    "items": ["Cortes y precios", "Horarios de hoy", "Ubicación"],
+    "boton": "Apartar lugar",
+    "confirmacion": "Lugar apartado · hoy 6:30 pm"
+  },
+  "resuelto": ["Todo resuelto", "desde un link"],
+  "comparacion": ["Sin mensajes. Sin esperar.", "Tu agenda, en un link."],
+  "cierre": { "linea1": "Tu barbería,", "destacado": "en un solo link.", "palabra": "APP", "usuario": "@supernova.digitall" },
+  "musica": null,
+  "publicacion": {
+    "descripcion": "Mismo corte. Dos barberías. 💈\nUna contesta tarde. La otra manda un link y el cliente aparta solo.\n📲 Haz que te elijan a ti: precios, horarios y citas en un solo link.\n👇 Escríbeme APP por DM y te enseño cómo se vería la tuya.",
+    "hashtags": ["#BarberiaTeocelo", "#Coatepec", "#Xico", "#Barberia", "#NegociosLocales", "#Supernova"],
+    "ganchosAlternativos": ["¿Cuántos clientes se te van por contestar tarde?", "Tu barbería es mejor de lo que se ve."],
+    "horario": "Martes a jueves, 7–9 pm"
+  }
+}

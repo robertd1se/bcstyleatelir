@@ -7,6 +7,8 @@ import { DURACION_RXT01, Rxt01 } from "./series/Rxt01";
 import { DURACION_RXT02, Rxt02 } from "./series2d/Rxt02";
 import { DURACION_ELEGIDO, Elegido } from "./ediciones/Elegido";
 import { DURACION_PULSAR, Pulsar } from "./personal/Pulsar";
+import { DosCaminos, DURACION_DOS_CAMINOS, GuionDosCaminos } from "./supernova/DosCaminos";
+import guionEjemplo from "../../clientes/supernova/guiones/01-barberia.json";
 import { VideoVertical, VideoVerticalProps } from "./VideoVertical";
 
 const calculateMetadata: CalculateMetadataFunction<VideoVerticalProps> = ({ props }) => ({
@@ -40,6 +42,15 @@ export const RemotionRoot: React.FC = () => {
       <Composition id="Rxt02" component={Rxt02} fps={FPS} width={ANCHO} height={ALTO} durationInFrames={DURACION_RXT02} />
       <Composition id="Rxt5Razones" component={Rxt5Razones} fps={FPS} width={ANCHO} height={ALTO} durationInFrames={DURACION_5RAZONES} />
       <Composition id="Pulsar" component={Pulsar} fps={FPS} width={ANCHO} height={ALTO} durationInFrames={DURACION_PULSAR} />
+      <Composition
+        id="DosCaminos"
+        component={DosCaminos}
+        fps={FPS}
+        width={ANCHO}
+        height={ALTO}
+        durationInFrames={DURACION_DOS_CAMINOS}
+        defaultProps={guionEjemplo satisfies GuionDosCaminos}
+      />
       <Composition id="MuestraEstilo" component={MuestraEstilo} fps={FPS} width={ANCHO} height={ALTO} durationInFrames={300} />
     </>
   );

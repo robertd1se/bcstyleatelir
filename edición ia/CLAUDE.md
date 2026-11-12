@@ -10,7 +10,7 @@ Nunca edites los videos originales: trabajá siempre sobre copias o archivos nue
 
 ## Varios clientes
 
-El usuario es editor: hace videos para **Roxet (RXT)**, videos **personales** y para **otros negocios**.
+El usuario es editor: hace videos para **Roxet (RXT)**, videos **personales** (motos, cinematográficos), su marca **Supernova** (`clientes/supernova/`, agencia de apps para negocios locales) y para **otros negocios**.
 - **Antes de cada video, confirmá para qué cliente es** (si no lo dice y no es obvio, preguntá) y trabajá en su carpeta `clientes/<cliente>/`.
 - Aplicá **`estilo.md` (estilo general del usuario) + `clientes/<cliente>/marca.md` (marca del cliente)**. Si chocan, manda la marca del cliente.
 - **Cliente nuevo:** copiá `clientes/_plantilla/` a `clientes/<nombre>/`, creá sus carpetas y completá `marca.md` con lo que te pase el usuario (logo, colores, tipografías, tono, referencias). Sus logos van en `proyecto/public/clientes/<nombre>/`.
@@ -90,6 +90,7 @@ npm run lint         # chequeo de tipos y estilo
 | `componentes/Plano.tsx` | Un tramo de una grabación (recorte, sin audio, zoom lento) |
 | `ediciones/` | Una composición por video editado (lista de planos, textos y sonido) |
 | `personal/` | Videos personales sin voz (cinematográficos, `clientes/personal/marca.md`): `Pulsar.tsx` tiene látigos, ráfagas, glitches, destellos, texto cinético y título póster reutilizables. Fuentes Anton y Unbounded en `public/fuentes/` |
+| `supernova/` | Formato "dos caminos" de Supernova (`DosCaminos.tsx`, motion graphics sin voz) alimentado por guiones JSON de `clientes/supernova/guiones/`. Se arma con `node scripts/supernova.mjs <guion.json> [--cuadros]`. El turno de madrugada sigue `clientes/supernova/automatizacion.md` |
 | `series/` | Serie explicativa RXT (9 reels). `ReelSerie.tsx` es la base común (3D, encabezado, texto, voz, música, destellos, acabado, cierre); cada `RxtNN.tsx` solo define cámara, estado del 3D y tarjetas. También `gym3d/`, `ui/`, `linea.ts` y `sonido.ts` |
 | `series2d/` | Formato explicativo 2D (reel 2): personaje plano animado (`Persona2D.tsx`), piezas gráficas (`piezas.tsx`) y `Rxt02.tsx` |
 | `../guiones/` | Guiones de la voz en off de la serie (`rxt-NN.txt`) |
